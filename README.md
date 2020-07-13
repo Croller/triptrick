@@ -1,2 +1,3 @@
-# triptrick
-TripTrick (SSR + PWA)
+# Trip Trick (https://www.triptrick.ru/)
+
+SSR + PWA
