@@ -1,0 +1,32 @@
+{
+  "system": {
+    "id": null,
+    "company-id": null,
+    "departments-id": null,
+    "projects-id": null
+  },
+  "custom": {
+    "description": {
+      "type": "text",
+      "ru": "Описание",
+      "value": null
+    }
+  },
+  "default": {
+    "name": {
+      "type": "text",
+      "ru": "Название",
+      "value": null
+    },
+    "date-start": {
+      "type": "date",
+      "ru": "Дата начала",
+      "value": null
+    },
+    "date-finish": {
+      "type": "date",
+      "ru": "Дата окончания",
+      "value": null
+    }
+  }
+}

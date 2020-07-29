@@ -1,0 +1,90 @@
+{
+  "system": {
+    "id": null
+  },
+  "custom": {
+    "birthdate": {
+      "type": "date",
+      "ru": "Дата регистрации",
+      "value": null
+    },
+    "phone": {
+      "type": "tel",
+      "ru": "Телефон",
+      "value": null,
+      "properties": {
+        "pattern": {
+          "value": "[0-9]{1}([0-9]{3})-[0-9]{3}-[0-9]{2}-[0-9]{2}",
+          "ru": "Формат 7(999)-999-99-99"
+        }
+      }
+    },
+    "inn": {
+      "type": "number",
+      "ru": "ИНН",
+      "value": null
+    },
+    "kpp": {
+      "type": "number",
+      "ru": "КПП",
+      "value": null
+    },
+    "bik": {
+      "type": "number",
+      "ru": "БИК",
+      "value": null
+    },
+    "rs": {
+      "type": "number",
+      "ru": "Р/С",
+      "value": null
+    },
+    "ks": {
+      "type": "number",
+      "ru": "К/С",
+      "value": null
+    },
+    "okpo": {
+      "type": "number",
+      "ru": "ОКПО",
+      "value": null
+    },
+    "okato": {
+      "type": "number",
+      "ru": "ОКАТО",
+      "value": null
+    },
+    "okved": {
+      "type": "text",
+      "ru": "ОКВЭД",
+      "value": null
+    },
+    "email": {
+      "type": "email",
+      "ru": "Email",
+      "value": null
+    },
+    "address-actual": {
+      "type": "text",
+      "ru": "Фактический адрес",
+      "value": null
+    },
+    "address-legal": {
+      "type": "text",
+      "ru": "Юридический адрес",
+      "value": null
+    },
+    "description": {
+      "type": "text",
+      "ru": "Описание",
+      "value": null
+    }
+  },
+  "default": {
+    "name": {
+      "type": "text",
+      "ru": "Название",
+      "value": null
+    }
+  }
+}

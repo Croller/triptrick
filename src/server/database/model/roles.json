@@ -1,0 +1,26 @@
+{
+  "system": {
+    "id": null,
+    "company_id": null,
+    "users_id": null,
+    "root": false,
+    "company": 0,
+    "departments": 0,
+    "projects": 0,
+    "kpi": 0,
+    "tasks": 0
+  },
+  "custom": {},
+  "default": {
+    "name": {
+      "type": "text",
+      "ru": "Название",
+      "value": null
+    },
+    "description": {
+      "type": "text",
+      "ru": "Описание",
+      "value": null
+    }
+  }
+}

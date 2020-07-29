@@ -1,0 +1,42 @@
+sudo docker pull mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
+sudo docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=MS_SQL_Server_123456" -p 1433:1433 --name MS_SQL_Server -d mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
+
+sudo docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=MS_SQL_Server_123456" \
+   -p 1433:1433 --name MS_SQL_Server \
+   -d mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
+
+
+docker ps -a
+docker start a7b187bc3172
+
+sudo docker exec -it MS_SQL_Server2017 "bash"
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "MS_SQL_Server_123456"
+
+CREATE DATABASE TestDB - cerate db for connect from vs code
+
+Ctrl+d 
+docker image rm <IMAGE_ID>
+
+docker cp /Users/croller/Documents/ГБУ_АПР/project/CRM_APR/src/server/database/csv  fe477febfc61:/home
+docker cp a7b187bc3172:/var/opt/mssql/backup/apr_gz.bak /Users/croller/Documents/ISGZ/docker-image
+
+# Backup
+docker exec -it MS_SQL_Server /usr/bin/mysqldump -U SA -P "MS_SQL_Server_123456" MonitoringGZ > ./backup.sql
+
+# Restore
+cat backup.sql | docker exec -i CONTAINER /usr/bin/mysql -u root --password=root DATABASE
+
+
+
+sudo docker pull mcr.microsoft.com/mssql/server:2017-latest
+sudo docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=MS_SQL_Server_123456" -p 1433:1433 --name MS_SQL_Server2017 -d mcr.microsoft.com/mssql/server:2017-latest
+docker start fe477febfc61
+sudo docker exec -it MS_SQL_Server2017 "bash"
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "MS_SQL_Server_123456"
+CREATE DATABASE apr_gz
+GO
+Ctrl+d 
+docker cp /Users/croller/Documents/ISGZ/src/server/database/csv  fe477febfc61:/home
+BACKUP DATABASE apr_gz TO DISK = N'/home/backup/apr_gz.bak'
+GO
+docker cp fe477febfc61:/home/backup/apr_gz.bak /Users/croller/Documents/ISGZ/docker-image

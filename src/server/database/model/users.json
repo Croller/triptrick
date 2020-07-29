@@ -1,0 +1,73 @@
+{
+  "system": {
+    "id": null,
+    "company-ids": null
+  },
+  "custom": {
+    "surname": {
+      "type": "text",
+      "ru": "Фамилия",
+      "value": null
+    },
+    "middlename": {
+      "type": "text",
+      "ru": "Отчество",
+      "value": null
+    },
+    "birthdate": {
+      "type": "date",
+      "ru": "Дата рождения",
+      "value": null
+    },
+    "phone": {
+      "type": "tel",
+      "ru": "Телефон",
+      "value": null,
+      "properties": {
+        "pattern": {
+          "value": "[0-9]{1}([0-9]{3})-[0-9]{3}-[0-9]{2}-[0-9]{2}",
+          "ru": "Формат 7(999)-999-99-99"
+        }
+      }
+    },
+    "address": {
+      "type": "text",
+      "ru": "Адрес",
+      "value": null
+    }
+  },
+  "default": {
+    "name": {
+      "type": "text",
+      "ru": "Имя",
+      "value": null
+    },
+    "login": {
+      "type": "text",
+      "ru": "Логин",
+      "value": null,
+      "properties": {
+        "pattern": {
+          "value": "[0-9a-zA-Z]{3,}",
+          "ru": "Любое слово, на латицине, от 3 символов"
+        }
+      }
+    },
+    "password": {
+      "type": "password",
+      "ru": "Пароль",
+      "value": null,
+      "properties": {
+        "pattern": {
+          "value": "[0-9a-zA-Z]{6,}",
+          "ru": "Любое слово, на латицине, от 6 символов"
+        }
+      }
+    },
+    "email": {
+      "type": "email",
+      "ru": "Email",
+      "value": null
+    }
+  }
+}
