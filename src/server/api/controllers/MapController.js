@@ -2,7 +2,7 @@
 
 const MBTiles = require('@mapbox/mbtiles');
 
-const tiles_countries = () => new Promise((resolve, reject) => {
+const tilesCountries = () => new Promise((resolve, reject) => {
   const mb = new MBTiles(`${__dirname.split('api')[0]}mbtiles/countries.mbtiles?mode=ro`, (err, mbtiles) => {
     if (err) return reject(err);
     return resolve(mbtiles);
@@ -11,7 +11,7 @@ const tiles_countries = () => new Promise((resolve, reject) => {
 
 const MapController = () => {
   const mbtiles = (req, res) => {
-    tiles_countries()
+    tilesCountries()
       .then((data) => {
         data.getTile(req.param('z'), req.param('x'), req.param('y'), (err, tile, headers) => {
           // console.log(tile);
