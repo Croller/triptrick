@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const WebpackPwaManifest = require('webpack-pwa-manifest')
 // const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const outputDirectory = 'dist';
@@ -17,15 +18,37 @@ let plugins = [
     favicon: './public/favicon.ico',
   }),
   new webpack.HotModuleReplacementPlugin(),
-  new webpack.DefinePlugin({
-    _PLATFORM: JSON.stringify(PLATFORM),
-    _HOST: JSON.stringify(process.env.HOST),
-    _PROTOCOL: JSON.stringify(process.env.PROTOCOL),
-    _WEBSOCKET_PORT: JSON.stringify(process.env.WEBSOCKET_PORT),
-    _WEBSOCKET_PROTOCOL: JSON.stringify(process.env.WEBSOCKET_PROTOCOL),
-    _BACK_SERVER: PLATFORM === 'production' ? JSON.stringify(process.env.PROD_BACK_SERVER) : JSON.stringify(''),
-    _DOMAIN_NAME: JSON.stringify(process.env.DOMAIN_NAME),
+  new WebpackPwaManifest({
+    name: 'My Progressive Web App',
+    short_name: 'MyPWA',
+    description: 'My awesome Progressive Web App!',
+    background_color: '#ffffff',
+    crossorigin: 'use-credentials',
+    icons: [
+      // {
+      //   src: path.resolve('src/assets/icon.png'),
+      //   sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+      // },
+      // {
+      //   src: path.resolve('src/assets/large-icon.png'),
+      //   size: '1024x1024' // you can also use the specifications pattern
+      // },
+      // {
+      //   src: path.resolve('src/assets/maskable-icon.png'),
+      //   size: '1024x1024',
+      //   purpose: 'maskable'
+      // }
+    ],
   }),
+  // new webpack.DefinePlugin({
+  //   _PLATFORM: JSON.stringify(PLATFORM),
+  //   _HOST: JSON.stringify(process.env.HOST),EnvironmentPlugin
+  //   _PROTOCOL: JSON.stringify(process.env.PROTOCOL),
+  //   _WEBSOCKET_PORT: JSON.stringify(process.env.WEBSOCKET_PORT),
+  //   _WEBSOCKET_PROTOCOL: JSON.stringify(process.env.WEBSOCKET_PROTOCOL),
+  //   _BACK_SERVER: PLATFORM === 'production' ? JSON.stringify(process.env.PROD_BACK_SERVER) : JSON.stringify(''),
+  //   _DOMAIN_NAME: JSON.stringify(process.env.DOMAIN_NAME),
+  // }),
 ];
 
 if (PLATFORM === 'production') {

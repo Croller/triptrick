@@ -9,9 +9,10 @@ import { withRouter } from 'react-router';
 import Loader from '../components/Loader';
 
 const Page401 = lazy(() => import('client/page/401'));
+const Map = lazy(() => import('client/page/Map'));
 // const Layout = lazy(() => import('client/page/Layout'));
 
-const Main = () => (
+export const Routers = withRouter(() => (
   <Router>
     <Switch>
       <Suspense
@@ -25,7 +26,7 @@ const Main = () => (
             ) : ( */}
         {/* <Layout> */}
         <Switch>
-          {/* <Route path="/401" component={Mailer} /> */}
+          <Route path="/" component={Map} />
           <Route path="/error" component={Page401} />
           <Route path="*" component={Page401} />
           {/* <Redirect to="/" /> */}
@@ -37,6 +38,6 @@ const Main = () => (
       </Suspense>
     </Switch>
   </Router>
-);
+));
 
-export default withRouter(Main);
+// export default withRouter(Main);

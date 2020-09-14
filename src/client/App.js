@@ -1,18 +1,12 @@
+import React from 'react';
 import { hot } from 'react-hot-loader';
-import React, { Component } from 'react';
-import Router from './router';
+import { Routers } from './router';
+import worker from './sw';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+export const App = () => (
+  <Routers />
+);
 
-  render() {
-    return (
-      <Router />
-    );
-  }
-}
+worker();
 
 export default hot(module)(App);
