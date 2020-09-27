@@ -1,12 +1,12 @@
 import React from 'react';
-import { hot } from 'react-hot-loader';
+import { hot } from 'react-hot-loader/root';
 import { Routers } from './router';
 import worker from './sw';
 
-export const App = () => (
+const App = () => (
   <Routers />
 );
 
 worker();
 
-export default hot(module)(App);
+export default hot(App);

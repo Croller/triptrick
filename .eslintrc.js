@@ -57,7 +57,7 @@ module.exports = {
     'no-unused-expressions': ['error', { allowShortCircuit: true }],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn'
+    'react-hooks/exhaustive-deps': 0
   },
   globals: {
     _HOST: 'readonly',

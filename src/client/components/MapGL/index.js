@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { translate } from 'react-i18next';
 import PropTypes from 'prop-types';
 import MapboxDraw from '@mapbox/mapbox-gl-draw';
@@ -25,9 +25,7 @@ import { Map } from './styled';
 
 export const MapGL = translate()((props) => {
   const {
-    token,
-    urlTiles,
-    mapConf,
+    height = null,
     mapLayers,
     mapLoaded,
     mapClick,
@@ -35,15 +33,14 @@ export const MapGL = translate()((props) => {
     mapLayersVisible,
     mapLayersUpdateSource,
     mapLayerDelete,
-    height,
     toolMode,
-    showMouseCoords,
-    showScale,
+    // showMouseCoords,
+    // showScale,
     mapZoomTo,
     mapResize,
     className = '',
   } = props;
-
+  const mapRef = useRef();
   const [mapLoad, setMapLoad] = useState(false);
   const [mapBox, setMapBox] = useState(null);
   const [mapDraw, setMapDraw] = useState(null);
@@ -54,6 +51,22 @@ export const MapGL = translate()((props) => {
   const [isMesuaring, setIsMesuaring] = useState(false);
   const snapValue = 8;
   const [snapMode, setSnapMode] = useState(null);
+
+  const mapConf = {
+    token: 'pk.eyJ1IjoiY3JvbGxlciIsImEiOiJWX0ZXZF9zIn0.lIjITIfJ3v62baoHVIqtqQ',
+    init: {
+      container: 'mapbox',
+      // style: 'mapbox://styles/croller/cjj8xkmu73qh32snzotqzhsdj',
+      style: 'mapbox://styles/croller/ck3tsjkye0dgd1cp62vtxjc3f',
+      zoom: 2,
+      center: [98.530, 58.810],
+      minZoom: 0,
+      doubleClickZoom: false,
+      dragPan: false,
+      dragRotate: false,
+      preserveDrawingBuffer: true,
+    },
+  };
 
   const getScaleStr = () => {
     const inchesPerMeter = 39.37;
@@ -413,14 +426,15 @@ export const MapGL = translate()((props) => {
       setMapLoad(true);
     });
     mapBox.on('click', (e) => {
+      console.log(onClick(e));
       // get all layer by coordinates and emit event
-      if (!isDrawing) {
-        mapClick(onClick(e));
-      }
-      setSubstrateShow(false);
-      if (isMesuaring) {
-        onMesuare();
-      }
+      // if (!isDrawing) {
+      //   mapClick(onClick(e));
+      // }
+      // setSubstrateShow(false);
+      // if (isMesuaring) {
+      //   onMesuare();
+      // }
       // window.console.log(mapBox.getStyle().sources);
       // window.console.log(mapBox.getStyle().layers);
     });
@@ -463,114 +477,62 @@ export const MapGL = translate()((props) => {
   };
 
   useEffect(() => {
-    if (mapConf && mapBox === null) {
-      let obj = {};
-      mapGL.accessToken = mapConf.token;
-      if (urlTiles) {
-        obj = {
-          ...mapConf.init,
-          transformRequest: (url, resourceType) => {
-            if (resourceType === 'Tile' && url.startsWith(urlTiles)) {
-              return {
-                url,
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              };
-            }
-            return { url };
-          },
-        };
-      } else {
-        obj = { ...mapConf.init };
-      }
-      setMapBox(new mapGL.Map(obj));
-    }
+    mapGL.accessToken = mapConf.token;
+    const map = new mapGL.Map(mapConf.init);
+    map.resize();
+    setMapBox(map);
+  }, []);
+
+  useEffect(() => {
     if (mapBox) {
-      // map event
       mapOn();
-      // add dram func with modes
-      const draw = new MapboxDraw({
-        displayControlsDefault: false,
-        controls: {},
-        modes: {
-          ...MapboxDraw.modes,
-          draw_point_custom: DrawPointCustom,
-          draw_line_string_pencil: DrawLinePencil,
-          draw_line_string_custom: DrawLineCustom,
-          draw_polygon_custom: DrawPolygonCustom,
-          draw_polygon_pencil: DrawPolygonPencil,
-          draw_rectangle: DrawRectangle,
-          draw_rectangle_assisted: DrawAssistedRectangle,
-          // draw_circle: CircleMode,
-          // drag_circle: DragCircleMode,
-          // direct_select: DirectMode,
-          // simple_select: SimpleSelectMode
-        },
-      });
-      mapBox.addControl(draw);
-      setMapDraw(draw);
-      // add listner
-      const that = this;
-      window.addEventListener('keydown', (e) => {
-        switch (true) {
-          case e.keyCode === 27:
-            that.setTool({ type: 'cancel' });
-            break;
-          case e.keyCode === 46:
-            that.setTool({ type: 'delete' });
-            break;
-          default:
-            break;
-        }
-      });
     }
-  }, [mapConf, mapBox]);
+  }, [mapBox]);
 
-  useEffect(() => {
-    if (toolMode) {
-      setTool(toolMode);
-    }
-  }, [toolMode]);
+  // useEffect(() => {
+  //   if (toolMode) {
+  //     setTool(toolMode);
+  //   }
+  // }, [toolMode]);
 
-  useEffect(() => {
-    if (mapLoad) {
-      onLoad();
-    }
-  }, [mapLayers, mapLoad]);
+  // useEffect(() => {
+  //   if (mapLoad) {
+  //     onLoad();
+  //   }
+  // }, [mapLayers, mapLoad]);
 
-  useEffect(() => {
-    if (mapZoomTo) {
-      setZoomTo(mapZoomTo);
-    }
-  }, [mapZoomTo]);
+  // useEffect(() => {
+  //   if (mapZoomTo) {
+  //     setZoomTo(mapZoomTo);
+  //   }
+  // }, [mapZoomTo]);
 
-  useEffect(() => {
-    if (mapLayersVisible.length > 0) {
-      setLayersVisibility(mapLayersVisible);
-    }
-  }, [mapLayersVisible]);
+  // useEffect(() => {
+  //   if (mapLayersVisible.length > 0) {
+  //     setLayersVisibility(mapLayersVisible);
+  //   }
+  // }, [mapLayersVisible]);
 
-  useEffect(() => {
-    if (mapLayersUpdateSource.length > 0) {
-      updateLayersSource(mapLayersUpdateSource);
-    }
-  }, [mapLayersUpdateSource]);
+  // useEffect(() => {
+  //   if (mapLayersUpdateSource.length > 0) {
+  //     updateLayersSource(mapLayersUpdateSource);
+  //   }
+  // }, [mapLayersUpdateSource]);
 
-  useEffect(() => {
-    if (mapLayerDelete.length > 0) {
-      deleteLayers(mapLayerDelete);
-    }
-  }, [mapLayerDelete]);
+  // useEffect(() => {
+  //   if (mapLayerDelete.length > 0) {
+  //     deleteLayers(mapLayerDelete);
+  //   }
+  // }, [mapLayerDelete]);
 
-  useEffect(() => {
-    if (mapBox) {
-      mapBox.resize();
-    }
-  }, [mapResize]);
+  // useEffect(() => {
+  //   if (mapBox) {
+  //     mapBox.resize();
+  //   }
+  // }, [mapResize]);
 
   return (
-    <Map className={className} />
+    <Map id="mapbox" className={className} height={height} />
     // <div id="mapbox" style={{ height }}>
     //   {
     //     substrateShow && 'test'
@@ -592,40 +554,3 @@ export const MapGL = translate()((props) => {
     // </div>
   );
 });
-
-MapGL.propTypes = {
-  token: PropTypes.string,
-  urlTiles: PropTypes.string,
-  height: PropTypes.string,
-  toolMode: PropTypes.string,
-  mapConf: PropTypes.objectOf(PropTypes.any),
-  mapLayers: PropTypes.arrayOf(PropTypes.any),
-  mapLoaded: PropTypes.func,
-  mapClick: PropTypes.func,
-  mapCreateFeature: PropTypes.func,
-  mapZoomTo: PropTypes.objectOf(PropTypes.any),
-  mapLayersVisible: PropTypes.arrayOf(PropTypes.any),
-  mapLayersUpdateSource: PropTypes.arrayOf(PropTypes.any),
-  mapLayerDelete: PropTypes.arrayOf(PropTypes.any),
-  mapResize: PropTypes.bool,
-};
-
-MapGL.defaultProps = {
-  token: '',
-  urlTiles: '',
-  height: '100%',
-  toolMode: null,
-  showMouseCoords: false,
-  showScale: false,
-  mapConf: null,
-  mapLayers: [],
-  mapLoaded: PropTypes.func,
-  mapClick: PropTypes.func,
-  mapCreateFeature: PropTypes.func,
-  mapZoomTo: null,
-  mapLayersVisible: [],
-  mapLayersUpdateSource: [],
-  mapLayerDelete: [],
-  mapResize: false,
-};
-
