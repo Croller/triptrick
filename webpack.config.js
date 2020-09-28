@@ -4,10 +4,10 @@ const webpack = require('webpack');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const WebpackPwaManifest = require('webpack-pwa-manifest')
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 // const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const outputDirectory = 'dist';
 const PLATFORM = process.env.NODE_ENV;
@@ -54,8 +54,8 @@ let plugins = [
 if (PLATFORM === 'production') {
   plugins = plugins.concat(
     new MiniCssExtractPlugin({ filename: 'css/[name]_[hash].css' }),
-    new CleanWebpackPlugin(),
     new BundleAnalyzerPlugin({ openAnalyzer: false, analyzerMode: 'static' }),
+    // new CleanWebpackPlugin(),
   );
 }
 
