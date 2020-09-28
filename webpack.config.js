@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const WebpackPwaManifest = require('webpack-pwa-manifest')
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 // const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const outputDirectory = 'dist';
@@ -87,61 +87,71 @@ module.exports = {
     },
   },
   module: {
-    rules: [{
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      use: {
-        loader: 'babel-loader',
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
       },
-    },
-    {
-      test: /\.s?css$/,
-      use: [
-        PLATFORM === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
-        'css-loader',
-        'sass-loader',
-      ],
-    },
-    {
-      test: /\.svg$/,
-      use: [
-        'babel-loader',
-        {
-          loader: 'react-svg-loader',
-          options: {
-            svgo: {
-              plugins: [
-                { removeTitle: false },
-              ],
-              floatPrecision: 2,
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        loader: 'awesome-typescript-loader',
+        options: {
+          useBabel: true,
+          babelCore: '@babel/core', // needed for Babel v7
+        },
+      },
+      {
+        test: /\.s?css$/,
+        use: [
+          PLATFORM === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          'babel-loader',
+          {
+            loader: 'react-svg-loader',
+            options: {
+              svgo: {
+                plugins: [
+                  { removeTitle: false },
+                ],
+                floatPrecision: 2,
+              },
             },
           },
+        ],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: './fonts/',
+          publicPath: './fonts/',
         },
-      ],
-    },
-    {
-      test: /\.(woff|woff2|eot|ttf)$/,
-      loader: 'file-loader',
-      options: {
-        name: '[name].[ext]',
-        outputPath: './fonts/',
-        publicPath: './fonts/',
       },
-    },
-    {
-      test: /\.(jpg|png|webp|gif)$/,
-      exclude: /node_modules/,
-      loader: 'file-loader',
-      options: {
-        name: '[name].[ext]',
-        outputPath: './image/',
-        publicPath: './image/',
+      {
+        test: /\.(jpg|png|webp|gif)$/,
+        exclude: /node_modules/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: './image/',
+          publicPath: './image/',
+        },
       },
-    },
     ],
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ['*', '.js', '.jsx', '.ts', 'tsx'],
     alias: {
       'react-dom': '@hot-loader/react-dom',
       client: path.resolve(__dirname, 'src/client'),
