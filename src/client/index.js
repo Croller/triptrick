@@ -31,6 +31,6 @@ ReactDOM.render(root, document.getElementById('root'));
 
 if (process.env.NODE_ENV === 'development') {
   store.subscribe(() => {
-    // console.log('subscribe', store.getState());
+    console.log('subscribe', store.getState());
   });
 }

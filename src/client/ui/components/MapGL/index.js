@@ -27,7 +27,6 @@ export const MapGL = translate()((props) => {
   const {
     height = null,
     mapLayers,
-    mapLoaded,
     mapClick,
     mapCreateFeature,
     mapLayersVisible,
@@ -56,13 +55,13 @@ export const MapGL = translate()((props) => {
     token: 'pk.eyJ1IjoiY3JvbGxlciIsImEiOiJWX0ZXZF9zIn0.lIjITIfJ3v62baoHVIqtqQ',
     init: {
       container: 'mapbox',
-      // style: 'mapbox://styles/croller/cjj8xkmu73qh32snzotqzhsdj',
-      style: 'mapbox://styles/croller/ck3tsjkye0dgd1cp62vtxjc3f',
+      style: 'mapbox://styles/croller/cjj8xkmu73qh32snzotqzhsdj',
+      // style: 'mapbox://styles/croller/ck3tsjkye0dgd1cp62vtxjc3f',
       zoom: 2,
       center: [98.530, 58.810],
       minZoom: 0,
       doubleClickZoom: false,
-      dragPan: false,
+      dragPan: true,
       dragRotate: false,
       preserveDrawingBuffer: true,
     },
@@ -78,6 +77,7 @@ export const MapGL = translate()((props) => {
     const scaleValue = Math.floor((Math.abs(distance * 1000) / size.width) * inchesPerMeter * screenDPI);
     return scaleValue;
   };
+
   const setSnapModes = (type, distance) => {
     if (snapMode && snapMode !== type) {
       setSnapMode(type);
@@ -89,6 +89,7 @@ export const MapGL = translate()((props) => {
       distance,
     };
   };
+
   const setTool = (mode) => {
     setIsDrawing(true);
     switch (mode) {
@@ -420,7 +421,6 @@ export const MapGL = translate()((props) => {
   const mapOn = () => {
     mapBox.on('load', () => {
       setMapLoad(true);
-      mapLoaded();
     });
     mapBox.on('styledata', () => {
       setMapLoad(true);

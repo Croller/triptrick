@@ -1,5 +1,5 @@
 export const highlightErrorLog = ({ err, component = 'unknown' }) => {
-  if (_PLATFORM !== 'production') {
+  if (process.env.NODE_ENV !== 'production') {
     console.warn(
       `\n%cError:%c${err.message};\n%cSource:%c${component};\n%cCode:%c${err.stack};`,
       'color: brown; font-style: bold; background-color: khaki; padding-right: 5px;',

@@ -6,38 +6,32 @@ import {
 } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
-import Loader from '../components/Loader';
+import { Loader } from 'client/ui/components/Loader';
+import { Layout } from 'client/ui/components/Layout';
+import { ErrorBoundary } from 'client/ui/components/base/ErrorBoundary';
 
-const Page401 = lazy(() => import('client/page/401'));
-const Map = lazy(() => import('client/page/Map'));
-// const Layout = lazy(() => import('client/page/Layout'));
+const Page404 = lazy(() => import('client/ui/page/404'));
+const Map = lazy(() => import('client/ui/page/Map'));
 
 export const Routers = withRouter(() => (
-  <Router>
-    <Switch>
-      <Suspense
-        fallback={
-          <Loader />
-        }
-      >
-        {/* {
-            user.token === null ? (
-              <Auth />
-            ) : ( */}
-        {/* <Layout> */}
-        <Switch>
-          <Route path="/" component={Map} />
-          <Route path="/error" component={Page401} />
-          <Route path="*" component={Page401} />
-          {/* <Redirect to="/" /> */}
-        </Switch>
-        {/* </Layout> */}
-        {/* )
-          } */}
-        {/* <Route path="/test/map" component={Map} /> */}
-      </Suspense>
-    </Switch>
-  </Router>
+  <ErrorBoundary>
+    <Router>
+      <Switch>
+        <Suspense
+          fallback={
+            <Loader />
+          }
+        >
+          <Layout>
+            <Switch>
+              <Route exact path="/" component={Map} />
+              <Route path="/error" component={Page404} />
+              <Route path="*" component={Page404} />
+              {/* <Redirect to="/" /> */}
+            </Switch>
+          </Layout>
+        </Suspense>
+      </Switch>
+    </Router>
+  </ErrorBoundary>
 ));
-
-// export default withRouter(Main);

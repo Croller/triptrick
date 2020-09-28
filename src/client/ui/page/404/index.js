@@ -10,7 +10,7 @@ const Page401Component = () => (
       <meta name="prerender-status-code" content="401" />
       <link rel="canonical" href="https://www.triptrick.com/" />
     </Helmet>
-    401 error / Ошибка
+    Ooops! Такой страницы нету...
   </Wrapper>
 );
 

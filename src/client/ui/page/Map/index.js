@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapGL } from 'client/components/MapGL';
+import { MapGL } from 'client/ui/components/MapGL';
 import { Wrapper } from './styled';
 
 const Map = () => (

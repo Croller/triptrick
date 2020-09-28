@@ -19,6 +19,7 @@
     "lint": "eslint --ext .jsx --ext .js ./src --fix"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.2.2",
     "@babel/runtime": "^7.10.5",
     "@hot-loader/react-dom": "^16.8.6",
     "@mapbox/mapbox-gl-draw": "^1.2.0",

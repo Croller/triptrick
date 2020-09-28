@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import styled from 'styled-components';
 import { highlightErrorLog } from 'client/utils/errorHandler';
@@ -27,10 +26,13 @@ export class ErrorBoundary extends React.Component {
   }
 
   render() {
-    if (this.state.hasError) {
+    const { hasError } = this.state;
+    const { children } = this.props;
+
+    if (hasError) {
       return <Text>Что-то пошло не так...</Text>;
     }
-    return this.props.children;
+    return children;
   }
 }
 
