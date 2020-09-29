@@ -49,6 +49,7 @@ module.exports = {
         max: 1,
       },
     ],
+    'arrow-parens': 0,
     'no-nested-ternary': 0,
     'consistent-return': 0,
     'no-trailing-spaces': 0,

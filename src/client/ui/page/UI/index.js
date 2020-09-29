@@ -1,0 +1,34 @@
+import React from 'react';
+
+import { Input } from 'client/ui/components/base/Input';
+import { BarsSolidSvg } from 'client/assets/images';
+import { Wrapper } from './styled';
+
+const UI = () => {
+  const handleChange = (key, obj) => {
+    console.log(key, obj);
+  };
+
+  return (
+    <Wrapper>
+      <Input
+        label="Input with prefix and suffix clear function"
+        value="Input value"
+        prefix={(<BarsSolidSvg />)}
+        showClear
+        onChange={(obj) => handleChange('Input', obj)}
+      />
+      <br />
+      <br />
+      <Input
+        label="Input with mask"
+        value="Input value"
+        showClear
+        onChange={(obj) => handleChange('Input', obj)}
+      />
+    </Wrapper>
+  );
+};
+
+export default UI;
+
