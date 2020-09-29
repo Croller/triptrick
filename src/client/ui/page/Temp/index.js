@@ -1,4 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { } from './styled';
 
-export const Temp = () => {};
+export const Temp = () => {
+  useEffect(() => {
+    window.prerenderReady = true;
+  }, []);
+
+  return (
+    <>
+    </>
+  );
+};
