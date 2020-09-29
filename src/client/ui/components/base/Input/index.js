@@ -49,9 +49,9 @@ export const Input = ({
         autoComplete="off"
         type={type}
         value={val}
-        onChange={handleChange}
         prefix={prefix}
         suffix={showClear}
+        onChange={handleChange}
       />
       {prefix && (
         <Prefix label={label}>

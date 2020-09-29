@@ -12,9 +12,17 @@ const UI = () => {
   return (
     <Wrapper>
       <Input
-        label="Label"
+        label="Input with prefix and suffix clear function"
         value="Input value"
         prefix={(<BarsSolidSvg />)}
+        showClear
+        onChange={(obj) => handleChange('Input', obj)}
+      />
+      <br />
+      <br />
+      <Input
+        label="Input with mask"
+        value="Input value"
         showClear
         onChange={(obj) => handleChange('Input', obj)}
       />
