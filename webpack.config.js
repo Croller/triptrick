@@ -153,7 +153,7 @@ module.exports = {
     host: '0.0.0.0',
     contentBase: './',
     port: process.env.PORT_LOCAL_CLIENT,
-    open: true,
+    open: false,
     hot: true,
     historyApiFallback: true,
     proxy: {

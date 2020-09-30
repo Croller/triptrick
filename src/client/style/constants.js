@@ -17,6 +17,7 @@ export const PALETTE = {
   grey2: '#6C6C6C',
   grey3: '#E5E6E7',
   grey4: '#D6D6D6',
+  grey5: '#FDFDFD',
   orange1: '#FF9F1C',
 };
 

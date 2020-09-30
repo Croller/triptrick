@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { CloseCircleRegSvg } from 'client/assets/images';
 import {
   Wrapper,
@@ -15,8 +15,10 @@ export const Input = ({
   prefix = null,
   showClear = false,
   onChange,
+  onBlur,
   className = '',
 }) => {
+  const ref = useRef();
   const [val, setVal] = useState('');
 
   const handleChange = (e) => {
@@ -30,6 +32,14 @@ export const Input = ({
     onChange('');
   };
 
+  const handleBlur = () => {
+    onBlur(val);
+  };
+
+  const handleFocus = () => {
+    ref.current.focus();
+  };
+
   useEffect(() => {
     if (val !== value) {
       setVal(value || '');
@@ -37,14 +47,20 @@ export const Input = ({
   }, [value]);
 
   return (
-    <Wrapper className={className}>
+    <Wrapper className={className} onClick={handleFocus}>
       {label && (
         <Label htmlFor="control">
           {label}
           :
         </Label>
       )}
+      {prefix && (
+        <Prefix label={label}>
+          {prefix}
+        </Prefix>
+      )}
       <Control
+        ref={ref}
         name="control"
         autoComplete="off"
         type={type}
@@ -52,13 +68,9 @@ export const Input = ({
         prefix={prefix}
         suffix={showClear}
         onChange={handleChange}
+        onBlur={handleBlur}
       />
-      {prefix && (
-        <Prefix label={label}>
-          {prefix}
-        </Prefix>
-      )}
-      {showClear && (
+      {showClear && val.length > 0 && (
         <Suffix label={label}>
           <CloseCircleRegSvg onClick={handleClear} />
         </Suffix>

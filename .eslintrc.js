@@ -53,12 +53,13 @@ module.exports = {
     'no-nested-ternary': 0,
     'consistent-return': 0,
     'no-trailing-spaces': 0,
-    'react-hooks/rules-of-hooks': 'error',
     'no-restricted-syntax': [0, 'ForOfStatement'],
     'no-unused-expressions': ['error', { allowShortCircuit: true }],
+    'import/no-unresolved': [0, { ignore: ['./styled'] }],
+    'react-hooks/rules-of-hooks': 'error',
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 0
+    'react-hooks/exhaustive-deps': 0,
   },
   globals: {
     _HOST: 'readonly',
