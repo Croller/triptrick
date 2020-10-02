@@ -45,6 +45,7 @@ export const Item = styled.span`
 
   svg {
     width: 14px;
+    color: ${PALETTE.grey2};
     cursor: pointer
   }
 `;

@@ -40,10 +40,10 @@ export const Select = ({
 
   const handleSearch = (e) => {
     const str = e.target.value;
-    const arr = list.filter((item) => item.props.children.indexOf(str) > -1);
+    const arr = filterDic(val, list).filter((item) => item.props.children.indexOf(str) > -1);
     setSearch(str);
-    if (str.length > 0 && arr.length > 0) {
-      setList(filterDic(arr, children));
+    if (str.length > 0 && str.length > 0) {
+      setList(arr);
     } else {
       setList(children);
     }
