@@ -6,10 +6,10 @@ export const OutSideClick = ({ className = '', children, onOutSide }) => {
 
   useEffect(() => {
     const listener = e => {
+      e.preventDefault();
       if (!ref.current || ref.current.contains(e.target)) {
         return;
       }
-      e.preventDefault();
       onOutSide();
     };
 

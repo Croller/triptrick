@@ -29,7 +29,7 @@ export const Select = ({
   multiple = false,
   children = [],
   onChange,
-  // onBlur,  // TODO
+  onBlur,  // TODO
   className = '',
 }) => {
   const ref = useRef();
@@ -69,28 +69,30 @@ export const Select = ({
   const handleClear = () => {
     setSearch('');
     if (!multiple) {
-      onChange(null);
-      setList(children);
       setVal('');
+      setList(children);
+      onChange(null);
     }
   };
 
   const handleBlur = () => {
-    if (multiple) {
-      // onBlur(val.map((v) => v.id));
-      setSearch('');
-    } else {
-      // onBlur(val.id || null);
+    if (show) {
+      if (multiple) {
+        onBlur(val.map((v) => v.id));
+        setSearch('');
+      } else {
+        onBlur(val.id || null);
+      }
+      handleShow(false);
     }
-    handleShow(false);
   };
 
   const handleDelete = (item) => {
     if (multiple && Array.isArray(val)) {
       const arr = val.filter((v) => v.id !== item.id);
-      onChange(arr.map((r) => r.id));
       setVal(arr);
       setList(filterDic(arr, children));
+      onChange(arr.map((r) => r.id));
       handleShow(true);
     }
   };
@@ -119,14 +121,14 @@ export const Select = ({
     if (value && children) {
       setList(children);
       setVal(value || '');
-      if (Array.isArray(value)) {
-        setVal(value);
-      } else {
+      if (!Array.isArray(value)) {
         const arr = children.filter((item) => parseInt(item.key, 0) !== value);
         const obj = children.find((item) => parseInt(item.key, 0) === value);
         setVal({ id: parseInt(obj.key, 0), name: obj.props.children });
         setList(arr);
         setSearch(children.find((item) => parseInt(item.key, 0) === value).props.children);
+      } else {
+        setVal(value);
       }
     }
   }, [value, children]);
