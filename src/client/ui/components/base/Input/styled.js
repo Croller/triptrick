@@ -90,14 +90,20 @@ export const Control = styled.input`
   height: ${THEME.controlHeight};
   font-family: ${FONTS.comfortaaRegular};
   font-size: 14px;
-  border: ${THEME.controlBorderWidth} solid ${PALETTE.grey3};
+  border: ${THEME.controlBorderWidth} solid ${p => (p.required ? `${PALETTE.red1}` : `${PALETTE.grey3}`)};
   border-radius: ${THEME.controlBorderRadius};
   padding-left: ${(p) => ((p.prefix && '35px') || '7px')};
   padding-right: ${(p) => ((p.suffix && '35px') || '7px')};
   box-sizing: border-box;
+  cursor: pointer;
+  background-color: ${p => (p.disabled ? `${PALETTE.grey6}` : `${PALETTE.white}`)};
 
   &:focus {
     outline: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
   }
 `;
 
@@ -136,3 +142,11 @@ export const Suffix = styled.span`
   }
 `;
 
+export const Error = styled.span`
+  position: absolute;
+  bottom: ${THEME.controlErrorMargin};
+  display: block;
+  font-family: ${FONTS.comfortaaLight};
+  color: ${PALETTE.red1};
+  font-size: ${THEME.controlErrorFontSize};
+`;

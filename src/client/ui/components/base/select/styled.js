@@ -23,12 +23,13 @@ export const Container = styled.div`
   box-sizing: border-box;
   max-width: 100%;
   min-height: ${THEME.controlHeight};
-  border: ${THEME.controlBorderWidth} solid ${PALETTE.grey3};
+  border: ${THEME.controlBorderWidth} solid ${p => (p.required ? `${PALETTE.red1}` : `${PALETTE.grey3}`)};
   border-radius: ${THEME.controlBorderRadius};
   padding: 2px 0 2px;
   padding-left: ${(p) => ((p.prefix && '35px') || '7px')};
   padding-right: ${(p) => ((p.suffix && '35px') || '7px')};
-  cursor: pointer;
+  cursor: ${p => (p.disabled ? 'not-allowed' : 'pointer')};
+  background-color: ${p => (p.disabled ? `${PALETTE.grey6}` : `${PALETTE.white}`)};
 
   > span {
     margin: 1.5px 3px 1.5px 0;
@@ -122,6 +123,15 @@ export const Suffix = styled.span`
 export const List = styled.div`
   position: relative;
   width: 100%;
+`;
+
+export const Error = styled.span`
+  position: absolute;
+  bottom: ${THEME.controlErrorMargin};
+  display: block;
+  font-family: ${FONTS.comfortaaLight};
+  color: ${PALETTE.red1};
+  font-size: ${THEME.controlErrorFontSize};
 `;
 
 export const Options = styled.ul`

@@ -11,6 +11,7 @@ import {
   Control,
   Prefix,
   Suffix,
+  Error,
 } from './styled';
 
 const setSeparator = (array, sep) => array.reduce((childrens, child, c) => {
@@ -71,8 +72,11 @@ export const Input = ({
   defaultValue = '',
   prefix = null,
   showClear = false,
-  onChange,
-  onBlur,
+  required = false,
+  disabled = false,
+  error = 'Required field',
+  onChange = () => {},
+  onBlur = () => {},
   className = '',
 }) => {
   const ref = useRef();
@@ -94,7 +98,7 @@ export const Input = ({
   };
 
   const handleFocus = () => {
-    ref.current.focus();
+    !disabled && ref.current.focus();
   };
 
   useEffect(() => {
@@ -129,15 +133,20 @@ export const Input = ({
           value={val}
           prefix={prefix}
           suffix={showClear}
+          required={required && val.length === 0}
+          disabled={disabled}
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        {showClear && val.length > 0 && (
+        {!disabled && showClear && val.length > 0 && (
           <Suffix className="t-input-suffix" label={label}>
             <CloseCircleLightSvg onClick={handleClear} />
           </Suffix>
         )}
       </Container>
+      {required && error && val.length === 0 && (
+        <Error>{error}</Error>
+      )}
     </Wrapper>
   );
 };

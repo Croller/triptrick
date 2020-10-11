@@ -4,6 +4,7 @@ import {
   Group,
   GroupLabel,
   GroupContainer,
+  Error,
   Label,
   Container,
   IconBlock,
@@ -16,19 +17,25 @@ export const CheckBoxGroup = ({
   defaulValue,
   children,
   direction = 'column',
+  required = false,
+  disabled = false,
+  error = 'Required field',
+  onChange = () => {},
+  // onBlur = () => {},
   className = '',
-  onChange,
 }) => {
   const [val, setVal] = useState([]);
 
   const handleChange = (value) => {
-    let eVal = [...val, value];
-    const exist = val.some((v) => v === value);
-    if (exist) {
-      eVal = val.filter((v) => v !== value);
+    if (!disabled) {
+      let eVal = [...val, value];
+      const exist = val.some((v) => v === value);
+      if (exist) {
+        eVal = val.filter((v) => v !== value);
+      }
+      setVal(eVal);
+      onChange(eVal);
     }
-    setVal(eVal);
-    onChange(eVal);
   };
 
   useEffect(() => {
@@ -52,8 +59,12 @@ export const CheckBoxGroup = ({
         {children && children.map((child) => React.cloneElement(child, {
           onClick: () => handleChange(child.props.value),
           checked: val.some((v) => v === child.props.value),
+          disabled,
         }))}
       </GroupContainer>
+      {required && error && val.length === 0 && (
+        <Error>{error}</Error>
+      )}
     </Group>
   ); 
 };
@@ -61,12 +72,18 @@ export const CheckBoxGroup = ({
 export const CheckBox = ({
   children,
   checked = false,
+  disabled = false,
   onClick,
   className = '',
 }) => {
   const ref = useRef();
   return (
-    <Label className={`t-checkbox ${className}`} htmlFor="control" onClick={onClick}>
+    <Label
+      className={`t-checkbox ${className}`}
+      htmlFor="control"
+      onClick={onClick}
+      disabled={disabled}
+    >
       <Container>
         <Control
           ref={ref}

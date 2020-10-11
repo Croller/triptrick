@@ -4,6 +4,7 @@ import {
   Group,
   GroupLabel,
   GroupContainer,
+  Error,
   Label,
   Container,
   IconBlock,
@@ -16,14 +17,20 @@ export const RadioGroup = ({
   defaulValue,
   children,
   direction = 'column',
+  required = false,
+  disabled = false,
+  error = 'Required field',
+  onChange = () => {},
+  // onBlur = () => {},
   className = '',
-  onChange,
 }) => {
-  const [val, setVal] = useState();
+  const [val, setVal] = useState(null);
 
   const handleChange = (value) => {
-    setVal(value);
-    onChange(value);
+    if (!disabled) {
+      setVal(value);
+      onChange(value);
+    }
   };
 
   useEffect(() => {
@@ -47,8 +54,12 @@ export const RadioGroup = ({
         {children && children.map((child) => React.cloneElement(child, {
           onClick: () => handleChange(child.props.value),
           checked: val === child.props.value,
+          disabled,
         }))}
       </GroupContainer>
+      {required && error && !val && (
+        <Error>{error}</Error>
+      )}
     </Group>
   ); 
 };
@@ -56,12 +67,18 @@ export const RadioGroup = ({
 export const Radio = ({
   children,
   checked = false,
+  disabled = false,
   onClick,
   className = '',
 }) => {
   const ref = useRef();
   return (
-    <Label className={`t-radio ${className}`} htmlFor="control" onClick={onClick}>
+    <Label
+      className={`t-radio ${className}`}
+      htmlFor="control"
+      onClick={onClick}
+      disabled={disabled}
+    >
       <Container>
         <Control
           ref={ref}

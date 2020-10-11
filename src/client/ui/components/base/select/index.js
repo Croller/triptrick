@@ -9,6 +9,7 @@ import {
   ControlWrapper, Control,
   Prefix,
   Suffix,
+  Error,
   List, Options, Opt,
 } from './styled';
 
@@ -28,15 +29,18 @@ export const Select = ({
   showSearch = false,
   multiple = false,
   children = [],
-  onChange,
-  onBlur,
+  required = false,
+  disabled = false,
+  error = 'Required field',
+  onChange = () => {},
+  onBlur = () => {},
   className = '',
 }) => {
   const ref = useRef();
   const [show, setShow] = useState(false);
-  const [val, setVal] = useState('');
+  const [val, setVal] = useState(null);
   const [search, setSearch] = useState('');
-  const [list, setList] = useState(null);
+  const [list, setList] = useState([]);
 
   const handleSearch = (e) => {
     const str = e.target.value;
@@ -51,19 +55,19 @@ export const Select = ({
   };
 
   const handleSelect = (value) => {
-    if (multiple && Array.isArray(val)) {
+    if (multiple) {
       const result = list.find((item) => item.props.value === value);
-      const arr = [...val, { id: result.props.value, name: result.props.children }];
+      const arr = [...(val || []), { id: result.props.value, name: result.props.children }];
       setSearch('');
       setVal(arr);
       setList(filterDic(arr, children));
-      onChange([...val.map((v) => v.id), value]);
+      onChange([...arr.map((v) => v.id)]);
     } else {
       const arr = list.filter((item) => item.props.value === value);
       setSearch(arr[0].props.children);
-      setVal(arr[0]);
+      setVal(value);
       setList(filterDic(arr[0].id, children));
-      onChange(value);
+      onChange(value);  
       handleShow(false);
     }
   };
@@ -71,7 +75,7 @@ export const Select = ({
   const handleClear = () => {
     setSearch('');
     if (!multiple) {
-      setVal('');
+      setVal(null);
       setList(children);
       onChange(null);
     }
@@ -79,18 +83,18 @@ export const Select = ({
 
   const handleBlur = () => {
     if (show) {
-      if (multiple) {
+      if (multiple && Array.isArray(val)) {
         onBlur(val.map((v) => v.id));
         setSearch('');
       } else {
-        onBlur(val.id || null);
+        onBlur((val && val.value) || null);
       }
     }
     handleShow(false);
   };
 
   const handleDelete = (item) => {
-    if (multiple && Array.isArray(val)) {
+    if (!disabled && multiple && Array.isArray(val)) {
       const arr = val.filter((v) => v.id !== item.id);
       setVal(arr);
       setList(filterDic(arr, children));
@@ -105,7 +109,7 @@ export const Select = ({
 
   const handleFocus = () => {
     if (showSearch) {
-      ref.current.focus();
+      !disabled && ref.current.focus();
     }
     if (!show) {
       handleShow();
@@ -113,15 +117,14 @@ export const Select = ({
   };
 
   const filterDic = (def, arr) => {
-    if (arr && multiple) {
+    if (Array.isArray(def) && arr && multiple) {
       return arr.filter((item) => !def.some((v) => v.id === item.props.value));
     }
     return arr.filter((item) => def !== item.props.value);
   };
 
   useEffect(() => {
-    if (defaulValue && children) {
-      setList(children);
+    if (defaulValue) {
       setVal(defaulValue || '');
       if (!Array.isArray(defaulValue)) {
         const arr = children.filter((item) => item.props.value !== defaulValue);
@@ -133,6 +136,7 @@ export const Select = ({
         setVal(defaulValue);
       }
     }
+    setList(children);
   }, [defaulValue, children]);
 
   return (
@@ -147,7 +151,13 @@ export const Select = ({
             :
           </Label>
         )}
-        <Container className="t-select-container" prefix={prefix} suffix={showSearch}>
+        <Container
+          className="t-select-container"
+          prefix={prefix}
+          suffix={showSearch}
+          required={required && !val}
+          disabled={disabled}
+        >
           {prefix && (
             <Prefix className="t-select-prefix" label={label}>
               {prefix}
@@ -166,7 +176,9 @@ export const Select = ({
             </>
           )}
           {showSearch && (
-            <ControlWrapper width={(search.length > 0 && `${search.length * 11}px`) || '2px'}>
+            <ControlWrapper
+              width={(search.length > 0 && `${search.length * 11}px`) || '2px'}
+            >
               <Control
                 ref={ref}
                 name="control"
@@ -175,7 +187,6 @@ export const Select = ({
                 type={type}
                 value={search}
                 onChange={handleSearch}
-                onClick={handleShow}
               />
             </ControlWrapper>
           )}
@@ -185,7 +196,10 @@ export const Select = ({
             </Suffix>
           )}
         </Container>
-        {show && list.length > 0 && (
+        {required && error && !val && (
+          <Error>{error}</Error>
+        )}
+        {!disabled && show && list.length > 0 && (
           <List className="t-select-options">
             <Options className="t-select-options-item">
               {list && filterDic(val, list).map((child) => React.cloneElement(child, {

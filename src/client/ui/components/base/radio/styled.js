@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { FONTS, PALETTE, THEME } from 'client/style/constants';
 
 export const Group = styled.div`
+  position: relative;
   display: block;
   margin: ${THEME.controlMargin};
 `;
@@ -29,12 +30,21 @@ export const GroupContainer = styled.div`
   }
 `;
 
+export const Error = styled.span`
+  position: absolute;
+  bottom: ${THEME.controlErrorMargin};
+  display: block;
+  font-family: ${FONTS.comfortaaLight};
+  color: ${PALETTE.red1};
+  font-size: ${THEME.controlErrorFontSize};
+`;
+
 export const Label = styled.label`
   display: flex;
   align-items: center;
   font-family: ${FONTS.comfortaaRegular};
   font-size: 14px;
-  cursor: pointer;
+  cursor: ${p => (p.disabled ? 'not-allowed' : 'pointer')};
 `;
 
 export const Control = styled.input`

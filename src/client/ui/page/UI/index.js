@@ -35,6 +35,28 @@ const UI = () => {
       <br />
       <br />
       <Input
+        label="Input disabled"
+        defaultValue="Input value"
+        prefix={(<BarsSolidSvg />)}
+        showClear
+        disabled
+        onChange={(obj) => handleChange('Input change - ', obj)}
+        onBlur={(obj) => handleBlur('Input blur - ', obj)}
+      />
+      <br />
+      <br />
+      <Input
+        label="Input required"
+        defaultValue="Input value"
+        prefix={(<BarsSolidSvg />)}
+        showClear
+        required
+        onChange={(obj) => handleChange('Input change - ', obj)}
+        onBlur={(obj) => handleBlur('Input blur - ', obj)}
+      />
+      <br />
+      <br />
+      <Input
         label="Input with mask"
         defaultValue="Input value"
         showClear
@@ -141,6 +163,31 @@ const UI = () => {
       </CheckBoxGroup>
       <br />
       <br />
+      <CheckBoxGroup
+        label="Checkbox disabled"
+        defaulValue={[1, 3]}
+        direction="row"
+        disabled
+        onChange={(obj) => handleChange('Checkbox change - ', obj)}
+      >
+        {CHECKBOX_DATA.map((item) => (
+          <CheckBox key={`_checkbox_1_${item.id}`} value={item.id}>{item.name}</CheckBox>
+        ))}
+      </CheckBoxGroup>
+      <br />
+      <br />
+      <CheckBoxGroup
+        label="Checkbox required"
+        direction="row"
+        required
+        onChange={(obj) => handleChange('Checkbox change - ', obj)}
+      >
+        {CHECKBOX_DATA.map((item) => (
+          <CheckBox key={`_checkbox_1_${item.id}`} value={item.id}>{item.name}</CheckBox>
+        ))}
+      </CheckBoxGroup>
+      <br />
+      <br />
       <RadioGroup
         onChange={(obj) => handleChange('Radio change - ', obj)}
       >
@@ -154,6 +201,30 @@ const UI = () => {
         label="Radio group row with label"
         defaulValue={2}
         direction="row"
+        onChange={(obj) => handleChange('Radio change - ', obj)}
+      >
+        {RADIO_DATA.map((item) => (
+          <Radio key={`_radio_1_${item.id}`} value={item.id}>{item.name}</Radio>
+        ))}
+      </RadioGroup>
+      <br />
+      <br />
+      <RadioGroup
+        label="Radio disabled"
+        direction="row"
+        disabled
+        onChange={(obj) => handleChange('Radio change - ', obj)}
+      >
+        {RADIO_DATA.map((item) => (
+          <Radio key={`_radio_1_${item.id}`} value={item.id}>{item.name}</Radio>
+        ))}
+      </RadioGroup>
+      <br />
+      <br />
+      <RadioGroup
+        label="Radio required"
+        direction="row"
+        required
         onChange={(obj) => handleChange('Radio change - ', obj)}
       >
         {RADIO_DATA.map((item) => (
@@ -192,6 +263,31 @@ const UI = () => {
         label="Select multiple simple, only select"
         defaulValue={SELECTED_DATA}
         multiple
+        onChange={(obj) => handleChange('Select change - ', obj)}
+      >
+        {SELECT_DATA.map((item) => (
+          <Option key={`_option_3_${item.id}`} value={item.id}>{item.name}</Option>
+        ))}
+      </Select>
+      <br />
+      <br />
+      <Select
+        label="Select disabled"
+        defaulValue={SELECTED_DATA}
+        multiple
+        disabled
+        onChange={(obj) => handleChange('Select change - ', obj)}
+      >
+        {SELECT_DATA.map((item) => (
+          <Option key={`_option_3_${item.id}`} value={item.id}>{item.name}</Option>
+        ))}
+      </Select>
+      <br />
+      <br />
+      <Select
+        label="Select disabled"
+        multiple
+        required
         onChange={(obj) => handleChange('Select change - ', obj)}
       >
         {SELECT_DATA.map((item) => (
