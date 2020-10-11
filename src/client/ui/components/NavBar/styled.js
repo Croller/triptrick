@@ -4,6 +4,7 @@ import {
   PALETTE,
   FONTS,
   BREAKPOINTS,
+  THEME,
 } from 'client/style/constants';
 import { MenuOutlined } from '@ant-design/icons';
 
@@ -36,7 +37,7 @@ export const Container = styled.div`
   margin-left: auto;
   margin-right: auto;
   color: ${PALETTE.white};
-  font-size: 12px;
+  font-size: ${THEME.controlLabelFontSize};
   justify-content: space-between;
   flex-wrap: nowrap;
 `;
@@ -77,7 +78,7 @@ export const MenuIcon = styled(MenuOutlined)`
   font-size: 24px;
   color: ${PALETTE.grey2};
   padding: 5px 7px;
-  border-radius: 3px;
+  border-radius: ${THEME.controlBorderRadius};
   cursor: pointer;
 
   &:hover {
@@ -108,7 +109,7 @@ export const Item = styled.li`
 
 export const Link = styled.a`
   color: ${PALETTE.black};
-  font-size: 12px;
+  font-size: ${THEME.controlLabelFontSize};
   transition: color 0.25s ease-in-out;
   line-height: 2.5;
   text-decoration: none;

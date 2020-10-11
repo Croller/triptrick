@@ -17,8 +17,9 @@ export const PALETTE = {
   grey2: '#6C6C6C',
   grey3: '#E5E6E7',
   grey4: '#D6D6D6',
-  grey5: '#FDFDFD',
+  grey5: '#F0F0F0',
   orange1: '#FF9F1C',
+  green1: '#55B533',
 };
 
 export const FONTS = {
@@ -27,3 +28,11 @@ export const FONTS = {
   comfortaaBold: 'Comfortaa-Bold, \'Source Sans Pro\', Helvetica, sans-serif',
 };
 
+export const THEME = {
+  controlLabelFontSize: '12px',
+  controlLabelMargin: '12px',
+  controlBorderWidth: '1px',
+  controlBorderRadius: '3px',
+  controlHeight: '36px',
+  controlMargin: '5px 0',
+};

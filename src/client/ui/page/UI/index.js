@@ -1,9 +1,18 @@
 import React from 'react';
 
-import { Input } from 'client/ui/components/base/input';
+import { InputRange, InputGroup, Input } from 'client/ui/components/base/input';
 import { Select, Option } from 'client/ui/components/base/select';
-import { BarsSolidSvg } from 'client/assets/images';
+import { CheckBoxGroup, CheckBox } from 'client/ui/components/base/checkbox';
+import { RadioGroup, Radio } from 'client/ui/components/base/radio';
+import { BarsSolidSvg, PlaneLightSvg } from 'client/assets/images';
 import { Wrapper } from './styled';
+
+import {
+  CHECKBOX_DATA,
+  RADIO_DATA,
+  SELECTED_DATA,
+  SELECT_DATA,
+} from './constants';
 
 const UI = () => {
   const handleChange = (key, obj) => {
@@ -17,7 +26,7 @@ const UI = () => {
     <Wrapper>
       <Input
         label="Input with prefix and suffix clear function"
-        value="Input value"
+        defaultValue="Input value"
         prefix={(<BarsSolidSvg />)}
         showClear
         onChange={(obj) => handleChange('Input change - ', obj)}
@@ -27,63 +36,167 @@ const UI = () => {
       <br />
       <Input
         label="Input with mask"
-        value="Input value"
+        defaultValue="Input value"
         showClear
         onChange={(obj) => handleChange('Input change - ', obj)}
         onBlur={(obj) => handleBlur('Input blur - ', obj)}
       />
       <br />
       <br />
+      <Input
+        type="password"
+        label="Input password"
+        defaultValue="password"
+        showClear
+        onChange={(obj) => handleChange('Input change - ', obj)}
+        onBlur={(obj) => handleBlur('Input blur - ', obj)}
+      />
+      <br />
+      <br />
+      <Input
+        defaultValue="Input witout label"
+        prefix={(<BarsSolidSvg />)}
+        showClear
+        onChange={(obj) => handleChange('Input change - ', obj)}
+        onBlur={(obj) => handleBlur('Input blur - ', obj)}
+      />
+      <br />
+      <br />
+      <InputGroup>
+        {[...Array(2)].map((num, n) => (
+          <Input
+            key={`_input_grp_1_${n + 1}`}
+            showClear
+            defaultValue={`Input ${n + 1}`}
+            onChange={(obj) => handleChange('Input change - ', obj)}
+            onBlur={(obj) => handleBlur('Input blur - ', obj)}
+          />
+        ))}
+      </InputGroup>
+      <br />
+      <br />
+      <InputGroup label="Input group with label">
+        {[...Array(4)].map((num, n) => (
+          <Input
+            key={`_input_grp_2_${n + 1}`}
+            showClear
+            separator={null}
+            defaultValue={`Input ${n + 1}`}
+            onChange={(obj) => handleChange('Input change - ', obj)}
+            onBlur={(obj) => handleBlur('Input blur - ', obj)}
+          />
+        ))}
+      </InputGroup>
+      <br />
+      <br />
+      <InputRange label="Input range with label">
+        {[...Array(4)].map((num, n) => (
+          <Input
+            key={`_input_grp_2_${n + 1}`}
+            showClear
+            separator={null}
+            defaultValue={`Input ${n + 1}`}
+            onChange={(obj) => handleChange('Input change - ', obj)}
+            onBlur={(obj) => handleBlur('Input blur - ', obj)}
+          />
+        ))}
+      </InputRange>
+      <br />
+      <br />
+      <InputRange
+        label="Input range with label and custom separator"
+        separator={(<PlaneLightSvg />)}
+      >
+        {[...Array(4)].map((num, n) => (
+          <Input
+            key={`_input_grp_2_${n + 1}`}
+            showClear
+            separator={null}
+            defaultValue={`Input ${n + 1}`}
+            onChange={(obj) => handleChange('Input change - ', obj)}
+            onBlur={(obj) => handleBlur('Input blur - ', obj)}
+          />
+        ))}
+      </InputRange>
+      <br />
+      <br />
+      <CheckBoxGroup
+        onChange={(obj) => handleChange('Checkbox change - ', obj)}
+      >
+        {CHECKBOX_DATA.map((item) => (
+          <CheckBox key={`_checkbox_1_${item.id}`} value={item.id}>{item.name}</CheckBox>
+        ))}
+      </CheckBoxGroup>
+      <br />
+      <br />
+      <CheckBoxGroup
+        label="Checkbox group row with label"
+        defaulValue={[1, 3]}
+        direction="row"
+        onChange={(obj) => handleChange('Checkbox change - ', obj)}
+      >
+        {CHECKBOX_DATA.map((item) => (
+          <CheckBox key={`_checkbox_1_${item.id}`} value={item.id}>{item.name}</CheckBox>
+        ))}
+      </CheckBoxGroup>
+      <br />
+      <br />
+      <RadioGroup
+        onChange={(obj) => handleChange('Radio change - ', obj)}
+      >
+        {RADIO_DATA.map((item) => (
+          <Radio key={`_radio_1_${item.id}`} value={item.id}>{item.name}</Radio>
+        ))}
+      </RadioGroup>
+      <br />
+      <br />
+      <RadioGroup
+        label="Radio group row with label"
+        defaulValue={2}
+        direction="row"
+        onChange={(obj) => handleChange('Radio change - ', obj)}
+      >
+        {RADIO_DATA.map((item) => (
+          <Radio key={`_radio_1_${item.id}`} value={item.id}>{item.name}</Radio>
+        ))}
+      </RadioGroup>
+      <br />
+      <br />
       <Select
         label="Select single with search"
-        value={1}
+        defaulValue={1}
         showSearch
         onChange={(obj) => handleChange('Select change - ', obj)}
-        onBlur={(obj) => handleBlur('Select blur - ', obj)}
       >
-        <Option key="1">test 1</Option>
-        <Option key="2">test 2</Option>
-        <Option key="3">test 3</Option>
-        <Option key="4">test 4</Option>
-        <Option key="5">test 5</Option>
+        {SELECT_DATA.map((item) => (
+          <Option key={`_option_1_${item.id}`} value={item.id}>{item.name}</Option>
+        ))}
       </Select>
       <br />
       <br />
       <Select
         label="Select multiple with search and prefix"
-        value={[
-          { id: 1, name: 'item 1' },
-          { id: 4, name: 'item 4' },
-        ]}
+        defaulValue={SELECTED_DATA}
         multiple
         showSearch
         prefix={(<BarsSolidSvg />)}
         onChange={(obj) => handleChange('Select change - ', obj)}
-        onBlur={(obj) => handleBlur('Select blur - ', obj)}
       >
-        <Option key="1">test 1</Option>
-        <Option key="2">test 2</Option>
-        <Option key="3">test 3</Option>
-        <Option key="4">test 4</Option>
-        <Option key="5">test 5</Option>
+        {SELECT_DATA.map((item) => (
+          <Option key={`_option_2_${item.id}`} value={item.id}>{item.name}</Option>
+        ))}
       </Select>
       <br />
       <br />
       <Select
         label="Select multiple simple, only select"
-        value={[
-          { id: 1, name: 'item 1' },
-          { id: 4, name: 'item 4' },
-        ]}
+        defaulValue={SELECTED_DATA}
         multiple
         onChange={(obj) => handleChange('Select change - ', obj)}
-        onBlur={(obj) => handleBlur('Select blur - ', obj)}
       >
-        <Option key="1">test 1</Option>
-        <Option key="2">test 2</Option>
-        <Option key="3">test 3</Option>
-        <Option key="4">test 4</Option>
-        <Option key="5">test 5</Option>
+        {SELECT_DATA.map((item) => (
+          <Option key={`_option_3_${item.id}`} value={item.id}>{item.name}</Option>
+        ))}
       </Select>
     </Wrapper>
   );

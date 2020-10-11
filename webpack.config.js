@@ -62,8 +62,8 @@ if (PLATFORM === 'production') {
 module.exports = {
   entry: [
     'babel-polyfill',
-    './src/client/index.js',
     'react-hot-loader/patch',
+    './src/client/index.js',
   ],
   output: {
     path: path.join(__dirname, outputDirectory),

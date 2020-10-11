@@ -1,17 +1,17 @@
 import styled from 'styled-components';
-import { FONTS, PALETTE } from 'client/style/constants';
+import { FONTS, PALETTE, THEME } from 'client/style/constants';
 
 export const Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  margin: 5px 0;
+  margin: ${THEME.controlMargin};
 `;
 
 export const Label = styled.label`
   font-family: ${FONTS.comfortaaRegular};
-  font-size: 12px;
-  margin-bottom: 6px;
+  font-size: ${THEME.controlLabelFontSize};
+  margin: 0 0 ${THEME.controlLabelMargin};
 `;
 
 export const Container = styled.div`
@@ -22,9 +22,9 @@ export const Container = styled.div`
   align-items: center;
   box-sizing: border-box;
   max-width: 100%;
-  min-height: 36px;
-  border: 1px solid ${PALETTE.grey3};
-  border-radius: 3px;
+  min-height: ${THEME.controlHeight};
+  border: ${THEME.controlBorderWidth} solid ${PALETTE.grey3};
+  border-radius: ${THEME.controlBorderRadius};
   padding: 2px 0 2px;
   padding-left: ${(p) => ((p.prefix && '35px') || '7px')};
   padding-right: ${(p) => ((p.suffix && '35px') || '7px')};
@@ -38,20 +38,26 @@ export const Container = styled.div`
 export const Item = styled.span`
   display: flex;
   border-width: 0;
-  border-radius: 3px;
-  background-color: #F0EDED;
+  border-radius: ${THEME.controlBorderRadius};
+  background-color: ${PALETTE.grey5};
   padding: 5px 8px;
   margin-right: 5px;
 
   svg {
     width: 14px;
     color: ${PALETTE.grey2};
-    cursor: pointer
+    cursor: pointer;
+    opacity: 1;
+
+    &:hover {
+      opacity: 0.8;
+      transition: opacity 0.25s ease-in-out;
+    }
   }
 `;
 
 export const Text = styled.span`
-  font-size: 14px;
+  font-size: ${THEME.controlLabelFontSize};
   text-align: center;
   margin-right: 5px;
 `;
@@ -104,9 +110,11 @@ export const Suffix = styled.span`
   > svg {
     width: 16px;
     color: ${PALETTE.grey2};
+    opacity: 1;
 
     &:hover {
-      color: ${PALETTE.grey1};
+      opacity: 0.8;
+      transition: opacity 0.25s ease-in-out;
     }
   }
 `;
@@ -126,19 +134,19 @@ export const Options = styled.ul`
   padding: 0;
   background-color: ${PALETTE.white};
   z-index: 2;
-  border: 1px solid ${PALETTE.grey3};
+  border: ${THEME.controlBorderWidth} solid ${PALETTE.grey3};
   border-top-width: 0;
-  border-radius: 3px;
+  border-radius: ${THEME.controlBorderRadius};
 `;
 
 export const Opt = styled.li`
   padding: 9px 8px;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
-  border-bottom: 1px solid ${PALETTE.grey3};
+  border-bottom: ${THEME.controlBorderWidth} solid ${PALETTE.grey3};
 
   &:hover {
-    background-color: ${PALETTE.grey3};
+    background-color: ${PALETTE.grey5};
   }
 
   &:last-child {

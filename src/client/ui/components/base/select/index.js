@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { CloseCircleRegSvg } from 'client/assets/images';
+import { CloseCircleLightSvg } from 'client/assets/images';
 import { OutSideClick } from 'client/ui/components/base/OutSideClick';
 import {
   Wrapper,
@@ -13,23 +13,23 @@ import {
 } from './styled';
 
 export const Option = ({
-  key,
+  value,
   children,
   onClick,
 }) => (
-  <Opt key={key} onClick={() => onClick(children)}>{children}</Opt>
+  <Opt value={value} onClick={() => onClick(children)}>{children}</Opt>
 );
 
 export const Select = ({
   type = 'text',
   label = null,
-  value,
+  defaulValue,
   prefix = null,
   showSearch = false,
   multiple = false,
   children = [],
   onChange,
-  onBlur,  // TODO
+  onBlur,
   className = '',
 }) => {
   const ref = useRef();
@@ -42,26 +42,28 @@ export const Select = ({
     const str = e.target.value;
     const arr = filterDic(val, list).filter((item) => item.props.children.indexOf(str) > -1);
     setSearch(str);
-    if (str.length > 0 && str.length > 0) {
+    handleShow(true);
+    if (str.length > 0) {
       setList(arr);
     } else {
       setList(children);
     }
   };
 
-  const handleSelect = (id) => {
+  const handleSelect = (value) => {
     if (multiple && Array.isArray(val)) {
-      const result = list.find((item) => parseInt(item.key, 0) === id);
-      const arr = [...val, { id: parseInt(result.key, 0), name: result.props.children }];
+      const result = list.find((item) => item.props.value === value);
+      const arr = [...val, { id: result.props.value, name: result.props.children }];
+      setSearch('');
       setVal(arr);
       setList(filterDic(arr, children));
-      onChange([...val.map((v) => v.id), id]);
+      onChange([...val.map((v) => v.id), value]);
     } else {
-      const arr = list.filter((item) => parseInt(item.key, 0) === id);
+      const arr = list.filter((item) => item.props.value === value);
       setSearch(arr[0].props.children);
       setVal(arr[0]);
-      setList(filterDic(arr[0].key, children));
-      onChange(id);
+      setList(filterDic(arr[0].id, children));
+      onChange(value);
       handleShow(false);
     }
   };
@@ -83,8 +85,8 @@ export const Select = ({
       } else {
         onBlur(val.id || null);
       }
-      handleShow(false);
     }
+    handleShow(false);
   };
 
   const handleDelete = (item) => {
@@ -112,42 +114,42 @@ export const Select = ({
 
   const filterDic = (def, arr) => {
     if (arr && multiple) {
-      return arr.filter((item) => !def.some((v) => v.id === parseInt(item.key, 0)));
+      return arr.filter((item) => !def.some((v) => v.id === item.props.value));
     }
-    return arr.filter((item) => parseInt(def, 0) !== parseInt(item.key, 0));
+    return arr.filter((item) => def !== item.props.value);
   };
 
   useEffect(() => {
-    if (value && children) {
+    if (defaulValue && children) {
       setList(children);
-      setVal(value || '');
-      if (!Array.isArray(value)) {
-        const arr = children.filter((item) => parseInt(item.key, 0) !== value);
-        const obj = children.find((item) => parseInt(item.key, 0) === value);
-        setVal({ id: parseInt(obj.key, 0), name: obj.props.children });
+      setVal(defaulValue || '');
+      if (!Array.isArray(defaulValue)) {
+        const arr = children.filter((item) => item.props.value !== defaulValue);
+        const obj = children.find((item) => item.props.value === defaulValue);
+        setVal({ value: obj.props.value, name: obj.props.children });
         setList(arr);
-        setSearch(children.find((item) => parseInt(item.key, 0) === value).props.children);
+        setSearch(children.find((item) => item.props.value === defaulValue).props.children);
       } else {
-        setVal(value);
+        setVal(defaulValue);
       }
     }
-  }, [value, children]);
+  }, [defaulValue, children]);
 
   return (
     <OutSideClick onOutSide={handleBlur}>
       <Wrapper
-        className={className}
+        className={`t-select-wrapper ${className}`}
         onClick={handleFocus}
       >
         {label && (
-          <Label htmlFor="control">
+          <Label className="t-select-label" htmlFor="control">
             {label}
             :
           </Label>
         )}
-        <Container prefix={prefix} suffix={showSearch}>
+        <Container className="t-select-container" prefix={prefix} suffix={showSearch}>
           {prefix && (
-            <Prefix label={label}>
+            <Prefix className="t-select-prefix" label={label}>
               {prefix}
             </Prefix>
           )}
@@ -158,7 +160,7 @@ export const Select = ({
                   <Text>
                     {item.name}
                   </Text>
-                  <CloseCircleRegSvg onClick={() => handleDelete(item)} />
+                  <CloseCircleLightSvg onClick={() => handleDelete(item)} />
                 </Item>
               ))}
             </>
@@ -169,6 +171,7 @@ export const Select = ({
                 ref={ref}
                 name="control"
                 autoComplete="off"
+                className="t-select-input" 
                 type={type}
                 value={search}
                 onChange={handleSearch}
@@ -177,15 +180,17 @@ export const Select = ({
             </ControlWrapper>
           )}
           {showSearch && search.length > 0 && (
-            <Suffix label={label}>
-              <CloseCircleRegSvg onClick={handleClear} />
+            <Suffix className="t-select-suffix" label={label}>
+              <CloseCircleLightSvg onClick={handleClear} />
             </Suffix>
           )}
         </Container>
         {show && list.length > 0 && (
-          <List>
-            <Options>
-              {list && filterDic(val, list).map((child) => React.cloneElement(child, { onClick: () => handleSelect(parseInt(child.key, 0)) }))}
+          <List className="t-select-options">
+            <Options className="t-select-options-item">
+              {list && filterDic(val, list).map((child) => React.cloneElement(child, {
+                onClick: () => handleSelect(child.props.value),
+              }))}
             </Options>
           </List>
         )}
