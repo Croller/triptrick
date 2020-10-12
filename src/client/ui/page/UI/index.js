@@ -29,12 +29,12 @@ const UI = () => {
   return (
     <Wrapper>
       <Input
+        name="input_1"
         label="Input with prefix and suffix clear function"
         defaultValue="Input value"
         prefix={(<BarsSolidSvg />)}
         showClear
-        onChange={(obj) => handleChange('Input change - ', obj)}
-        onBlur={(obj) => handleBlur('Input blur - ', obj)}
+        onChange={(obj) => handleChange('Input change with name - ', obj)}
       />
       <br />
       <br />
@@ -45,7 +45,6 @@ const UI = () => {
         showClear
         disabled
         onChange={(obj) => handleChange('Input change - ', obj)}
-        onBlur={(obj) => handleBlur('Input blur - ', obj)}
       />
       <br />
       <br />
@@ -55,7 +54,6 @@ const UI = () => {
         showClear
         required
         onChange={(obj) => handleChange('Input change - ', obj)}
-        onBlur={(obj) => handleBlur('Input blur - ', obj)}
       />
       <br />
       <br />
@@ -64,7 +62,6 @@ const UI = () => {
         defaultValue="Input value"
         showClear
         onChange={(obj) => handleChange('Input change - ', obj)}
-        onBlur={(obj) => handleBlur('Input blur - ', obj)}
       />
       <br />
       <br />
@@ -74,7 +71,6 @@ const UI = () => {
         defaultValue="password"
         showClear
         onChange={(obj) => handleChange('Input change - ', obj)}
-        onBlur={(obj) => handleBlur('Input blur - ', obj)}
       />
       <br />
       <br />
@@ -83,7 +79,6 @@ const UI = () => {
         prefix={(<BarsSolidSvg />)}
         showClear
         onChange={(obj) => handleChange('Input change - ', obj)}
-        onBlur={(obj) => handleBlur('Input blur - ', obj)}
       />
       <br />
       <br />
@@ -94,7 +89,6 @@ const UI = () => {
             showClear
             defaultValue={`Input ${n + 1}`}
             onChange={(obj) => handleChange('Input change - ', obj)}
-            onBlur={(obj) => handleBlur('Input blur - ', obj)}
           />
         ))}
       </InputGroup>
@@ -108,7 +102,6 @@ const UI = () => {
             separator={null}
             defaultValue={`Input ${n + 1}`}
             onChange={(obj) => handleChange('Input change - ', obj)}
-            onBlur={(obj) => handleBlur('Input blur - ', obj)}
           />
         ))}
       </InputGroup>
@@ -122,7 +115,6 @@ const UI = () => {
             separator={null}
             defaultValue={`Input ${n + 1}`}
             onChange={(obj) => handleChange('Input change - ', obj)}
-            onBlur={(obj) => handleBlur('Input blur - ', obj)}
           />
         ))}
       </InputRange>
@@ -139,14 +131,24 @@ const UI = () => {
             separator={null}
             defaultValue={`Input ${n + 1}`}
             onChange={(obj) => handleChange('Input change - ', obj)}
-            onBlur={(obj) => handleBlur('Input blur - ', obj)}
           />
         ))}
       </InputRange>
       <br />
       <br />
+      <CheckBox
+        name="checkbox_0"
+        value
+        onChange={(obj) => handleChange('Single Checkbox change - ', obj)}
+      >
+        Single Checkbox
+      </CheckBox>
+      <br />
+      <br />
       <CheckBoxGroup
-        onChange={(obj) => handleChange('Checkbox change - ', obj)}
+        name="checkbox_1"
+        checked
+        onChange={(obj) => handleChange('Checkbox change with name - ', obj)}
       >
         {CHECKBOX_DATA.map((item) => (
           <CheckBox key={`_checkbox_1_${item.id}`} value={item.id}>{item.name}</CheckBox>
@@ -192,7 +194,8 @@ const UI = () => {
       <br />
       <br />
       <RadioGroup
-        onChange={(obj) => handleChange('Radio change - ', obj)}
+        name="radio_1"
+        onChange={(obj) => handleChange('Radio change with name - ', obj)}
       >
         {RADIO_DATA.map((item) => (
           <Radio key={`_radio_1_${item.id}`} value={item.id}>{item.name}</Radio>
@@ -237,10 +240,11 @@ const UI = () => {
       <br />
       <br />
       <Select
+        name="select_0"
         label="Select single with search"
         defaulValue={1}
         showSearch
-        onChange={(obj) => handleChange('Select change - ', obj)}
+        onChange={(obj) => handleChange('Select change with name - ', obj)}
       >
         {SELECT_DATA.map((item) => (
           <Option key={`_option_1_${item.id}`} value={item.id}>{item.name}</Option>
@@ -249,12 +253,13 @@ const UI = () => {
       <br />
       <br />
       <Select
+        name="select_1"
         label="Select multiple with search and prefix"
         defaulValue={SELECTED_DATA}
         multiple
         showSearch
         prefix={(<BarsSolidSvg />)}
-        onChange={(obj) => handleChange('Select change - ', obj)}
+        onChange={(obj) => handleChange('Select change with name - ', obj)}
       >
         {SELECT_DATA.map((item) => (
           <Option key={`_option_2_${item.id}`} value={item.id}>{item.name}</Option>
@@ -327,7 +332,6 @@ const UI = () => {
           prefix={(<BarsSolidSvg />)}
           showClear
           onChange={(obj) => handleChange('Input change - ', obj)}
-          onBlur={(obj) => handleBlur('Input blur - ', obj)}
         />
       </Form>
     </Wrapper>

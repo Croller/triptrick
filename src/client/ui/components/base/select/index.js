@@ -22,6 +22,7 @@ export const Option = ({
 );
 
 export const Select = ({
+  name = null,
   type = 'text',
   label = null,
   defaulValue,
@@ -61,13 +62,14 @@ export const Select = ({
       setSearch('');
       setVal(arr);
       setList(filterDic(arr, children));
-      onChange([...arr.map((v) => v.id)]);
+      const data = [...arr.map((v) => v.id)];
+      onChange(name ? { [name]: data } : data);
     } else {
       const arr = list.filter((item) => item.props.value === value);
       setSearch(arr[0].props.children);
       setVal(value);
       setList(filterDic(arr[0].id, children));
-      onChange(value);  
+      onChange(name ? { [name]: value } : value);  
       handleShow(false);
     }
   };
@@ -98,10 +100,11 @@ export const Select = ({
       const arr = val.filter((v) => v.id !== item.id);
       setVal((arr.length > 0 && arr) || null);
       setList(filterDic(arr, children));
-      onChange(arr.map((r) => r.id));
+      const data = [...arr.map((v) => v.id)];
+      onChange(name ? { [name]: data } : data);
       handleShow(true);
     } else {
-      setVal(null);
+      setVal(name ? { [name]: null } : null);
     }
   };
 
@@ -166,16 +169,16 @@ export const Select = ({
             </Prefix>
           )}
           {multiple && (
-            <>
-              {Array.isArray(val) && val.map((item, i) => (
-                <Item key={`_item_${i + 1}`}>
-                  <Text>
-                    {item.name}
-                  </Text>
-                  <CloseCircleLightSvg onClick={() => handleDelete(item)} />
-                </Item>
-              ))}
-            </>
+          <>
+            {Array.isArray(val) && val.map((item, i) => (
+              <Item key={`_item_${i + 1}`}>
+                <Text>
+                  {item.name}
+                </Text>
+                <CloseCircleLightSvg onClick={() => handleDelete(item)} />
+              </Item>
+            ))}
+          </>
           )}
           {showSearch && (
             <ControlWrapper

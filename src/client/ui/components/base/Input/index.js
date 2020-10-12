@@ -67,6 +67,7 @@ export const InputGroup = ({
 }) => (groupFunc(label, children, null, className));
 
 export const Input = ({
+  name = null,
   type = 'text',
   label = null,
   defaultValue = '',
@@ -85,7 +86,7 @@ export const Input = ({
   const handleChange = (e) => {
     const str = e.target.value;
     setVal(str);
-    onChange(str);
+    onChange(name ? { [name]: str } : str);
   };
 
   const handleClear = () => {

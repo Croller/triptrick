@@ -13,6 +13,7 @@ import {
 } from './styled';
 
 export const RadioGroup = ({
+  name = null,
   label = null,
   defaulValue,
   children,
@@ -29,7 +30,7 @@ export const RadioGroup = ({
   const handleChange = (value) => {
     if (!disabled) {
       setVal(value);
-      onChange(value);
+      onChange(name ? { [name]: value } : value);
     }
   };
 

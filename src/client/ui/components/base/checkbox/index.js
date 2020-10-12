@@ -13,6 +13,7 @@ import {
 } from './styled';
 
 export const CheckBoxGroup = ({
+  name = null,
   label = null,
   defaulValue,
   children,
@@ -26,7 +27,7 @@ export const CheckBoxGroup = ({
 }) => {
   const [val, setVal] = useState([]);
 
-  const handleChange = (value) => {
+  const handleClick = (value) => {
     if (!disabled) {
       let eVal = [...val, value];
       const exist = val.some((v) => v === value);
@@ -34,7 +35,7 @@ export const CheckBoxGroup = ({
         eVal = val.filter((v) => v !== value);
       }
       setVal(eVal);
-      onChange(eVal);
+      onChange(name ? { [name]: eVal } : eVal);
     }
   };
 
@@ -57,7 +58,7 @@ export const CheckBoxGroup = ({
         label={label}
       >
         {children && children.map((child) => React.cloneElement(child, {
-          onClick: () => handleChange(child.props.value),
+          onClick: () => handleClick(child.props.value),
           checked: val.some((v) => v === child.props.value),
           disabled,
         }))}
@@ -70,18 +71,33 @@ export const CheckBoxGroup = ({
 };
 
 export const CheckBox = ({
-  children,
+  name,
   checked = false,
+  children,
   disabled = false,
   onClick,
+  onChange = () => {},
   className = '',
 }) => {
   const ref = useRef();
+  const [val, setVal] = useState([]);
+
+  const handleClick = () => {
+    if (!disabled) {
+      setVal(!val);
+      onChange(name ? { [name]: !val } : !val);
+    }
+  };
+
+  useEffect(() => {
+    setVal(checked);
+  }, [checked]);
+
   return (
     <Label
       className={`t-checkbox ${className}`}
       htmlFor="control"
-      onClick={onClick}
+      onClick={onClick || handleClick}
       disabled={disabled}
     >
       <Container>
@@ -91,10 +107,10 @@ export const CheckBox = ({
           autoComplete="off"
           className="t-checkbox-input" 
           type="checkbox"
-          value={checked}
+          value={val}
         />
-        <IconBlock className="t-checkbox-icon" status={checked}>
-          {checked ? (
+        <IconBlock className="t-checkbox-icon" status={val}>
+          {val ? (
             <CheckCircleLightSvg />
           ) : (
             <CircleLightSvg />
