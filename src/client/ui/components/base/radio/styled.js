@@ -43,7 +43,7 @@ export const Label = styled.label`
   display: flex;
   align-items: center;
   font-family: ${FONTS.comfortaaRegular};
-  font-size: 14px;
+  font-size: ${THEME.controlFontSize};
   cursor: ${p => (p.disabled ? 'not-allowed' : 'pointer')};
 `;
 
@@ -65,7 +65,7 @@ export const IconBlock = styled.span`
   margin-right: 10px;
 
   > svg {
-    width: 18px;
+    width: 16px;
     color: ${PALETTE.grey2};
   }
 `;

@@ -4,7 +4,11 @@ import { InputRange, InputGroup, Input } from 'client/ui/components/base/input';
 import { Select, Option } from 'client/ui/components/base/select';
 import { CheckBoxGroup, CheckBox } from 'client/ui/components/base/checkbox';
 import { RadioGroup, Radio } from 'client/ui/components/base/radio';
-import { BarsSolidSvg, PlaneLightSvg } from 'client/assets/images';
+import { ButtonGroup, Button } from 'client/ui/components/base/button';
+import { Slider } from 'client/ui/components/base/slider';
+import { Form } from 'client/ui/components/base/form';
+import { BarsSolidSvg, PlaneLightSvg, CircleLightSvg } from 'client/assets/images';
+import { PALETTE } from 'client/style/constants';
 import { Wrapper } from './styled';
 
 import {
@@ -47,7 +51,6 @@ const UI = () => {
       <br />
       <Input
         label="Input required"
-        defaultValue="Input value"
         prefix={(<BarsSolidSvg />)}
         showClear
         required
@@ -294,6 +297,39 @@ const UI = () => {
           <Option key={`_option_3_${item.id}`} value={item.id}>{item.name}</Option>
         ))}
       </Select>
+      <br />
+      <br />
+      <ButtonGroup>
+        <Button>Button</Button>
+        <Button color={PALETTE.green1}>Button</Button>
+        <Button color={PALETTE.red1}>Button</Button>
+        <Button color={PALETTE.blue1}>Button</Button>
+        <Button disabled>Disabled</Button>
+        <Button>
+          <PlaneLightSvg />
+          Icon
+        </Button>
+        <Button>
+          <CircleLightSvg />
+          Icon
+          <CircleLightSvg />
+        </Button>
+      </ButtonGroup>
+      <br />
+      <br />
+      <Slider>Slider</Slider>
+      <br />
+      <br />
+      <Form>
+        <Input
+          label="Input with prefix and suffix clear function"
+          defaultValue="Input value"
+          prefix={(<BarsSolidSvg />)}
+          showClear
+          onChange={(obj) => handleChange('Input change - ', obj)}
+          onBlur={(obj) => handleBlur('Input blur - ', obj)}
+        />
+      </Form>
     </Wrapper>
   );
 };

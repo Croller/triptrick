@@ -96,10 +96,12 @@ export const Select = ({
   const handleDelete = (item) => {
     if (!disabled && multiple && Array.isArray(val)) {
       const arr = val.filter((v) => v.id !== item.id);
-      setVal(arr);
+      setVal((arr.length > 0 && arr) || null);
       setList(filterDic(arr, children));
       onChange(arr.map((r) => r.id));
       handleShow(true);
+    } else {
+      setVal(null);
     }
   };
 

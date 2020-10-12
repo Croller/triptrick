@@ -74,7 +74,7 @@ export const Control = styled.input`
   min-width: 4px;
   height: 25px;
   font-family: ${FONTS.comfortaaRegular};
-  font-size: 14px;
+  font-size: ${THEME.controlFontSize};
   border-width: 0;
   cursor: pointer;
 
@@ -150,7 +150,7 @@ export const Options = styled.ul`
 `;
 
 export const Opt = styled.li`
-  padding: 9px 8px;
+  padding: 11px 10px;
   font-size: 13px;
   cursor: pointer;
   border-bottom: ${THEME.controlBorderWidth} solid ${PALETTE.grey3};

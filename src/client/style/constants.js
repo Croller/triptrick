@@ -22,6 +22,7 @@ export const PALETTE = {
   orange1: '#FF9F1C',
   green1: '#55B533',
   red1: '#F25555',
+  blue1: '#02A9E0',
 };
 
 export const FONTS = {
@@ -32,6 +33,7 @@ export const FONTS = {
 
 export const THEME = {
   controlLabelFontSize: '12px',
+  controlFontSize: '14px',
   controlLabelMargin: '10px',
   controlBorderWidth: '1px',
   controlBorderRadius: '3px',

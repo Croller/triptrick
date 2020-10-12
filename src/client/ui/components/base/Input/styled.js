@@ -89,7 +89,7 @@ export const Control = styled.input`
   width: 100%;
   height: ${THEME.controlHeight};
   font-family: ${FONTS.comfortaaRegular};
-  font-size: 14px;
+  font-size: ${THEME.controlFontSize};
   border: ${THEME.controlBorderWidth} solid ${p => (p.required ? `${PALETTE.red1}` : `${PALETTE.grey3}`)};
   border-radius: ${THEME.controlBorderRadius};
   padding-left: ${(p) => ((p.prefix && '35px') || '7px')};
