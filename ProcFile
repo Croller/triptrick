@@ -1,2 +1,2 @@
 NPM_CONFIG_PRODUCTION=false
-web: node src/server/index.js
+web: npm start
