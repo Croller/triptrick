@@ -100,6 +100,9 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-pwa-manifest": "^4.2.0"
   },
+  "engines": {
+    "node": "12.x"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
