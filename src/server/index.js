@@ -19,6 +19,7 @@ app.use(express.static('dist'));
 app.use(bodyParser.urlencoded({ extended: true, limit: '1550mb' }));
 app.use(bodyParser.json({ limit: '1550mb' }));
 app.use('/', mappedRoutes);
+app.use(express.static(path.join(__dirname, '../../dist')));
 // app.use(express.static('src/server/shared'));
 
 app.use((req, res, next) => {
@@ -33,3 +34,11 @@ app.listen(process.env.PORT || process.env.PORT_LOCAL_SERVER, () => console.log(
 app.get('*', (req, res) => {
   res.sendFile(path.resolve('dist/index.html'));
 });
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../../dist')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  });
+}
+
