@@ -23,6 +23,8 @@ export const PALETTE = {
   green1: '#55B533',
   red1: '#F25555',
   blue1: '#02A9E0',
+
+  disabled: '#A5A5A5',
 };
 
 export const FONTS = {

@@ -8,7 +8,7 @@ export const ButtonGroup = ({
   children,
   className = '',
 }) => (
-  <Group className={className}>{children}</Group>
+  <Group className={`t-button-group ${className}`}>{children}</Group>
 );
 
 export const Button = ({
@@ -18,7 +18,7 @@ export const Button = ({
   className = '',
 }) => (
   <Wrapper
-    className={className}
+    className={`t-button ${className}`}
     disabled={disabled}
     color={color}
   >

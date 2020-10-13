@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { Layout } from 'antd';
 
-export const Container = styled(Layout)`
+export const Container = styled.div`
   display: block;
 `;
 

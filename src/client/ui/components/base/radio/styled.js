@@ -44,7 +44,16 @@ export const Label = styled.label`
   align-items: center;
   font-family: ${FONTS.comfortaaRegular};
   font-size: ${THEME.controlFontSize};
-  cursor: ${p => (p.disabled ? 'not-allowed' : 'pointer')};
+  cursor: pointer;
+
+  ${p => (p.disabled && css`
+    cursor: not-allowed;
+    color: ${PALETTE.disabled};
+
+    svg {
+      color: ${PALETTE.disabled} !important;
+    }
+  `)}
 `;
 
 export const Control = styled.input`

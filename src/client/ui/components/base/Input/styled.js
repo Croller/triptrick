@@ -97,6 +97,7 @@ export const Control = styled.input`
   box-sizing: border-box;
   cursor: pointer;
   background-color: ${p => (p.disabled ? `${PALETTE.grey6}` : `${PALETTE.white}`)};
+  letter-spacing: -0.5px;
 
   &:focus {
     outline: none;
@@ -104,6 +105,7 @@ export const Control = styled.input`
 
   &:disabled {
     cursor: not-allowed;
+    color: ${PALETTE.disabled};
   }
 `;
 
@@ -131,7 +133,7 @@ export const Suffix = styled.span`
   cursor: pointer;
 
   > svg {
-    width: 16px;
+    width: 14px;
     color: ${PALETTE.grey2};
     opacity: 1;
 

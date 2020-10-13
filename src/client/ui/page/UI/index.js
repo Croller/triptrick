@@ -310,11 +310,16 @@ const UI = () => {
         <Button color={PALETTE.red1}>Button</Button>
         <Button color={PALETTE.blue1}>Button</Button>
         <Button disabled>Disabled</Button>
-        <Button>
+      </ButtonGroup>
+      <br />
+      <br />
+      <ButtonGroup>
+        <Button>Button</Button>
+        <Button color={PALETTE.blue1}>
           <PlaneLightSvg />
           Icon
         </Button>
-        <Button>
+        <Button disabled>
           <CircleLightSvg />
           Icon
           <CircleLightSvg />
@@ -322,7 +327,12 @@ const UI = () => {
       </ButtonGroup>
       <br />
       <br />
-      <Slider>Slider</Slider>
+      {/* <Slider
+        label="Slider range"
+        min={0}
+        step={3}
+        defaulValue={30}
+      /> */}
       <br />
       <br />
       <Form>

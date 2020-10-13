@@ -26,7 +26,7 @@ export const Wrapper = styled.button`
   font-family: ${FONTS.comfortaaRegular};
   font-size: ${THEME.controlFontSize};
   margin: ${THEME.controlMargin};
-  padding: 10px 18px;
+  padding: 10px 24px;
   color: ${p => ((p.color && `${PALETTE.white}`) || `${PALETTE.black}`)};
   cursor: pointer;
 
@@ -40,17 +40,8 @@ export const Wrapper = styled.button`
     transition: background-color 0.1s linear;
   }
 
-  &:disabled {
-    cursor: not-allowed;
-    color: ${PALETTE.grey3};
-
-    &:hover {
-      background-color: ${PALETTE.grey6};
-    }
-  }
-
   > svg {
-    width: 18px;
+    width: 16px;
     margin-right: 10px;
 
     &:last-child {
@@ -61,6 +52,16 @@ export const Wrapper = styled.button`
     &:first-child {
       margin-right: 10px;
       margin-left: 0;
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    color: ${PALETTE.disabled};
+    background-color: ${PALETTE.grey6};
+
+    > svg {
+      color: ${PALETTE.disabled} !important;
     }
   }
 `;

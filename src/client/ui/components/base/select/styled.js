@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FONTS, PALETTE, THEME } from 'client/style/constants';
 
 export const Wrapper = styled.div`
@@ -28,12 +28,21 @@ export const Container = styled.div`
   padding: 2px 0 2px;
   padding-left: ${(p) => ((p.prefix && '35px') || '7px')};
   padding-right: ${(p) => ((p.suffix && '35px') || '7px')};
-  cursor: ${p => (p.disabled ? 'not-allowed' : 'pointer')};
   background-color: ${p => (p.disabled ? `${PALETTE.grey6}` : `${PALETTE.white}`)};
+  cursor: pointer;
 
   > span {
     margin: 1.5px 3px 1.5px 0;
   }
+
+  ${p => (p.disabled && css`
+    cursor: not-allowed;
+    color: ${PALETTE.disabled};
+
+    svg {
+      color: ${PALETTE.disabled} !important;
+    }
+  `)}
 `;
 
 export const Item = styled.span`
@@ -109,7 +118,7 @@ export const Suffix = styled.span`
   cursor: pointer;
 
   > svg {
-    width: 16px;
+    width: 14px;
     color: ${PALETTE.grey2};
     opacity: 1;
 
@@ -151,7 +160,7 @@ export const Options = styled.ul`
 
 export const Opt = styled.li`
   padding: 11px 10px;
-  font-size: 13px;
+  font-size: ${THEME.controlFontSize};
   cursor: pointer;
   border-bottom: ${THEME.controlBorderWidth} solid ${PALETTE.grey3};
 

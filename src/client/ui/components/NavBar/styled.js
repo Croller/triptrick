@@ -6,7 +6,6 @@ import {
   BREAKPOINTS,
   THEME,
 } from 'client/style/constants';
-import { MenuOutlined } from '@ant-design/icons';
 
 export const Wrapper = styled.header`
   position: absolute;
@@ -73,7 +72,7 @@ export const Menu = styled.ul`
   }
 `;
 
-export const MenuIcon = styled(MenuOutlined)`
+export const MenuIcon = styled.div`
   margin: auto 0;
   font-size: 24px;
   color: ${PALETTE.grey2};
