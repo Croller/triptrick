@@ -1,8 +1,15 @@
-/node_modules
-/dist
+dist/
+node_modules/
+public/
+.tmp/
+npm-debug.log
+.DS_Store
+.env
 
 .eslintcache
 .vscode
 .idea
 .idea
 package-lock.json
+
+
