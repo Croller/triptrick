@@ -19,7 +19,7 @@ app.use(express.static('dist'));
 app.use(bodyParser.urlencoded({ extended: true, limit: '1550mb' }));
 app.use(bodyParser.json({ limit: '1550mb' }));
 app.use('/', mappedRoutes);
-app.use(express.static('src/server/shared'));
+// app.use(express.static('src/server/shared'));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
