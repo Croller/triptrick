@@ -18,6 +18,15 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "lint": "eslint --ext .jsx --ext .js ./src --fix"
   },
+  "root": "dist/",
+  "clean_urls": false,
+  "routes": {
+    "/**": "index.html"
+  },
+  "engines": {
+    "node": "12.x",
+    "npm": "6.X"
+  },
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
     "@babel/runtime": "^7.10.5",
