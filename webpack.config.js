@@ -14,8 +14,8 @@ const PLATFORM = process.env.NODE_ENV;
 
 let plugins = [
   new HtmlWebpackPlugin({
-    template: './dist/index.html',
-    favicon: './dist/favicon.ico',
+    template: './public/index.html',
+    favicon: './public/favicon.ico',
   }),
   new webpack.HotModuleReplacementPlugin(),
   new WebpackPwaManifest({
@@ -58,7 +58,7 @@ if (PLATFORM === 'production') {
     new HtmlWebpackPlugin({
       favicon: './public/favicon.ico',
       template: './public/index.html',
-      filename: './dist/index.html',
+      filename: './public/index.html',
     }),
   );
 }
