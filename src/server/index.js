@@ -3,12 +3,13 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mapRoutes = require('express-routes-mapper');
 const cors = require('cors');
+const fs = require('fs');
 const routes = require('./api/routes');
 require('dotenv').config();
-
-console.log('-------------- check connection server --------------');
+// console.log('-------------- check connection server --------------');
 // const db = require('./api/db');
 // db.ConnectDB();
+
 
 // -------------- config server --------------
 
@@ -21,6 +22,12 @@ app.use(bodyParser.json({ limit: '1550mb' }));
 app.use('/', mappedRoutes);
 app.use(express.static('src/server/shared'));
 
+fs.readdir('dist', (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+  });
+});
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -28,8 +35,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.listen(process.env.PORT || process.env.PORT_LOCAL_SERVER, () => console.log(`success: listen port ${process.env.PORT || process.env.PORT_LOCAL_SERVER}`));
-
 app.get('*', (req, res) => {
   res.sendFile(path.resolve('dist/index.html'));
 });
+
+app.listen(process.env.PORT || process.env.PORT_LOCAL_SERVER, () => console.log(`success: listen port ${process.env.PORT || process.env.PORT_LOCAL_SERVER}`));
