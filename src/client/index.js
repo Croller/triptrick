@@ -5,7 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 
 // import ru from 'antd/lib/locale-provider/ru_RU';
 // import en from 'antd/lib/locale-provider/en_US';
-// import { ConfigProvider } from 'antd';
 
 import { I18nextProvider } from 'react-i18next';
 import App from './App';
@@ -17,13 +16,11 @@ const store = configureStore();
 
 const root = (
   <Provider store={store}>
-    {/* <ConfigProvider locale={ru}> */}
     <I18nextProvider i18n={i18n}>
       <BrowserRouter>
         <App i18n={i18n} />
       </BrowserRouter>
     </I18nextProvider>
-    {/* </ConfigProvider> */}
   </Provider>
 );
 

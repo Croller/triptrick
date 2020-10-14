@@ -28,13 +28,11 @@
     "npm": "6.X"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.2.2",
     "@babel/runtime": "^7.10.5",
     "@hot-loader/react-dom": "^16.8.6",
     "@mapbox/mapbox-gl-draw": "^1.2.0",
     "@mapbox/mbtiles": "^0.11.0",
     "@turf/turf": "^5.1.6",
-    "antd": "^3.26.18",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.19.0",
