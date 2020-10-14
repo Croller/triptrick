@@ -14,8 +14,8 @@ const PLATFORM = process.env.NODE_ENV;
 
 let plugins = [
   new HtmlWebpackPlugin({
-    template: './public/index.html',
-    favicon: './public/favicon.ico',
+    template: './dist/index.html',
+    favicon: './dist/favicon.ico',
   }),
   new webpack.HotModuleReplacementPlugin(),
   new WebpackPwaManifest({
@@ -55,7 +55,11 @@ if (PLATFORM === 'production') {
   plugins = plugins.concat(
     new MiniCssExtractPlugin({ filename: 'css/[name]_[hash].css' }),
     new BundleAnalyzerPlugin({ openAnalyzer: false, analyzerMode: 'static' }),
-    // new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      favicon: './public/favicon.ico',
+      template: './public/index.html',
+      filename: './dist/index.html',
+    }),
   );
 }
 
@@ -71,7 +75,6 @@ module.exports = {
     publicPath: `${PLATFORM === 'production' ? './' : '/'}`,
     chunkFilename: 'js/[name].[chunkhash].js',
   },
-
   optimization: {
     chunkIds: 'named',
     splitChunks: {
