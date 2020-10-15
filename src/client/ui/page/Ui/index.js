@@ -5,7 +5,7 @@ import { Select, Option } from 'client/ui/components/base/select';
 import { CheckBoxGroup, CheckBox } from 'client/ui/components/base/checkbox';
 import { RadioGroup, Radio } from 'client/ui/components/base/radio';
 import { ButtonGroup, Button } from 'client/ui/components/base/button';
-import { Slider } from 'client/ui/components/base/slider';
+// import { Slider } from 'client/ui/components/base/slider';
 import { Form } from 'client/ui/components/base/form';
 import { BarsSolidSvg, PlaneLightSvg, CircleLightSvg } from 'client/assets/images';
 import { PALETTE } from 'client/style/constants';
