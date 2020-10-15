@@ -55,7 +55,11 @@ if (PLATFORM === 'production') {
   plugins = plugins.concat(
     new MiniCssExtractPlugin({ filename: 'css/[name]_[hash].css' }),
     new BundleAnalyzerPlugin({ openAnalyzer: false, analyzerMode: 'static' }),
-    // new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      favicon: './public/favicon.ico',
+      template: './public/index.html',
+      filename: './public/index.html',
+    }),
   );
 }
 
@@ -71,7 +75,6 @@ module.exports = {
     publicPath: `${PLATFORM === 'production' ? './' : '/'}`,
     chunkFilename: 'js/[name].[chunkhash].js',
   },
-
   optimization: {
     chunkIds: 'named',
     splitChunks: {
