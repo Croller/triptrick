@@ -56,9 +56,8 @@ if (PLATFORM === 'production') {
     new MiniCssExtractPlugin({ filename: 'css/[name]_[hash].css' }),
     new BundleAnalyzerPlugin({ openAnalyzer: false, analyzerMode: 'static' }),
     new HtmlWebpackPlugin({
-      favicon: './public/favicon.ico',
-      template: './public/index.html',
-      filename: './public/index.html',
+      template: path.resolve(__dirname, 'dist', 'index.html'),
+      filename: 'index.html',
     }),
   );
 }

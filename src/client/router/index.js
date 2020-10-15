@@ -13,7 +13,7 @@ import { ErrorBoundary } from 'client/ui/components/base/ErrorBoundary';
 
 const Page404 = lazy(() => import('client/ui/page/404'));
 const Map = lazy(() => import('client/ui/page/Map'));
-const UI = lazy(() => import('client/ui/page/UI'));
+const UI = lazy(() => import('client/ui/page/Components'));
 
 export const Routers = withRouter(() => (
   <ErrorBoundary>
