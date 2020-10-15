@@ -57,7 +57,7 @@ if (PLATFORM === 'production') {
     new MiniCssExtractPlugin({ filename: 'css/[name]_[hash].css' }),
     new BundleAnalyzerPlugin({ openAnalyzer: false, analyzerMode: 'static' }),
     new HtmlWebpackPlugin(),
-    new CaseSensitivePathsPlugin();
+    new CaseSensitivePathsPlugin({ debug: true }),
   );
 }
 
