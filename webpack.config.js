@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 // const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 // const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -56,6 +57,7 @@ if (PLATFORM === 'production') {
     new MiniCssExtractPlugin({ filename: 'css/[name]_[hash].css' }),
     new BundleAnalyzerPlugin({ openAnalyzer: false, analyzerMode: 'static' }),
     new HtmlWebpackPlugin(),
+    new CaseSensitivePathsPlugin();
   );
 }
 
