@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { InputRange, InputGroup, Input } from 'client/ui/components/base/input';
+import { InputRange, InputGroup, Input } from 'src/client/ui/components/base/input';
 import { Select, Option } from 'client/ui/components/base/select';
 import { CheckBoxGroup, CheckBox } from 'client/ui/components/base/checkbox';
 import { RadioGroup, Radio } from 'client/ui/components/base/radio';
