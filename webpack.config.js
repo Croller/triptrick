@@ -66,8 +66,8 @@ if (PLATFORM === 'production') {
 module.exports = {
   entry: [
     'babel-polyfill',
-    './src/client/index.js',
     'react-hot-loader/patch',
+    './src/client/index.js',
   ],
   output: {
     path: path.join(__dirname, outputDirectory),
@@ -156,7 +156,7 @@ module.exports = {
     host: '0.0.0.0',
     contentBase: './',
     port: process.env.PORT_LOCAL_CLIENT,
-    open: true,
+    open: false,
     hot: true,
     historyApiFallback: true,
     proxy: {

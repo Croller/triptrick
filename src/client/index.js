@@ -10,7 +10,6 @@ import { I18nextProvider } from 'react-i18next';
 import App from './App';
 import configureStore from './store/configStore';
 import i18n from './i18n';
-import './style/base.scss';
 
 const store = configureStore();
 
