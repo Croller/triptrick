@@ -28,7 +28,7 @@ const UI = () => {
 
   return (
     <Wrapper>
-      <Input
+      {/* <Input
         name="input_1"
         label="Input with prefix and suffix clear function"
         defaultValue="Input value"
@@ -133,7 +133,7 @@ const UI = () => {
             onChange={(obj) => handleChange('Input change - ', obj)}
           />
         ))}
-      </InputRange>
+      </InputRange> */}
       <br />
       <br />
       <CheckBox
@@ -336,13 +336,13 @@ const UI = () => {
       <br />
       <br />
       <Form>
-        <Input
+        {/* <Input
           label="Input with prefix and suffix clear function"
           defaultValue="Input value"
           prefix={(<BarsSolidSvg />)}
           showClear
           onChange={(obj) => handleChange('Input change - ', obj)}
-        />
+        /> */}
       </Form>
     </Wrapper>
   );
