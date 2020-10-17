@@ -1,55 +1,47 @@
 import { createGlobalStyle } from 'styled-components';
+import FuturaPTLight from 'client/assets/fonts/FuturaPT-Light.ttf';
+import FuturaPTBook from 'client/assets/fonts/FuturaPT-Book.ttf';
+import FuturaPTMedium from 'client/assets/fonts/FuturaPT-Medium.ttf';
+import FuturaPTBold from 'client/assets/fonts/FuturaPT-Bold.ttf';
+import ComfortaaRegular from 'client/assets/fonts/Comfortaa-Regular.ttf';
+import ComfortaaBold from 'client/assets/fonts/Comfortaa-Bold.ttf';
+import ComfortaaLight from 'client/assets/fonts/Comfortaa-Light.ttf';
 import { FONTS, PALETTE } from './constants';
 
 export const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'FuturaPT-Light';
-    src: url('../assets/fonts/FuturaPT-Light.ttf');
+    src: url(${FuturaPTLight}) format('ttf');
   }
 
   @font-face {
     font-family: 'FuturaPT-Book';
-    src: url('../assets/fonts/FuturaPT-Book.ttf');
+    src: url(${FuturaPTBook}) format('ttf');
   }
 
   @font-face {
     font-family: 'FuturaPT-Medium';
-    src: url('../assets/fonts/FuturaPT-Medium.ttf');
+    src: url(${FuturaPTMedium}) format('ttf');
   }
 
   @font-face {
     font-family: 'FuturaPT-Bold';
-    src: url('../assets/fonts/FuturaPT-Bold.ttf');
-  }
-
-  @font-face {
-    font-family: 'FuturaPT-Light';
-    src: url('../assets/fonts/FuturaPT-Light.ttf');
-  }
-
-  @font-face {
-    font-family: 'FuturaPT-Book';
-    src: url('../assets/fonts/FuturaPT-Book.ttf');
-  }
-
-  @font-face {
-    font-family: 'FuturaPT-Medium';
-    src: url('../assets/fonts/FuturaPT-Medium.ttf');
+    src: url(${FuturaPTBold}) format('ttf');
   }
 
   @font-face {
     font-family: 'Comfortaa-Regular';
-    src: url('../assets/fonts/Comfortaa-Regular.ttf');
+    src: url(${ComfortaaRegular}) format('ttf');
   }
 
   @font-face {
     font-family: 'Comfortaa-Bold';
-    src: url('../assets/fonts/Comfortaa-Bold.ttf');
+    src: url(${ComfortaaBold}) format('ttf');
   }
 
   @font-face {
     font-family: 'Comfortaa-Light';
-    src: url('../assets/fonts/Comfortaa-Light.ttf');
+    src: url(${ComfortaaLight}) format('ttf');
   }
 
   body {

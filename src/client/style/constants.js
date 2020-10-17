@@ -34,7 +34,7 @@ export const FONTS = {
 };
 
 export const THEME = {
-  controlLabelFontSize: '12px',
+  controlLabelFontSize: '13px',
   controlFontSize: '14px',
   controlLabelMargin: '10px',
   controlBorderWidth: '1px',

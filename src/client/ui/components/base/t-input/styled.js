@@ -98,6 +98,7 @@ export const Control = styled.input`
   cursor: pointer;
   background-color: ${p => (p.disabled ? `${PALETTE.grey6}` : `${PALETTE.white}`)};
   letter-spacing: -0.5px;
+  outline: none;
 
   &:focus {
     outline: none;
@@ -131,6 +132,7 @@ export const Suffix = styled.span`
   right: 10px;
   z-index: 1;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 
   > svg {
     width: 14px;
