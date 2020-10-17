@@ -52,6 +52,7 @@ export const Item = styled.span`
   background-color: ${PALETTE.grey5};
   padding: 5px 8px;
   margin-right: 5px;
+  height: 15px;
 
   svg {
     width: 14px;
