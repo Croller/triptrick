@@ -21,7 +21,6 @@ export const Container = styled.div`
   flex-wrap: wrap;
   align-items: center;
   box-sizing: border-box;
-  height: 100%;
   max-width: 100%;
   min-height: ${THEME.controlHeight};
   border: ${THEME.controlBorderWidth} solid ${p => (p.required ? `${PALETTE.red1}` : `${PALETTE.grey3}`)};
@@ -160,6 +159,7 @@ export const Options = styled.ul`
 `;
 
 export const Opt = styled.li`
+  height: auto;
   padding: 11px 10px;
   font-size: ${THEME.controlFontSize};
   cursor: pointer;

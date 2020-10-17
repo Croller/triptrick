@@ -58,9 +58,9 @@ export const GroupContainer = styled.div`
 `;
 
 export const Separator = styled.div`
-  line-height: ${THEME.controlHeight};
+  display: flex;
+  justify-content: center;
   width: ${THEME.controlHeight};
-  text-align: center;
 
   > svg {
     width: 15px;
@@ -99,6 +99,7 @@ export const Control = styled.input`
   background-color: ${p => (p.disabled ? `${PALETTE.grey6}` : `${PALETTE.white}`)};
   letter-spacing: -0.5px;
   outline: none;
+  -webkit-appearance: none;
 
   &:focus {
     outline: none;
