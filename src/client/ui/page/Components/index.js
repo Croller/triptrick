@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { InputRange, InputGroup, Input } from 'client/ui/components/base/input';
-import { Select, Option } from 'client/ui/components/base/select';
-import { CheckBoxGroup, CheckBox } from 'client/ui/components/base/checkbox';
-import { RadioGroup, Radio } from 'client/ui/components/base/radio';
-import { ButtonGroup, Button } from 'client/ui/components/base/button';
-import { Slider } from 'client/ui/components/base/slider';
-import { Form } from 'client/ui/components/base/form';
+import { InputRange, InputGroup, Input } from 'client/ui/components/base/t-input';
+import { Select, Option } from 'client/ui/components/base/t-select';
+import { CheckBoxGroup, CheckBox } from 'client/ui/components/base/t-checkbox';
+import { RadioGroup, Radio } from 'client/ui/components/base/t-radio';
+import { ButtonGroup, Button } from 'client/ui/components/base/t-button';
+// import { Slider } from 'client/ui/components/base/slider';
+import { Form } from 'client/ui/components/base/t-form';
 import { BarsSolidSvg, PlaneLightSvg, CircleLightSvg } from 'client/assets/images';
 import { PALETTE } from 'client/style/constants';
 import { Wrapper } from './styled';

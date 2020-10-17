@@ -29,6 +29,7 @@ export const Wrapper = styled.button`
   padding: 10px 24px;
   color: ${p => ((p.color && `${PALETTE.white}`) || `${PALETTE.black}`)};
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 
   &:focus {
     outline: none;

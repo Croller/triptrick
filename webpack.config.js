@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+const CopyPlugin = require('copy-webpack-plugin');
 // const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 // const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -40,22 +41,27 @@ let plugins = [
       // }
     ],
   }),
-  // new webpack.DefinePlugin({
-  //   _PLATFORM: JSON.stringify(PLATFORM),
-  //   _HOST: JSON.stringify(process.env.HOST),EnvironmentPlugin
-  //   _PROTOCOL: JSON.stringify(process.env.PROTOCOL),
-  //   _WEBSOCKET_PORT: JSON.stringify(process.env.WEBSOCKET_PORT),
-  //   _WEBSOCKET_PROTOCOL: JSON.stringify(process.env.WEBSOCKET_PROTOCOL),
-  //   _BACK_SERVER: PLATFORM === 'production' ? JSON.stringify(process.env.PROD_BACK_SERVER) : JSON.stringify(''),
-  //   _DOMAIN_NAME: JSON.stringify(process.env.DOMAIN_NAME),
-  // }),
 ];
 
 if (PLATFORM === 'production') {
   plugins = plugins.concat(
     new MiniCssExtractPlugin({ filename: 'css/[name]_[hash].css' }),
     new BundleAnalyzerPlugin({ openAnalyzer: false, analyzerMode: 'static' }),
-    // new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      favicon: './public/favicon.ico',
+    }),
+    new CopyPlugin(
+      [
+        { from: './src/client/assets/fonts', to: './fonts' },
+      ],
+    ),
+  );
+}
+
+if (PLATFORM === 'development') {
+  plugins = plugins.concat(
+    new BundleAnalyzerPlugin({ openAnalyzer: false, analyzerMode: 'static' }),
   );
 }
 
@@ -71,7 +77,6 @@ module.exports = {
     publicPath: `${PLATFORM === 'production' ? './' : '/'}`,
     chunkFilename: 'js/[name].[chunkhash].js',
   },
-
   optimization: {
     chunkIds: 'named',
     splitChunks: {
@@ -121,9 +126,10 @@ module.exports = {
     },
     {
       test: /\.(woff|woff2|eot|ttf)$/,
-      loader: 'file-loader',
+      exclude: /node_modules/,
+      loader: 'url-loader',
       options: {
-        name: '[name].[ext]',
+        name: './fonts/[name].[ext]?[hash]',
         outputPath: './fonts/',
         publicPath: './fonts/',
       },
@@ -133,7 +139,7 @@ module.exports = {
       exclude: /node_modules/,
       loader: 'file-loader',
       options: {
-        name: '[name].[ext]',
+        name: '[name].[ext]?[hash]',
         outputPath: './image/',
         publicPath: './image/',
       },

@@ -6,10 +6,9 @@ const cors = require('cors');
 const routes = require('./api/routes');
 require('dotenv').config();
 
-console.log('-------------- check connection server --------------');
+// console.log('-------------- check connection server --------------');
 // const db = require('./api/db');
 // db.ConnectDB();
-
 // -------------- config server --------------
 
 const mappedRoutes = mapRoutes(routes, '/src/server/api/controllers/');

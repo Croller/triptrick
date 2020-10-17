@@ -58,9 +58,15 @@ export const GroupContainer = styled.div`
 `;
 
 export const Separator = styled.div`
-  line-height: ${THEME.controlHeight};
+  display: flex;
+  min-width: auto;
+  min-height: auto;
+  justify-content: center;
   width: ${THEME.controlHeight};
-  text-align: center;
+  flex-wrap: wrap;
+  align-items: center;
+  height: auto;
+  align-content: right;
 
   > svg {
     width: 15px;
@@ -98,6 +104,8 @@ export const Control = styled.input`
   cursor: pointer;
   background-color: ${p => (p.disabled ? `${PALETTE.grey6}` : `${PALETTE.white}`)};
   letter-spacing: -0.5px;
+  outline: none;
+  -webkit-appearance: none;
 
   &:focus {
     outline: none;
@@ -131,6 +139,7 @@ export const Suffix = styled.span`
   right: 10px;
   z-index: 1;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 
   > svg {
     width: 14px;

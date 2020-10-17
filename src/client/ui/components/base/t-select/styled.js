@@ -52,6 +52,7 @@ export const Item = styled.span`
   background-color: ${PALETTE.grey5};
   padding: 5px 8px;
   margin-right: 5px;
+  height: 15px;
 
   svg {
     width: 14px;
@@ -70,6 +71,10 @@ export const Text = styled.span`
   font-size: ${THEME.controlLabelFontSize};
   text-align: center;
   margin-right: 5px;
+
+  > svg {
+    -webkit-tap-highlight-color: transparent;
+  }
 `;
 
 export const ControlWrapper = styled.span`
@@ -116,6 +121,7 @@ export const Suffix = styled.span`
   z-index: 1;
   margin: 0 !important;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 
   > svg {
     width: 14px;
@@ -159,6 +165,8 @@ export const Options = styled.ul`
 `;
 
 export const Opt = styled.li`
+  min-width: auto;
+  min-height: auto;
   padding: 11px 10px;
   font-size: ${THEME.controlFontSize};
   cursor: pointer;
