@@ -63,6 +63,10 @@ export const Separator = styled.div`
   min-height: auto;
   justify-content: center;
   width: ${THEME.controlHeight};
+  flex-wrap: wrap;
+  align-items: center;
+  height: auto;
+  align-content: right;
 
   > svg {
     width: 15px;
