@@ -70,6 +70,10 @@ export const Text = styled.span`
   font-size: ${THEME.controlLabelFontSize};
   text-align: center;
   margin-right: 5px;
+
+  > svg {
+    -webkit-tap-highlight-color: transparent;
+  }
 `;
 
 export const ControlWrapper = styled.span`
@@ -116,6 +120,7 @@ export const Suffix = styled.span`
   z-index: 1;
   margin: 0 !important;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 
   > svg {
     width: 14px;
@@ -159,7 +164,8 @@ export const Options = styled.ul`
 `;
 
 export const Opt = styled.li`
-  height: auto;
+  min-width: auto;
+  min-height: auto;
   padding: 11px 10px;
   font-size: ${THEME.controlFontSize};
   cursor: pointer;

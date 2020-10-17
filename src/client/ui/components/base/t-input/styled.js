@@ -59,6 +59,8 @@ export const GroupContainer = styled.div`
 
 export const Separator = styled.div`
   display: flex;
+  min-width: auto;
+  min-height: auto;
   justify-content: center;
   width: ${THEME.controlHeight};
 
