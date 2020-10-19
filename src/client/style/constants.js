@@ -40,7 +40,7 @@ export const THEME = {
   controlBorderWidth: '1px',
   controlBorderRadius: '3px',
   controlHeight: '36px',
-  controlMargin: '5px 0',
+  controlMargin: '5px 0 15px',
   controlErrorFontSize: '10px',
   controlErrorMargin: '-15px',
 };

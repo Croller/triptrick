@@ -20,16 +20,18 @@ export const Wrapper = styled.button`
   display: block;
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: ${p => p.color || `${PALETTE.white}`};
   border: ${THEME.controlBorderWidth} solid ${p => p.color || `${PALETTE.grey3}`};
   border-radius: ${THEME.controlBorderRadius};
   font-family: ${FONTS.comfortaaRegular};
   font-size: ${THEME.controlFontSize};
-  margin: ${THEME.controlMargin};
+  margin: '5px 0';
   padding: 10px 24px;
   color: ${p => ((p.color && `${PALETTE.white}`) || `${PALETTE.black}`)};
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.1s linear;
 
   &:focus {
     outline: none;

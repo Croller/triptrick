@@ -12,12 +12,14 @@ export const ButtonGroup = ({
 );
 
 export const Button = ({
+  type = 'button',
   color = null,
   disabled = false,
   children,
   className = '',
 }) => (
   <Wrapper
+    type={type}
     className={`t-button ${className}`}
     disabled={disabled}
     color={color}

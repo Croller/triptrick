@@ -182,7 +182,7 @@ export const Select = ({
           )}
           {showSearch && (
             <ControlWrapper
-              width={(search.length > 0 && `${search.length * 5}px`) || '2px'}
+              width={(search.length > 0 && `${search.length * 12}px`) || '2px'}
             >
               <Control
                 ref={ref}

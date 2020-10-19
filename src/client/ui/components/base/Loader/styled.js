@@ -25,7 +25,7 @@ export const Container = styled.div`
   position: relative;
   margin: 0 auto;
 
-  @-webkit-keyframes sk-doubleBounce {
+  @-webkit-keyframes sk-doublebounce {
     0%,
     100% {
       -webkit-transform: scale(0);
@@ -39,7 +39,7 @@ export const Container = styled.div`
     }
   }
 
-  @keyframes sk-doubleBounce {
+  @keyframes sk-doublebounce {
     0%,
     100% {
       -webkit-transform: scale(0);
@@ -65,13 +65,27 @@ export const BounceFirst = styled.div`
   top: 0;
   left: 0;
   -webkit-animation: sk-doublebounce 2s infinite ease-in-out;
-  animation: sk-doubleBounce 2s infinite ease-in-out;
+  animation: sk-doublebounce 2s infinite ease-in-out;
   -webkit-box-shadow: 0 0 21px 3px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 0 21px 3px rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 21px 3px rgba(0, 0, 0, 0.2);
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
 `;
 
 export const BounceSecond = styled.div`
-  -webkit-animation-delay: -1s;
-  animation-delay: -1s;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 5px solid ${PALETTE.white};
+  background-color: ${p => (p.color || `${PALETTE.orange1}`)};
+  opacity: 0.8;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-animation: sk-doublebounce 2s infinite ease-in-out;
+  animation: sk-doublebounce 2s infinite ease-in-out;
+  -webkit-box-shadow: 0 0 21px 3px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 0 21px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 21px 3px rgba(0, 0, 0, 0.2);
 `;

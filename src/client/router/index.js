@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
-import { Loader } from 'client/ui/components/Loader';
+import { Loader } from 'client/ui/components/base/Loader';
 import { Layout } from 'client/ui/components/Layout';
 import { ErrorBoundary } from 'client/ui/components/base/ErrorBoundary';
 
@@ -19,11 +19,7 @@ export const Routers = withRouter(() => (
   <ErrorBoundary>
     <Router>
       <Switch>
-        <Suspense
-          fallback={
-            <Loader />
-          }
-        >
+        <Suspense fallback={<Loader />}>
           <Layout>
             <Switch>
               <Route exact path="/" component={Map} />

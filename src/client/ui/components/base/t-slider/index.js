@@ -10,8 +10,8 @@ import {
 export const Slider = ({
   name = null,
   label = null,
-  defaulValue,
-  min = 1,
+  defaulValue = null,
+  min = 0,
   max = 100,
   step = 1,
   vertical = false,
@@ -22,23 +22,19 @@ export const Slider = ({
   onChange = () => {},
   className = '',
 }) => {
-  const [val, setVal] = useState(0);
+  const [val, setVal] = useState((multiple && [0, 100]) || 0);
   
-  const handleChange = (e) => {
-    const str = e.target.value;
-    console.log(str, e);
-    setVal(str);
-    onChange(name ? { [name]: str } : str);
+  const handleChange = (value) => {
+    setVal(value);
+    onChange(name ? { [name]: value } : value);
   };
 
   useEffect(() => {
-    if (multiple && defaulValue && Array.isArray(defaulValue)) {
-      setVal(defaulValue);
-      console.log(defaulValue);
+    if (multiple && defaulValue) {
+      setVal((Array.isArray(defaulValue) && defaulValue) || []);
     }
     if (!multiple && defaulValue && !Array.isArray(defaulValue)) {
       setVal(defaulValue);
-      console.log(defaulValue);
     }
   }, [defaulValue]);
 
@@ -53,18 +49,19 @@ export const Slider = ({
       <Container>
         {multiple ? (
           <RangeStyled
-            min={min}
-            // max={max}
-            marks={marks}
-            step={step}
             defaultValue={val}
+            min={min}
+            max={max}
+            step={step}
+            marks={marks}
             vertical={vertical}
             disabled={disabled}
+            onAfterChange={handleChange}
           />
         ) : (
           <SliderStyled
             min={min}
-            // max={max}
+            max={max}
             marks={marks}
             step={step}
             defaultValue={val}

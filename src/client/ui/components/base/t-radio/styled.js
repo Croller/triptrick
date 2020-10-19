@@ -28,6 +28,19 @@ export const GroupContainer = styled.div`
     ` : css`margin-right: 0;`)}
     }
   }
+
+  > button {
+    border-right-width: 0;
+    border-left-style: dashed;
+
+    &:first-child {
+      border-left-style: solid;
+    }
+
+    &:last-child {
+      border-right-width: 1px;
+    }
+  }
 `;
 
 export const Error = styled.span`

@@ -5,10 +5,16 @@ import { Select, Option } from 'client/ui/components/base/t-select';
 import { CheckBoxGroup, CheckBox } from 'client/ui/components/base/t-checkbox';
 import { RadioGroup, Radio } from 'client/ui/components/base/t-radio';
 import { ButtonGroup, Button } from 'client/ui/components/base/t-button';
-// import { Slider } from 'client/ui/components/base/slider';
+import { Slider } from 'client/ui/components/base/t-slider';
 import { Form } from 'client/ui/components/base/t-form';
-import { BarsSolidSvg, PlaneLightSvg, CircleLightSvg } from 'client/assets/images';
+import { Card } from 'client/ui/components/base/t-card';
 import { PALETTE } from 'client/style/constants';
+import {
+  BarsSolidSvg,
+  PlaneLightSvg,
+  CircleLightSvg,
+  CloseCircleLightSvg, 
+} from 'client/assets/images';
 import { Wrapper } from './styled';
 
 import {
@@ -237,6 +243,18 @@ const UI = () => {
           <Radio key={`_radio_1_${item.id}`} value={item.id}>{item.name}</Radio>
         ))}
       </RadioGroup>
+      {/*   TODO
+      <br />
+      <br />
+      <RadioGroup
+        label="Radio required"
+        direction="row"
+        onChange={(obj) => handleChange('Radio change - ', obj)}
+      >
+        {RADIO_DATA.map((item) => (
+          <Button color={PALETTE.red1} key={`_button_1_${item.id}`}>{item.name}</Button>
+        ))}
+      </RadioGroup> */}
       <br />
       <br />
       <Select
@@ -327,23 +345,71 @@ const UI = () => {
       </ButtonGroup>
       <br />
       <br />
-      {/* <Slider
+      <Slider
         label="Slider range"
         min={0}
-        step={3}
-        defaulValue={30}
-      /> */}
+        max={500}
+        defaulValue={100}
+        marks={{ 0: 'start', 500: 'finish' }}
+        onChange={(obj) => handleChange('Slider change - ', obj)}
+      />
+      <Slider
+        label="Slider range multiple"
+        min={0}
+        max={500}
+        defaulValue={[100, 200]}
+        marks={{ 0: 'start', 300: 'middle', 500: 'finish' }}
+        multiple
+        onChange={(obj) => handleChange('Slider multiple change - ', obj)}
+      />
       <br />
       <br />
-      <Form>
+      <Form onSubmit={(obj) => handleChange('Form change - ', obj)}>
         <Input
-          label="Input with prefix and suffix clear function"
+          label="Form control"
           defaultValue="Input value"
           prefix={(<BarsSolidSvg />)}
           showClear
           onChange={(obj) => handleChange('Input change - ', obj)}
         />
+        <Button type="submit" color={PALETTE.green1}>Submit</Button>
       </Form>
+      <br />
+      <br />
+      <Card
+        title="Card title"
+        extra={(
+          <>
+            <CircleLightSvg />
+            <CloseCircleLightSvg />
+          </>
+        )}
+        control={(
+          <>
+            <Button>Reset</Button>
+            <Button>Submit</Button>
+          </>
+        )}
+      >
+        Card body
+      </Card>
+      <br />
+      <br />
+      <Card
+        control={(
+          <>
+            <Button>Reset</Button>
+            <Button>Submit</Button>
+          </>
+        )}
+      >
+        Card without title
+      </Card>
+      <br />
+      <br />
+      <Card>
+        Card without title
+      </Card>
     </Wrapper>
   );
 };

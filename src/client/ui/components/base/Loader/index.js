@@ -11,8 +11,8 @@ export const Loader = ({ className = '', height = null, color = null }) => (
   <Wrapper className={className} height={height}>
     <Background />
     <Container>
-      <BounceFirst color={color} />
       <BounceSecond />
+      <BounceFirst color={color} />
     </Container>
   </Wrapper>
 );
