@@ -92,7 +92,7 @@ export const IconBlock = styled.span`
   }
 `;
 
-export const Text = styled.p`
+export const Text = styled.span`
   display: block;
   margin: 0;
 `;
