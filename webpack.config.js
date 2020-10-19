@@ -1,12 +1,12 @@
-require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
-
+const Dotenv = require('dotenv-webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const CopyPlugin = require('copy-webpack-plugin');
+
 // const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 // const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -14,6 +14,7 @@ const outputDirectory = 'dist';
 const PLATFORM = process.env.NODE_ENV;
 
 let plugins = [
+  new Dotenv({ path: '.env' }),
   new HtmlWebpackPlugin({
     template: './public/index.html',
     favicon: './public/favicon.ico',
