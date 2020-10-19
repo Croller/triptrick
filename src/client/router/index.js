@@ -12,7 +12,7 @@ import { Layout } from 'client/ui/components/Layout';
 import { ErrorBoundary } from 'client/ui/components/base/ErrorBoundary';
 
 const Page404 = lazy(() => import('client/ui/page/404'));
-const Map = lazy(() => import('client/ui/page/Map'));
+const Main = lazy(() => import('client/ui/page/Main'));
 const Components = lazy(() => import('client/ui/page/Components'));
 
 export const Routers = withRouter(() => (
@@ -22,7 +22,7 @@ export const Routers = withRouter(() => (
         <Suspense fallback={<Loader />}>
           <Layout>
             <Switch>
-              <Route exact path="/" component={Map} />
+              <Route exact path="/" component={Main} />
               <Route exact path="/ui" component={Components} />
               <Route path="/error" component={Page404} />
               <Route path="*" component={Page404} />

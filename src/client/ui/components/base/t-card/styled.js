@@ -19,6 +19,7 @@ export const Title = styled.div`
   display: block;
   width: 100%;
   line-height: 30px;
+  font-family: ${FONTS.comfortaaBold};
 `;
 
 export const Extra = styled.div`
@@ -26,7 +27,7 @@ export const Extra = styled.div`
   width: auto;
 
   > svg {
-    width: 25px;
+    width: 20px;
     color: ${PALETTE.grey2};
     margin-right: 10px;
     cursor: pointer;

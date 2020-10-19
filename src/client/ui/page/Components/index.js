@@ -8,12 +8,17 @@ import { ButtonGroup, Button } from 'client/ui/components/base/t-button';
 import { Slider } from 'client/ui/components/base/t-slider';
 import { Form } from 'client/ui/components/base/t-form';
 import { Card } from 'client/ui/components/base/t-card';
+import { Tooltip } from 'client/ui/components/base/t-tooltip';
+import { List, Item } from 'client/ui/components/base/t-list';
+import { Label } from 'client/ui/components/base/t-label';
+import { Map } from 'client/ui/components/base/t-map';
 import { PALETTE } from 'client/style/constants';
 import {
   BarsSolidSvg,
   PlaneLightSvg,
   CircleLightSvg,
   CloseCircleLightSvg, 
+  MinusLightSvg,
 } from 'client/assets/images';
 import { Wrapper } from './styled';
 
@@ -305,7 +310,7 @@ const UI = () => {
         onChange={(obj) => handleChange('Select change - ', obj)}
       >
         {SELECT_DATA.map((item) => (
-          <Option key={`_option_3_${item.id}`} value={item.id}>{item.name}</Option>
+          <Option key={`_option_4_${item.id}`} value={item.id}>{item.name}</Option>
         ))}
       </Select>
       <br />
@@ -317,11 +322,12 @@ const UI = () => {
         onChange={(obj) => handleChange('Select change - ', obj)}
       >
         {SELECT_DATA.map((item) => (
-          <Option key={`_option_3_${item.id}`} value={item.id}>{item.name}</Option>
+          <Option key={`_option_5_${item.id}`} value={item.id}>{item.name}</Option>
         ))}
       </Select>
       <br />
       <br />
+      <Label>Button group</Label>
       <ButtonGroup>
         <Button>Button</Button>
         <Button color={PALETTE.green1}>Button</Button>
@@ -362,6 +368,30 @@ const UI = () => {
         multiple
         onChange={(obj) => handleChange('Slider multiple change - ', obj)}
       />
+      <br />
+      <br />
+      <Label>List</Label>
+      <List>
+        {SELECT_DATA.map((item, i) => (
+          <Item key={`_item_5_${item.id}`} onClick={() => handleChange('List item click multiple change - ', item.id)}>
+            <MinusLightSvg />
+            {`Item ${i + 1}`}
+          </Item>
+        ))}
+      </List>
+      <br />
+      <br />
+      <Label>List horizontal with tooltip</Label>
+      <List vertical={false}>
+        {SELECT_DATA.map((item, i) => (
+          <Tooltip key={`_item_4_${item.id}`} title={`Tooltip item ${item.id}`}>
+            <Item>
+              <MinusLightSvg />
+              {`Item ${i + 1}`}
+            </Item>
+          </Tooltip>
+        ))}
+      </List>
       <br />
       <br />
       <Form onSubmit={(obj) => handleChange('Form change - ', obj)}>
@@ -409,6 +439,11 @@ const UI = () => {
       <br />
       <Card>
         Card without title
+      </Card>
+      <br />
+      <br />
+      <Card title="Map component">
+        <Map height="300px" />
       </Card>
     </Wrapper>
   );
