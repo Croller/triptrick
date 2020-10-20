@@ -1,6 +1,13 @@
 import {
   getScale,
+  getJson,
+  getPaintLayer,
+  setDrawMode,
 } from './common';
+import {
+  paintFeature,
+  paintDraw,
+} from './constants';
 import DrawAssistedRectangle from './DrawAssistedRectangle';
 import DrawPointCustom from './DrawPointCustom';
 import DrawLinePencil from './DrawLinePencil';
@@ -16,4 +23,9 @@ export {
   DrawPolygonPencil,
   DrawPolygonCustom,
   getScale,
+  getJson,
+  getPaintLayer,
+  setDrawMode,
+  paintFeature,
+  paintDraw,
 };

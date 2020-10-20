@@ -27,13 +27,11 @@ import {
   RADIO_DATA,
   SELECTED_DATA,
   SELECT_DATA,
+  MAP_LAYERS_DATA,
 } from './constants';
 
 const UI = () => {
   const handleChange = (key, obj) => {
-    console.log(key, obj);
-  };
-  const handleBlur = (key, obj) => {
     console.log(key, obj);
   };
 
@@ -443,7 +441,13 @@ const UI = () => {
       <br />
       <br />
       <Card title="Map component">
-        <Map height="300px" />
+        <Map
+          height="500px"
+          mode="drawPolygon"
+          layers={MAP_LAYERS_DATA}
+          onClick={(obj) => handleChange('Map click - ', obj)}
+          onCreate={(arr) => handleChange('Map create - ', arr)}
+        />
       </Card>
     </Wrapper>
   );
