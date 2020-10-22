@@ -1,11 +1,16 @@
 import styled, { css } from 'styled-components';
-import { FONTS, PALETTE, THEME } from 'client/style/constants';
+import {
+  Z_INDEX,
+  FONTS,
+  PALETTE,
+  THEME,
+} from 'client/style/constants';
 
 const absolute = css`
   position: absolute;
   background-color: ${PALETTE.white};
   color: ${PALETTE.black};
-  z-index: 100;
+  z-index: ${Z_INDEX.local};
   font-family: ${FONTS.comfortaaLight};
 `;
 

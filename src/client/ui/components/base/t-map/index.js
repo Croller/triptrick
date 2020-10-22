@@ -204,7 +204,6 @@ export const Map = ({
       if (map._controls.length === 2) {
         map.addControl(initDraw);
         setDraw(initDraw);
-        console.log('set');
       }
       mapOn();
     }

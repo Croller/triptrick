@@ -3,22 +3,11 @@ import {
   Wrapper,
 } from './styled';
 
-export const Form = ({
+export const Grid = ({
   className = '',
   children,
-  onSubmit = () => {},
-}) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit();
-  };
-
-  return (
-    <Wrapper
-      className={`t-form ${className}`}
-      onSubmit={handleSubmit}
-    >
-      {children}
-    </Wrapper>
-  );
-};
+}) => (
+  <Wrapper className={`t-grid ${className}`}>
+    {children}
+  </Wrapper>
+);
