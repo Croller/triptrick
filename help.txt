@@ -1,3 +1,31 @@
+docker-compose up -d
+docker-compose --env-file ./.env up
+
+docker exec -it 18333265ded5 bash
+cd var/opt/csv
+
+docker cp /Users/croller/Documents/_LocalProjects/triptrick/src/server/database/csv/description_users.csv 18333265ded5:/var/opt/csv/description_users.csv
+
+
+
+ps aux | grep node
+kill -9 PID
+
+
+
+
+
+
+// postgres://yfhryprmlffmvs:17e455aa726991ed569d1155ecc0289786007f31f8c808a245adca8e59b1b157@ec2-46-137-156-205.eu-west-1.compute.amazonaws.com:5432/dd9stod734haav?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
+
+
+
+
+
+
+
+
+
 sudo docker pull mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
 sudo docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=MS_SQL_Server_123456" -p 1433:1433 --name MS_SQL_Server -d mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
 

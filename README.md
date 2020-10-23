@@ -4,6 +4,12 @@
 
 Web for test functionality, test public REST API
 
+## Install Database docker container
+
+```
+docker-compose up -d
+```
+
 ## Start client vs server
 
 ```
