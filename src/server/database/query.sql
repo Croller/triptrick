@@ -1,5 +1,5 @@
 -- CREATE SCHEMA triptrick;
--- CREATE TABLE users (
+-- CREATE TABLE data_users (
 --   id SERIAL PRIMARY KEY,
 --   login varchar,
 --   password varchar,
@@ -7,7 +7,7 @@
 --   name varchar,
 --   middlename varchar,
 --   birthdate date,
---   phone int,
+--   phone bigint,
 --   email varchar,
 --   enter_at timestamp
 -- );
@@ -20,13 +20,13 @@
 -- );
 
 
--- COPY description_users(key, name, type)
--- FROM '/var/opt/csv/description_users.csv'
+-- COPY data_users(login,password,surname,name,middlename,birthdate,phone,email)
+-- FROM '/var/opt/app/src/server/database/csv/data_users.csv'
 -- DELIMITER ','
 -- CSV HEADER;
 
 
-SELECT * FROM description_users;
+SELECT * FROM data_users;
 
 -- alter user yfhryprmlffmvs superuser
 -- select usesuper from pg_user where usename = 'yfhryprmlffmvs';
@@ -36,8 +36,8 @@ SELECT * FROM description_users;
 -- DROP TABLE users
 -- DROP SCHEMA CASCADE;
 
--- ALTER TABLE users ADD COLUMN enter_at TIMESTAMP;
--- ALTER TABLE users ALTER COLUMN phone TYPE BIGINT
+-- ALTER TABLE users ADD COLUMN enter_at int;
+-- ALTER TABLE data_users ALTER COLUMN phone TYPE BIGINT
 
 -- INSERT INTO users (login, password, name, email)
 -- VALUES ('admin', '123456789','admin', '79104643015@yandex.ru');

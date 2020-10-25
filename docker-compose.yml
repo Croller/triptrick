@@ -6,14 +6,17 @@ services:
     image: postgres
     container_name: triptrick-postgres
     restart: always
+    volumes:
+      - .:/var/opt/app # copy all app to container
     environment:
       POSTGRES_USER: ${DB_LOCAL_USER}
       POSTGRES_PASSWORD: ${DB_LOCAL_PASSWORD}
       POSTGRES_DB: ${DB_LOCAL_DATABASE}
-      # PGDATA: /triptrick-postgres-pg-data
-      # PGDATA import backup on create
-    # volumes:
-    #   - triptrick-pg-data:/triptrick-postgres-pg-data
+      SCHEDULE: every 0h30m00s
+      BACKUP_KEEP_DAYS: 7
+      BACKUP_KEEP_WEEKS: 4
+      BACKUP_KEEP_MONTHS: 6
+      HEALTHCHECK_PORT: 81
     ports:
       - ${DB_LOCAL_PORT}:${DB_LOCAL_PORT}
 

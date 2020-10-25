@@ -1,12 +1,19 @@
 docker-compose up -d
+docker-compose stop
 docker-compose --env-file ./.env up
 
-docker exec -it 18333265ded5 bash
+docker ps -a
+docker exec -it triptrick-postgres bash
+mkdir var/opt/csv
+mkdir var/opt/app
 cd var/opt/csv
+cd var/opt/app
 
-docker cp /Users/croller/Documents/_LocalProjects/triptrick/src/server/database/csv/description_users.csv 18333265ded5:/var/opt/csv/description_users.csv
+docker cp dd54d1c46626:/var/opt/app/src/server/database/backup/backup.sql /Users/croller/Documents/_LocalProjects/triptrick/src/server/database/backup/backup.sql
 
+docker exec triptrick-postgres pg_dump triptrick -U triptrick -h localhost -p 5432 -f /var/opt/app/src/server/database/backup/backup.sql
 
+docker exec triptrick-postgres pg_restore triptrick -U triptrick -h localhost -p 5432 -d triptrick /var/opt/app/src/server/database/backup/backup.sql
 
 ps aux | grep node
 kill -9 PID
