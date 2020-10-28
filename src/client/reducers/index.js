@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import user from './user';
-import execution from './execution';
+import global from './global';
+import krt from './krt';
 
 const allReducers = combineReducers({
-  user,
-  execution,
+  global,
+  krt,
 });
 
 export default allReducers;

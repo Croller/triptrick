@@ -1,0 +1,4 @@
+key,name,type,required,edit,system
+id,id,number,true,false,false
+name,Роль,string,true,true,false
+description,Описание,string,false,true,false

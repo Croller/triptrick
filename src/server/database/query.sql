@@ -1,4 +1,5 @@
 -- CREATE SCHEMA triptrick;
+
 -- CREATE TABLE data_users (
 --   id SERIAL PRIMARY KEY,
 --   login varchar,
@@ -12,21 +13,38 @@
 --   enter_at timestamp
 -- );
 
-
 -- CREATE TABLE description_users (
 --   key varchar,
 --   name varchar,
 --   type varchar
 -- );
 
+-- CREATE TABLE data_roles (
+--   user int NOT NULL,
+--   admin BOOLEAN NOT NULL,
+--   moderator BOOLEAN NOT NULL,
+-- );
 
--- COPY data_users(login,password,surname,name,middlename,birthdate,phone,email)
--- FROM '/var/opt/app/src/server/database/csv/data_users.csv'
+-- COPY dictionary_status_stage_krt_confirm(id,name)
+-- FROM '/var/opt/app/src/server/database/csv/dictionary_status_stage_krt_confirm.csv'
+-- DELIMITER ';'
+-- CSV HEADER;
+
+-- COPY description_dictionary_roles(key,name,type,required,edit,system)
+-- FROM '/var/opt/app/src/server/database/csv/description_dictionary_roles.csv'
 -- DELIMITER ','
 -- CSV HEADER;
 
+-- SELECT * FROM description_dictionary_roles;
 
+
+-- INSERT INTO data_users (login, password, role, enter_at) VALUES ('view', 'view', '2', '2020-10-28T10:01:11.258')
 SELECT * FROM data_users;
+
+-- create extension postgis;
+
+-- ALTER TABLE data_krt_monitoring ADD COLUMN project int;
+-- SELECT * FROM data_krt;
 
 -- alter user yfhryprmlffmvs superuser
 -- select usesuper from pg_user where usename = 'yfhryprmlffmvs';
@@ -38,6 +56,7 @@ SELECT * FROM data_users;
 
 -- ALTER TABLE users ADD COLUMN enter_at int;
 -- ALTER TABLE data_users ALTER COLUMN phone TYPE BIGINT
+-- ALTER TABLE data_krt_confirm RENAME disctrict TO district;
 
 -- INSERT INTO users (login, password, name, email)
 -- VALUES ('admin', '123456789','admin', '79104643015@yandex.ru');

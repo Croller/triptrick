@@ -30,15 +30,17 @@ export const PALETTE = {
   orange1: '#FF9F1C',
   green1: '#55B533',
   red1: '#F25555',
+  red2: '#BE0710',
   blue1: '#02A9E0',
+  yellow1: '#FF9F1C',
 
   disabled: '#A5A5A5',
 };
 
 export const FONTS = {
-  comfortaaLight: 'Comfortaa-Light, \'Source Sans Pro\', Helvetica, sans-serif',
-  comfortaaRegular: 'Comfortaa-Regular, \'Source Sans Pro\', Helvetica, sans-serif',
-  comfortaaBold: 'Comfortaa-Bold, \'Source Sans Pro\', Helvetica, sans-serif',
+  light: 'TTNorms-Light, Comfortaa-Light, \'Source Sans Pro\', Helvetica, sans-serif',
+  regular: 'TTNorms-Regular, \'Source Sans Pro\', Helvetica, sans-serif',
+  bold: 'TTNorms-Bold, Comfortaa-Bold, \'Source Sans Pro\', Helvetica, sans-serif',
 };
 
 export const THEME = {

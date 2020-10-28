@@ -25,8 +25,8 @@ const root = (
 
 ReactDOM.render(root, document.getElementById('root'));
 
-if (process.env.NODE_ENV === 'development') {
-  store.subscribe(() => {
-    console.log('subscribe', store.getState());
-  });
-}
+// if (process.env.NODE_ENV === 'development') {
+//   store.subscribe(() => {
+//     console.log('subscribe', store.getState());
+//   });
+// }

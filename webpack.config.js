@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const CopyPlugin = require('copy-webpack-plugin');
+require('dotenv').config();
 
 // const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 // const { CleanWebpackPlugin } = require('clean-webpack-plugin');

@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Label = styled.label`
-  font-family: ${FONTS.comfortaaRegular};
+  font-family: ${FONTS.regular};
   font-size: ${THEME.controlLabelFontSize};
   margin: 0 0 ${THEME.controlLabelMargin};
 `;
@@ -87,7 +87,7 @@ export const Control = styled.input`
   width: 100%;
   min-width: 4px;
   height: 25px;
-  font-family: ${FONTS.comfortaaRegular};
+  font-family: ${FONTS.regular};
   font-size: ${THEME.controlFontSize};
   border-width: 0;
   cursor: pointer;
@@ -144,7 +144,7 @@ export const Error = styled.span`
   position: absolute;
   bottom: ${THEME.controlErrorMargin};
   display: block;
-  font-family: ${FONTS.comfortaaLight};
+  font-family: ${FONTS.light};
   color: ${PALETTE.red1};
   font-size: ${THEME.controlErrorFontSize};
 `;

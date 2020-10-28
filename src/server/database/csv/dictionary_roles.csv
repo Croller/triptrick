@@ -1,0 +1,4 @@
+id,name,description
+1,Admin,Full access
+2,Moderaton,Can update tables access
+3,User,View only

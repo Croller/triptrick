@@ -19,7 +19,7 @@ export const Title = styled.div`
   display: block;
   width: 100%;
   line-height: 30px;
-  font-family: ${FONTS.comfortaaBold};
+  font-family: ${FONTS.bold};
 `;
 
 export const Extra = styled.div`

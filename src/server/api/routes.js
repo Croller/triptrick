@@ -1,5 +1,13 @@
 const routes = {
-
+  'POST /api/user/signin': 'UserController.signin',
+  'GET /api/user/auth': 'UserController.auth',
+  'POST /api/user/create': 'UserController.create',
+  'POST /api/user/update': 'UserController.update',
+  'POST /api/user/remove': 'UserController.remove',
+  
+  'POST /api/table/get': 'CommonController.getTableByName',
+  // 'GET /api/krt': 'KrtController.krt',
+  // 'GET /api/krt/monitoring': 'KrtController.monitoring',
   // 'POST /api/user/signin': 'UserController.signin',
   // 'POST /api/user/create': 'UserController.create',
   // 'POST /api/user/edit': 'UserController.edit',

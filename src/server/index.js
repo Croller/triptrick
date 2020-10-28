@@ -11,21 +11,21 @@ const routes = require('./api/routes');
 
 // console.log(res);
 
-const fu = async () => {
-  try {
-    const result = await db.query('SELECT * FROM description_users');
-    console.log(result);
-  } catch (err) {
-    console.log('err', err);
-  }
-};
+// const fu = async () => {
+//   try {
+//     const result = await db.query('SELECT * FROM description_users');
+//     console.log(result);
+//   } catch (err) {
+//     console.log('err', err);
+//   }
+// };
 
-fu();
+// fu();
 
 // -------------- config server --------------
 
 // const mappedRoutes = mapRoutes(routes, '/src/server/api/controllers/');
-const mappedRoutes = mapRoutes(routes, './api/controllers/');
+const mappedRoutes = mapRoutes(routes, 'src/server/api/controllers/');
 const app = express();
 app.use(cors());
 app.use(express.static('dist'));

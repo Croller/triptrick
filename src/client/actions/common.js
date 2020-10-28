@@ -1,14 +1,12 @@
 
-import axios from 'axios';
-import moment from 'moment';
 import * as Constants from '../constants';
 
-export const setUser = obj => ({
+export const getDescriprion = obj => ({
   type: Constants.USER_SET,
   obj,
 });
 
-export const signin = obj => (dispatch) => {
+export const get = obj => (dispatch) => {
   dispatch(setUser({ error: null, loading: true }));
   axios.post('/api/user/signin', obj)
     .then((res) => {

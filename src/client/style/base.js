@@ -6,6 +6,24 @@ import FuturaPTBold from 'client/assets/fonts/FuturaPT-Bold.ttf';
 import ComfortaaRegular from 'client/assets/fonts/Comfortaa-Regular.ttf';
 import ComfortaaBold from 'client/assets/fonts/Comfortaa-Bold.ttf';
 import ComfortaaLight from 'client/assets/fonts/Comfortaa-Light.ttf';
+import TTNormsBoldItalic from 'client/assets/fonts/TTNorms-BoldItalic.ttf';
+import TTNormsBold from 'client/assets/fonts/TTNorms-Bold.ttf';
+import TTNormsBlackItalic from 'client/assets/fonts/TTNorms-BlackItalic.ttf';
+import TTNormsRegular from 'client/assets/fonts/TTNorms-Regular.ttf';
+import TTNormsMediumItalic from 'client/assets/fonts/TTNorms-MediumItalic.ttf';
+import TTNormsExtraLight from 'client/assets/fonts/TTNorms-ExtraLight.ttf';
+import TTNormsThinItalic from 'client/assets/fonts/TTNorms-ThinItalic.ttf';
+import TTNormsMedium from 'client/assets/fonts/TTNorms-Medium.ttf';
+import TTNormsLightItalic from 'client/assets/fonts/TTNorms-LightItalic.ttf';
+import TTNormsHeavyItalic from 'client/assets/fonts/TTNorms-HeavyItalic.ttf';
+import TTNormsBlack from 'client/assets/fonts/TTNorms-Black.ttf';
+import TTNormsExtraBoldItalic from 'client/assets/fonts/TTNorms-ExtraBoldItalic.ttf';
+import TTNormsExtraBold from 'client/assets/fonts/TTNorms-ExtraBold.ttf';
+import TTNormsExtraLightItalic from 'client/assets/fonts/TTNorms-ExtraLightItalic.ttf';
+import TTNormsLight from 'client/assets/fonts/TTNorms-Light.ttf';
+import TTNormsHeavy from 'client/assets/fonts/TTNorms-Heavy.ttf';
+import TTNormsItalic from 'client/assets/fonts/TTNorms-Italic.ttf';
+import TTNormsThin from 'client/assets/fonts/TTNorms-Thin.ttf';
 import { FONTS, PALETTE } from './constants';
 
 export const GlobalStyle = createGlobalStyle`
@@ -44,10 +62,101 @@ export const GlobalStyle = createGlobalStyle`
     src: url(${ComfortaaLight}) format('ttf');
   }
 
+  @font-face {
+    font-family: 'TTNorms-BoldItalic';
+    src: url(${TTNormsBoldItalic}) format('ttf');
+  }
+
+  @font-face {
+    font-family: 'TTNorms-Bold';
+    src: url(${TTNormsBold}) format('ttf');
+  }
+
+  @font-face {
+    font-family: 'TTNorms-BlackItalic';
+    src: url(${TTNormsBlackItalic}) format('ttf');
+  }
+
+  @font-face {
+    font-family: 'TTNorms-Regular';
+    src: url(${TTNormsRegular}) format('ttf');
+  }
+
+  @font-face {
+    font-family: 'TTNorms-MediumItalic';
+    src: url(${TTNormsMediumItalic}) format('ttf');
+  }
+
+  @font-face {
+    font-family: 'TTNorms-ExtraLight';
+    src: url(${TTNormsExtraLight}) format('ttf');
+  }
+
+  @font-face {
+    font-family: 'TTNorms-ThinItalic';
+    src: url(${TTNormsThinItalic}) format('ttf');
+  }
+
+  @font-face {
+    font-family: 'TTNorms-Medium';
+    src: url(${TTNormsMedium}) format('ttf');
+  }
+
+  @font-face {
+    font-family: 'TTNorms-LightItalic';
+    src: url(${TTNormsLightItalic}) format('ttf');
+  }
+
+  @font-face {
+    font-family: 'TTNorms-HeavyItalic';
+    src: url(${TTNormsHeavyItalic}) format('ttf');
+  }
+
+  @font-face {
+    font-family: 'TTNorms-Black';
+    src: url(${TTNormsBlack}) format('ttf');
+  }
+
+  @font-face {
+    font-family: 'TTNorms-ExtraBoldItalic';
+    src: url(${TTNormsExtraBoldItalic}) format('ttf');
+  }
+
+  @font-face {
+    font-family: 'TTNorms-ExtraBold';
+    src: url(${TTNormsExtraBold}) format('ttf');
+  }
+
+  @font-face {
+    font-family: 'TTNorms-ExtraLightItalic';
+    src: url(${TTNormsExtraLightItalic}) format('ttf');
+  }
+
+  @font-face {
+    font-family: 'TTNorms-Light';
+    src: url(${TTNormsLight}) format('ttf');
+  }
+
+  @font-face {
+    font-family: 'TTNorms-Heavy';
+    src: url(${TTNormsHeavy}) format('ttf');
+  }
+
+  @font-face {
+    font-family: 'TTNorms-Italic';
+    src: url(${TTNormsItalic}) format('ttf');
+  }
+
+  @font-face {
+    font-family: 'TTNorms-Thin';
+    src: url(${TTNormsThin}) format('ttf');
+  }
+
   body {
     height: 100%;
     margin: 0;
-    font-family: ${FONTS.comfortaaRegular};
+    font-family: ${FONTS.regular};
+    overflow-x: hidden;
   }
 
   [ant-click-animating-without-extra-node]::after {

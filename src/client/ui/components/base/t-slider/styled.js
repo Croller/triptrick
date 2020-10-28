@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Label = styled.label`
-  font-family: ${FONTS.comfortaaRegular};
+  font-family: ${FONTS.regular};
   font-size: ${THEME.controlLabelFontSize};
   margin: 0 0 ${THEME.controlLabelMargin};
 `;

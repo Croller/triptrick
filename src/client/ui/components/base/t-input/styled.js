@@ -45,7 +45,7 @@ export const Group = styled.div`
 `;
 
 export const GroupLabel = styled.label`
-  font-family: ${FONTS.comfortaaRegular};
+  font-family: ${FONTS.regular};
   font-size: ${THEME.controlLabelFontSize};
 `;
 
@@ -81,7 +81,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Label = styled.label`
-  font-family: ${FONTS.comfortaaRegular};
+  font-family: ${FONTS.regular};
   font-size: ${THEME.controlLabelFontSize};
   margin: 0 0 ${THEME.controlLabelMargin};
 `;
@@ -94,7 +94,7 @@ export const Container = styled.div`
 export const Control = styled.input`
   width: 100%;
   height: ${THEME.controlHeight};
-  font-family: ${FONTS.comfortaaRegular};
+  font-family: ${FONTS.regular};
   font-size: ${THEME.controlFontSize};
   border: ${THEME.controlBorderWidth} solid ${p => (p.required ? `${PALETTE.red1}` : `${PALETTE.grey3}`)};
   border-radius: ${THEME.controlBorderRadius};
@@ -157,7 +157,7 @@ export const Error = styled.span`
   position: absolute;
   bottom: ${THEME.controlErrorMargin};
   display: block;
-  font-family: ${FONTS.comfortaaLight};
+  font-family: ${FONTS.light};
   color: ${PALETTE.red1};
   font-size: ${THEME.controlErrorFontSize};
 `;

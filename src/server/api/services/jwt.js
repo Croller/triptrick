@@ -1,7 +1,9 @@
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const db = require('./db');
 
-const signature = 'test_secret';
+const signature = process.env.SERVER_AUTH_SECRET;
+const expiration = process.env.SERVER_AUTH_TIME;
 
 module.exports = {
   generateToken: (user) => {
@@ -10,7 +12,6 @@ module.exports = {
       login: user.login,
       password: user.password,
     };
-    const expiration = '6h';
     return jwt.sign(obj, signature, { expiresIn: expiration });
   },
 
@@ -26,12 +27,12 @@ module.exports = {
       const data = jwt.verify(req.headers.authorization.split(' ')[1], signature);
       if (data) {
         const { login, password } = data;
-        const strQuery = `SELECT * FROM users WHERE login='${login}' AND password='${password}'`;
-        const user = await db.AsyncQueryDB(strQuery);
-        if (user.recordsets[0].length === 1) {
-          return true;
+        const result = await db.query(`SELECT * FROM data_users WHERE login='${login}' AND password='${password}'`);
+        if (result.rows.length === 1) {
+          const user = result.rows[0];
+          return user;
         }
-        return false;
+        return null;
       }
       return null;
     }

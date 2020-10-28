@@ -95,7 +95,7 @@ export const Item = styled.li`
   height: 100%;
   justify-content: center;
   text-decoration: none;
-  font-family: ${FONTS.comfortaaRegular};
+  font-family: ${FONTS.regular};
   line-height: 14px;
   margin: 0 15px;
   cursor: pointer;

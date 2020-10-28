@@ -1,5 +1,5 @@
 import React from 'react';
-import { Map } from 'client/ui/components/base/t-map';
+import { MainModule } from 'client/ui/modules/main';
 import {
   Wrapper,
   Container,
@@ -13,17 +13,7 @@ import {
 
 const Main = () => (
   <Wrapper>
-    <Map />
-    <Container>
-      <Content>
-        <GridStyled>
-          <ServicesWrapper />
-          <SearchWrapper />
-          <FilterWrapper />
-          <ResultsWrapper />
-        </GridStyled>
-      </Content>
-    </Container>
+    <MainModule />
   </Wrapper>
 );
 

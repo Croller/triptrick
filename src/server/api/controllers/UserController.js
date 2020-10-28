@@ -1,239 +1,156 @@
 import moment from 'moment';
 
 const db = require('../services/db');
-const auth = require('../services/auth');
+const jwt = require('../services/jwt');
+
+const error = {
+  name: '',
+  code: 0,
+  text: '',
+};
 
 const UserController = () => {
-  const signin = (req, res) => {
+  const signin = async (req, res) => {
     const {
       login,
       password,
     } = req.body;
-    const strQuery = `SELECT * FROM users WHERE login='${login}' AND password='${password}'`;
-    db.AsyncQueryDB(strQuery)
-      .then((us) => {
-        if (us.recordsets[0].length > 0) {
-          const user = us.recordsets[0][0];
-          const token = auth.generateToken(us.recordsets[0][0]);
-          db.AsyncQueryDB('SELECT * FROM alias_col_users')
-            .then((alias) => {
-              db.AsyncQueryDB('SELECT * FROM roles')
-                .then((roles) => {
-                  db.AsyncQueryDB('SELECT * FROM position')
-                    .then((position) => {
-                      db.AsyncQueryDB('SELECT * FROM department')
-                        .then((department) => {
-                          db.AsyncQueryDB('SELECT * FROM organization')
-                            .then((organization) => {
-                              db.AsyncQueryDB(`UPDATE users SET last_login='${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')}' WHERE login='${login}' AND password='${password}'`);
-                              res.json({
-                                alias: alias.recordsets[0],
-                                token,
-                                info: user,
-                                dictionary: {
-                                  roles: roles.recordsets[0],
-                                  position: position.recordsets[0],
-                                  department: department.recordsets[0],
-                                  organization: organization.recordsets[0],
-                                },
-                                error: null,
-                              });
-                            })
-                            .catch(() => res.json({
-                              error: {
-                                name: 'execution roles alias',
-                                code: 1,
-                                text: 'no records',
-                              },
-                            }));
-                        })
-                        .catch(() => res.json({
-                          error: {
-                            name: 'execution roles alias',
-                            code: 1,
-                            text: 'no records',
-                          },
-                        }));
-                    })
-                    .catch(() => res.json({
-                      error: {
-                        name: 'execution roles alias',
-                        code: 1,
-                        text: 'no records',
-                      },
-                    }));
-                })
-                .catch(() => res.json({
-                  error: {
-                    name: 'execution roles alias',
-                    code: 1,
-                    text: 'no records',
-                  },
-                }));
-            })
-            .catch(() => res.json({
-              error: {
-                name: 'execution users alias',
-                code: 1,
-                text: 'no records',
-              },
-            }));
-        } else {
-          res.json({
-            error: {
-              name: 'authorisation',
-              code: 1,
-              text: 'no user',
-            },
-          });
-        }
-      })
-      .catch(() => res.json({
-        error: {
-          name: 'authorisation',
-          code: 1,
-          text: 'bad query',
-        },
-      }));
-  };
-
-  const create = (req, res) => {
-    const verifyToken = auth.verifyToken(req, res);
-    if (verifyToken) {
-      const userData = req.body;
-      const params = Object.keys(userData).filter(f => f !== 'id').map(k => (userData[k] !== null ? `N'${userData[k]}'` : 'NULL'));
-      const strQuery = `INSERT INTO users (${Object.keys(userData).join(', ')}) VALUES (${params.join(', ')})`;
-      db.AsyncQueryDB(strQuery)
-        .then(() => {
-          res.json({
-            error: null,
-          });
-        })
-        .catch(e => res.json({
-          error: {
-            name: 'create user',
-            code: 1,
-            text: JSON.stringify(e),
-          },
-        }));
-    } else {
-      res.json({
-        error: {
-          name: 'non auth',
-          code: 1,
-          text: 'Не верный токен',
-        },
-      });
-    }
-  };
-
-  const edit = async (req, res) => {
-    const verifyToken = auth.verifyToken(req, res);
-    if (verifyToken) {
-      const { userData, who } = req.body;
-      const params = Object.keys(userData).filter(f => f !== 'id').map(k => (userData[k] !== null ? `${k}=N'${userData[k]}'` : `${k}=NULL`));
-      const strQuery = `UPDATE users SET ${params.join(', ')} WHERE id = ${userData.id}`;
-      db.AsyncQueryDB(strQuery)
-        .then((data) => {
-          if (data.recordsets.length === 0) {
-            if (who !== 'admin') {
-              db.AsyncQueryDB(`SELECT * FROM users WHERE id=${userData.id}`)
-                .then((user) => {
-                  if (user.recordsets[0].length === 1) {
-                    const token = auth.generateToken(user.recordsets[0][0]);
-                    res.json({
-                      token,
-                      info: user.recordsets[0][0],
-                      error: null,
-                    });
-                  }
-                })
-                .catch((e) => {
-                  res.json({
-                    error: {
-                      name: 'edit user data',
-                      code: 1,
-                      text: JSON.stringify(e),
-                    },
-                  });
-                });
-            } else {
-              db.AsyncQueryDB('SELECT * FROM users')
-                .then((user) => {
-                  if (user.recordsets[0].length > 0) {
-                    res.json({
-                      list: user.recordsets[0],
-                      error: null,
-                    });
-                  }
-                })
-                .catch((e) => {
-                  res.json({
-                    error: {
-                      name: 'edit users data',
-                      code: 1,
-                      text: JSON.stringify(e),
-                    },
-                  });
-                });
-            }
-          }
-        })
-        .catch((e) => {
-          res.json({
-            error: {
-              name: 'edit users data',
-              code: 1,
-              text: JSON.stringify(e),
-            },
-          });
-        });
-    } else {
-      res.json({
-        error: {
-          name: 'non auth',
-          code: 1,
-          text: 'Не верный токен',
-        },
-      });
-    }
-  };
-
-  const list = async (req, res) => {
     try {
-      const verifyToken = auth.verifyToken(req, res);
-      if (verifyToken) {
-        const users = await db.AsyncQueryDB('SELECT * FROM users');
-        if (users.recordsets[0].length > 0) {
-          return res.status(200).json({
-            list: users.recordsets[0],
-          });
-        }
-        return res.status(400).json({
-          error: true,
-          name: 'Ошибка запроса',
-          message: 'Пользователи не найдены',
-        });
+      const result = await db.query(`SELECT * FROM data_users WHERE login='${login}' AND password='${password}'`);
+      if (result.rows.length === 1) {
+        await db.query(`UPDATE data_users SET enter_at='${moment().format('YYYY-MM-DDTHH:mm:ss.SSS')}' WHERE login='${login}' AND password='${password}'`);
+        const user = result.rows[0];
+        const token = jwt.generateToken(user);
+        delete user.password;
+        res.json({ ...user, token });
       }
-      return res.status(400).json({
-        error: true,
-        name: 'Ошибка авторизации',
-        message: 'Не верный токен',
-      });
-    } catch (e) {
-      return res.status(500).json({
-        error: true,
-        name: 'Ошибка сервера',
-        message: JSON.stringify(e),
-      });
+    } catch (err) {
+      error.name = 'Query error';
+      error.text = JSON.stringify(err);
+      res.json(error);
     }
   };
 
+  const auth = async (req, res) => {
+    try {
+      const user = await jwt.verifyToken(req, res);
+      if (user) {
+        const result = await db.query(`SELECT * FROM data_users WHERE login='${user.login}' AND password='${user.password}'`);
+        if (result.rows.length === 1) {
+          const token = jwt.generateToken(result.rows[0]);
+          delete user.password;
+          res.json({ ...user, token });
+        } else {
+          error.name = 'User error';
+          error.text = 'User does not exist';
+          res.json(error);
+        }
+      } else {
+        error.name = 'Token error';
+        error.text = 'Token not valid';
+        res.json(error);
+      }
+    } catch {
+      error.name = 'Token error';
+      error.text = 'Cant get token';
+      res.json(error);
+    }
+  };
+
+  const create = async (req, res) => {
+    try {
+      const { data } = req.body;
+      if (data.role !== 1) {
+        delete data.id;
+        data.enter_at = moment().format('YYYY-MM-DDTHH:mm:ss.SSS');
+        const query = Object.keys(data).reduce((obj, key) => ({
+          fields: [...obj.fields, key],
+          values: [...obj.values, data[key]],
+        }), { fields: [], values: [] });
+        const check = await db.query(`SELECT * FROM data_users WHERE login='${data.login}' OR email='${data.email}'`);
+        if (check.rows.length === 0) {
+          const newUser = await db.query(`INSERT INTO data_users (${query.fields.join(', ')}) VALUES ('${query.values.join('\', \'')}') RETURNING *`);
+          res.json(newUser.rows[0]);
+        } else {
+          error.name = 'Create user error';
+          error.text = 'Same user already exist';
+          res.json(error);
+        }
+      } else {
+        error.name = 'Permition error';
+        error.text = 'User create is same role of admin or not valid token';
+        res.json(error);
+      }
+    } catch (err) {
+      error.name = 'Query error';
+      error.text = JSON.stringify(err);
+      res.json(error);
+    }
+  };
+
+  const update = async (req, res) => {
+    try {
+      const { data } = req.body;
+      const user = await jwt.verifyToken(req, res);
+      if (user && (user.role === 1 || data.id === user.id)) {
+        const { id } = { ...data };
+        const check = await db.query(`SELECT * FROM data_users WHERE id='${id}'`);
+        if (check.rows.length === 1) {
+          delete data.id;
+          data.enter_at = moment().format('YYYY-MM-DDTHH:mm:ss.SSS');
+          const query = Object.keys(data).map(key => (`${key}='${data[key]}'`));
+          const upadateUser = await db.query(`UPDATE data_users SET ${query.join(', ')} WHERE id='${id}' RETURNING *`);
+          res.json(upadateUser.rows[0]);
+        } else {
+          error.name = 'Update user error';
+          error.text = 'This user does not exist';
+          res.json(error);
+        }
+      } else {
+        error.name = 'Permition error';
+        error.text = 'May be you are not role with admin or you try edit another account witch not your';
+        res.json(error);
+      }
+    } catch (err) {
+      error.name = 'Query error';
+      error.text = JSON.stringify(err);
+      res.json(error);
+    }
+  };
+
+  const remove = async (req, res) => {
+    try {
+      const { data } = req.body;
+      const user = await jwt.verifyToken(req, res);
+      if (user && (user.role === 1 || data.id === user.id)) {
+        const { id } = { ...data };
+        const check = await db.query(`SELECT * FROM data_users WHERE id='${id}'`);
+        if (check.rows.length === 1) {
+          await db.query(`DELETE FROM data_users WHERE id='${id}'`);
+          res.json({});
+        } else {
+          error.name = 'Update user error';
+          error.text = 'This user does not exist';
+          res.json(error);
+        }
+      } else {
+        error.name = 'Permition error';
+        error.text = 'May be you are not role with admin or you try edit another account witch not your';
+        res.json(error);
+      }
+    } catch (err) {
+      error.name = 'Query error';
+      error.text = JSON.stringify(err);
+      res.json(error);
+    }
+  };
+  
   return {
     signin,
+    auth,
     create,
-    edit,
-    list,
+    update,
+    remove,
   };
 };
 

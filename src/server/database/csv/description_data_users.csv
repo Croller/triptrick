@@ -1,0 +1,12 @@
+key,name,type,required,edit,system
+id,id,number,false,false,true
+login,Логин,string,true,true,false
+password,Пароль,string,true,true,false
+surname,Фамилия,string,false,true,false
+name,Имя,string,false,true,false
+middlename,Отчество,string,false,true,false
+birthdate,Дата рождения,date,false,true,false
+phone,Телефон,number,false,true,false
+email,Почта,string,true,true,false
+role,Роль,dictionary_roles,true,true,false
+enter_at,Последняя активность,datetime,false,false,false

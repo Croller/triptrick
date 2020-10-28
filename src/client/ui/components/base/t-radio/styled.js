@@ -8,7 +8,7 @@ export const Group = styled.div`
 `;
 
 export const GroupLabel = styled.label`
-  font-family: ${FONTS.comfortaaRegular};
+  font-family: ${FONTS.regular};
   font-size: ${THEME.controlLabelFontSize};
 `;
 
@@ -47,7 +47,7 @@ export const Error = styled.span`
   position: absolute;
   bottom: ${THEME.controlErrorMargin};
   display: block;
-  font-family: ${FONTS.comfortaaLight};
+  font-family: ${FONTS.light};
   color: ${PALETTE.red1};
   font-size: ${THEME.controlErrorFontSize};
 `;
@@ -55,7 +55,7 @@ export const Error = styled.span`
 export const Label = styled.label`
   display: flex;
   align-items: center;
-  font-family: ${FONTS.comfortaaRegular};
+  font-family: ${FONTS.regular};
   font-size: ${THEME.controlFontSize};
   cursor: pointer;
 

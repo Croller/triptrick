@@ -11,7 +11,7 @@ const absolute = css`
   background-color: ${PALETTE.white};
   color: ${PALETTE.black};
   z-index: ${Z_INDEX.local};
-  font-family: ${FONTS.comfortaaLight};
+  font-family: ${FONTS.light};
 `;
 
 export const Wrapper = styled.div`
@@ -20,7 +20,7 @@ export const Wrapper = styled.div`
   height: ${p => p.height};
   width: ${p => p.width};
   border-radius: ${THEME.controlBorderRadius};
-  font-family: ${FONTS.comfortaaLight};
+  font-family: ${FONTS.light};
 
   .mapboxgl-ctrl-attrib {
     display: none;

@@ -24,7 +24,7 @@ export const Wrapper = styled.button`
   background-color: ${p => p.color || `${PALETTE.white}`};
   border: ${THEME.controlBorderWidth} solid ${p => p.color || `${PALETTE.grey3}`};
   border-radius: ${THEME.controlBorderRadius};
-  font-family: ${FONTS.comfortaaRegular};
+  font-family: ${FONTS.regular};
   font-size: ${THEME.controlFontSize};
   margin: '5px 0';
   padding: 10px 24px;
