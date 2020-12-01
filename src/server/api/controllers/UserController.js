@@ -14,7 +14,7 @@ const UserController = () => {
     const {
       login,
       password,
-    } = req.body;
+    } = req.body.data;
     try {
       const result = await db.query(`SELECT * FROM data_users WHERE login='${login}' AND password='${password}'`);
       if (result.rows.length === 1) {
@@ -27,7 +27,7 @@ const UserController = () => {
     } catch (err) {
       error.name = 'Query error';
       error.text = JSON.stringify(err);
-      res.json(error);
+      res.json({ error });
     }
   };
 
@@ -43,17 +43,17 @@ const UserController = () => {
         } else {
           error.name = 'User error';
           error.text = 'User does not exist';
-          res.json(error);
+          res.json({ error });
         }
       } else {
         error.name = 'Token error';
         error.text = 'Token not valid';
-        res.json(error);
+        res.json({ error });
       }
     } catch {
       error.name = 'Token error';
       error.text = 'Cant get token';
-      res.json(error);
+      res.json({ error });
     }
   };
 
@@ -61,30 +61,30 @@ const UserController = () => {
     try {
       const { data } = req.body;
       if (data.role !== 1) {
-        delete data.id;
-        data.enter_at = moment().format('YYYY-MM-DDTHH:mm:ss.SSS');
-        const query = Object.keys(data).reduce((obj, key) => ({
-          fields: [...obj.fields, key],
-          values: [...obj.values, data[key]],
-        }), { fields: [], values: [] });
         const check = await db.query(`SELECT * FROM data_users WHERE login='${data.login}' OR email='${data.email}'`);
         if (check.rows.length === 0) {
+          delete data.id;
+          data.enter_at = moment().format('YYYY-MM-DDTHH:mm:ss.SSS');
+          const query = Object.keys(data).reduce((obj, key) => ({
+            fields: [...obj.fields, key],
+            values: [...obj.values, data[key]],
+          }), { fields: [], values: [] });
           const newUser = await db.query(`INSERT INTO data_users (${query.fields.join(', ')}) VALUES ('${query.values.join('\', \'')}') RETURNING *`);
           res.json(newUser.rows[0]);
         } else {
           error.name = 'Create user error';
           error.text = 'Same user already exist';
-          res.json(error);
+          res.json({ error });
         }
       } else {
         error.name = 'Permition error';
         error.text = 'User create is same role of admin or not valid token';
-        res.json(error);
+        res.json({ error });
       }
     } catch (err) {
       error.name = 'Query error';
       error.text = JSON.stringify(err);
-      res.json(error);
+      res.json({ error });
     }
   };
 
@@ -104,17 +104,17 @@ const UserController = () => {
         } else {
           error.name = 'Update user error';
           error.text = 'This user does not exist';
-          res.json(error);
+          res.json({ error });
         }
       } else {
         error.name = 'Permition error';
         error.text = 'May be you are not role with admin or you try edit another account witch not your';
-        res.json(error);
+        res.json({ error });
       }
     } catch (err) {
       error.name = 'Query error';
       error.text = JSON.stringify(err);
-      res.json(error);
+      res.json({ error });
     }
   };
 
@@ -131,17 +131,17 @@ const UserController = () => {
         } else {
           error.name = 'Update user error';
           error.text = 'This user does not exist';
-          res.json(error);
+          res.json({ error });
         }
       } else {
         error.name = 'Permition error';
         error.text = 'May be you are not role with admin or you try edit another account witch not your';
-        res.json(error);
+        res.json({ error });
       }
     } catch (err) {
       error.name = 'Query error';
       error.text = JSON.stringify(err);
-      res.json(error);
+      res.json({ error });
     }
   };
   

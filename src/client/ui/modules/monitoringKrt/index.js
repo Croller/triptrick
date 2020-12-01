@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getKrtMonitoring, getTableByName } from 'client/actions/krt';
+import { getKrtMonitoring, getTableByNames } from 'client/actions/krt';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 
@@ -8,14 +8,22 @@ import {
   Tabs, Tab,
   Content,
   Table, Header, Body, Row, Cell,
-  GroupText, DistrictText, NameText,
+  GroupText, NameText,
+  GroupWrapper,
+  GroupTitle,
+  GroupContainer,
+  Group,
+  GroupCount,
+  Before,
+  Current,
+  GroupName,
 } from './styled';
 
 const TABS_DATA = [
-  { id: 0, name: 'Установленные' },
-  { id: 1, name: 'Не установленные' },
-  { id: 2, name: 'Дашборд' },
-  { id: 3, name: 'Карта' },
+  { id: 'data_krt_confirm', name: 'Установленные' },
+  { id: 'data_krt_unconfirm', name: 'Не установленные' },
+  { id: 'analitics', name: 'Дашборд' },
+  // { id: 'map', name: 'Карта' },
 ];
 
 const COLUMNS_WIDTH = {
@@ -30,14 +38,16 @@ const COLUMNS_WIDTH = {
   descriptions: '400px',
 };
 
-const EXCLUDE_KEYS = ['id', 'group_name', 'district'];
+const EXCLUDE_KEYS = ['id', 'group_name', 'change_at'];
 
 export const MonitoringKrtModule = () => {
   const rootDispatch = useDispatch();
   const { data, supoortData } = useSelector((state) => state.krt);
-  const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState('data_krt_confirm');
 
   const selectDicData = (cell, row, dictionaries) => {
+    if (!row[cell.key]) return '';
+
     if (dictionaries[cell.type]) {
       const result = dictionaries[cell.type].find(item => item.id === row[cell.key]);
       return result.name;
@@ -50,30 +60,27 @@ export const MonitoringKrtModule = () => {
 
   useEffect(() => {
     if (!data) {
-      rootDispatch(getTableByName([
+      rootDispatch(getTableByNames([
         'data_krt',
+        'description_data_krt',
         'dictionary_district',
-        'dictionary_group_krt_confirm',
-        'dictionary_stage_krt_confirm',
-        'dictionary_status_stage_krt_confirm',
-        'description_krt_confirm',
-        'description_krt',
+
+        'description_data_krt_confirm',
+        'dictionary_stage_data_krt_confirm',
+        'dictionary_status_stage_data_krt_confirm',
+        'dictionary_group_name_data_krt_confirm',
+
+        'description_data_krt_unconfirm',
+        'dictionary_stage_data_krt_unconfirm',
+        'dictionary_status_stage_data_krt_unconfirm',
+        'dictionary_group_name_data_krt_unconfirm',
       ]));
       rootDispatch(getKrtMonitoring([
         'data_krt_confirm',
-        // 'data_krt_unconfirm',
+        'data_krt_unconfirm',
       ]));
     }
   }, []);
-
-  useEffect(() => {
-    if (data) {
-      console.log(data);
-    }
-    if (supoortData) {
-      console.log(supoortData);
-    }
-  }, [data, supoortData]);
 
   return (
     <Wrapper>
@@ -89,12 +96,12 @@ export const MonitoringKrtModule = () => {
         ))}
       </Tabs>
       <Content>
-        {tab === 0 && (
+        {['data_krt_confirm', 'data_krt_unconfirm'].includes(tab) && (
           <Table>
             <Header>
               <Row>
                 <Cell width="50px">№</Cell>
-                {supoortData.description_krt_confirm && supoortData.description_krt_confirm.filter(item => !EXCLUDE_KEYS.some(key => key === item.key)).map((header, h) => (
+                {supoortData[`description_${tab}`] && supoortData[`description_${tab}`].filter(item => !EXCLUDE_KEYS.some(key => key === item.key)).map((header, h) => (
                   <Cell key={`_header_${h + 1}`} width={COLUMNS_WIDTH[header.key]}>
                     {header.name}
                   </Cell>
@@ -102,23 +109,22 @@ export const MonitoringKrtModule = () => {
               </Row>
             </Header>
             <Body>
-              {supoortData.dictionary_group_krt_confirm && supoortData.dictionary_group_krt_confirm.map((group, g) => (
+              {supoortData[`dictionary_group_name_${tab}`] && supoortData[`dictionary_group_name_${tab}`].map((group, g) => (
                 <React.Fragment key={`_group_${g + 1}`}>
                   <Row key={`_group_name_${g + 1}`}>
                     <Cell width="100%">
                       <GroupText>{group.name}</GroupText>
                     </Cell>
                   </Row>
-                  {data && data.data_krt_confirm.sort((a, b) => a.group_name - b.group_name).filter((row) => row.group_name === group.id).map((row, r) => (
+                  {data && data[tab].sort((a, b) => a.group_name - b.group_name).filter((row) => row.group_name === group.id).map((row, r) => (
                     <Row key={`_row_${r + 1}`}>
                       <Cell width="50px">
                         {r + 1}
                       </Cell>
-                      {supoortData.description_krt_confirm && supoortData.description_krt_confirm.filter(item => !EXCLUDE_KEYS.some(key => key === item.key)).map((cell, h) => (
+                      {supoortData[`description_${tab}`] && supoortData[`description_${tab}`].filter(item => !EXCLUDE_KEYS.some(key => key === item.key)).map((cell, h) => (
                         <Cell key={`_cell_${h + 1}`} width={COLUMNS_WIDTH[cell.key]}>
                           {cell.key === 'krt' ? (
                             <>
-                              <DistrictText>{selectDicData(supoortData.description_krt_confirm.find(f => f.key === 'district'), row, supoortData)}</DistrictText>
                               <NameText>{selectDicData(cell, row, supoortData)}</NameText>
                             </>
                           ) : selectDicData(cell, row, supoortData)}
@@ -130,7 +136,33 @@ export const MonitoringKrtModule = () => {
               ))}
             </Body>
           </Table>
-        )} 
+        )}
+        {tab === 'analitics' && (
+          <GroupWrapper>
+            {TABS_DATA.slice(0, 2).map((item, i) => (
+              <React.Fragment key={`_group_krt_${i + 1}`}>
+                <GroupTitle>{item.name}</GroupTitle>
+                <GroupContainer>
+                  {supoortData[`dictionary_group_name_${item.id}`] && supoortData[`dictionary_group_name_${item.id}`].map((group, g) => (
+                    <Group key={`_group_name_${g + 1}`}>
+                      <GroupCount>
+                        <Before>
+                          0
+                        </Before>
+                        <Current>
+                          {data[item.id].filter(f => f.group_name === group.id).length}
+                        </Current>
+                      </GroupCount>
+                      <GroupName>
+                        {group.name}
+                      </GroupName>
+                    </Group>
+                  ))}
+                </GroupContainer>
+              </React.Fragment>
+            ))}
+          </GroupWrapper>
+        )}
       </Content>
     </Wrapper>
   );

@@ -25,21 +25,20 @@
 --   moderator BOOLEAN NOT NULL,
 -- );
 
--- COPY dictionary_status_stage_krt_confirm(id,name)
--- FROM '/var/opt/app/src/server/database/csv/dictionary_status_stage_krt_confirm.csv'
--- DELIMITER ';'
--- CSV HEADER;
+COPY data_krt_unconfirm(district,krt,stage,status_stage,date_start,date_end,next_stage,date_next,descriptions,group_name)
+FROM '/var/opt/app/src/server/database/csv/data_krt_unconfirm.csv'
+DELIMITER ';'
+CSV HEADER;
 
--- COPY description_dictionary_roles(key,name,type,required,edit,system)
--- FROM '/var/opt/app/src/server/database/csv/description_dictionary_roles.csv'
+-- COPY dictionary_district(key,name,type,required,edit,system)
+-- FROM '/var/opt/app/src/server/database/csv/dictionary_district.csv'
 -- DELIMITER ','
 -- CSV HEADER;
 
--- SELECT * FROM description_dictionary_roles;
-
+SELECT * FROM data_krt_unconfirm;
 
 -- INSERT INTO data_users (login, password, role, enter_at) VALUES ('view', 'view', '2', '2020-10-28T10:01:11.258')
-SELECT * FROM data_users;
+-- SELECT * FROM data_users;
 
 -- create extension postgis;
 

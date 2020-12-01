@@ -63,13 +63,14 @@ export const Header = styled.div`
   > div {
     background-color: ${PALETTE.red2};
 
+    > div {
+      border-color: ${PALETTE.white}
+    }
+
     &:hover {
       background-color: ${PALETTE.red2};
     }
 
-    > div {
-      border-color: ${PALETTE.white}
-    }
   }
 `;
 
@@ -116,13 +117,6 @@ export const GroupText = styled.span`
   font-family: ${FONTS.bold};
 `;
 
-export const DistrictText = styled.span`
-  font-family: ${FONTS.light};
-  font-size: 14px;
-  color: ${PALETTE.yellow1};
-  margin-right: 20px;
-`;
-
 export const NameText = styled.span`
   font-family: ${FONTS.bold};
 `;
@@ -130,4 +124,77 @@ export const NameText = styled.span`
 export const Text = styled.span`
   display: inline-block;
   vertical-align: middle;
+`;
+
+// GroupWrapper,
+//   Group,
+//   GroupCount,
+//   Before,
+//   Current,
+//   GroupLabel,
+
+export const GroupWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+`;
+
+export const GroupTitle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: ${PALETTE.red2};
+  letter-spacing: 8px;
+  font-family: ${FONTS.bold};
+  margin-bottom: 50px;
+`;
+
+export const GroupContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 150px;
+  justify-content: center;
+`;
+
+export const Group = styled.div`
+  width: 220px;
+  height: 170px;
+  border-radius: ${THEME.containerBorderRadius};
+  background-color: ${PALETTE.white};
+  box-shadow: ${THEME.containerBoxShadow};
+  margin-left: 30px;
+`;
+
+export const GroupCount = styled.div`
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+`;
+
+export const Before = styled.div`
+  font-size: 24px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 10px;
+`;
+
+export const Current = styled.div`
+  font-size: 65px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+`;
+
+export const GroupName = styled.div`
+  height: 70px;
+  font-family: ${FONTS.bold};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 `;

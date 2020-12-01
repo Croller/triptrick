@@ -17,12 +17,14 @@ export const Button = ({
   disabled = false,
   children,
   className = '',
+  onClick = () => {},
 }) => (
   <Wrapper
     type={type}
     className={`t-button ${className}`}
     disabled={disabled}
     color={color}
+    onClick={onClick}
   >
     {children}
   </Wrapper>

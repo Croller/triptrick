@@ -36,6 +36,8 @@
 --   system boolean
 -- );
 
+-- // --------------------------------------------------
+
 -- CREATE TABLE data_krt (
 --   id int,
 --   name varchar,
@@ -50,10 +52,13 @@
 --   geom varchar
 -- );
 
--- CREATE TABLE description_krt (
+-- CREATE TABLE description_data_krt (
 --   key varchar,
 --   name varchar,
---   type varchar
+--   type varchar,
+--   required boolean,
+--   edit boolean,
+--   system boolean
 -- );
 
 -- CREATE TABLE data_krt_confirm (
@@ -67,14 +72,41 @@
 --   next_stage int,
 --   date_next date,
 --   descriptions varchar,
---   group_name int
---   change_at timestamp
+--   group_name int,
+--   change_at timestamp NOT NULL DEFAULT NOW()
 -- );
 
--- CREATE TABLE description_krt_confirm (
+-- CREATE TABLE description_data_krt_confirm (
 --   key varchar,
 --   name varchar,
---   type varchar
+--   type varchar,
+--   required boolean,
+--   edit boolean,
+--   system boolean
+-- );
+
+-- CREATE TABLE data_krt_unconfirm (
+--   id SERIAL PRIMARY KEY,
+--   district int,
+--   krt int,
+--   stage int,
+--   status_stage int,
+--   date_start date,
+--   date_end date,
+--   next_stage int,
+--   date_next date,
+--   descriptions varchar,
+--   group_name int,
+--   change_at timestamp NOT NULL DEFAULT NOW()
+-- );
+
+-- CREATE TABLE description_data_krt_unconfirm (
+--   key varchar,
+--   name varchar,
+--   type varchar,
+--   required boolean,
+--   edit boolean,
+--   system boolean
 -- );
 
 -- CREATE TABLE dictionary_district (
@@ -82,19 +114,98 @@
 --   name varchar
 -- );
 
--- CREATE TABLE dictionary_stage_krt_confirm (
+-- CREATE TABLE description_dictionary_district (
+--   key varchar,
+--   name varchar,
+--   type varchar,
+--   required boolean,
+--   edit boolean,
+--   system boolean
+-- );
+
+-- CREATE TABLE dictionary_stage_data_krt_confirm (
 --   id int,
 --   name varchar,
 --   fullname varchar
 -- );
 
--- CREATE TABLE dictionary_status_stage_krt_confirm (
+-- CREATE TABLE description_dictionary_stage_data_krt_confirm (
+--   key varchar,
+--   name varchar,
+--   type varchar,
+--   required boolean,
+--   edit boolean,
+--   system boolean
+-- );
+
+-- CREATE TABLE dictionary_status_stage_data_krt_confirm (
 --   id int,
 --   name varchar
 -- );
 
--- CREATE TABLE dictionary_group_krt_confirm (
+-- CREATE TABLE description_dictionary_status_stage_data_krt_confirm (
+--   key varchar,
+--   name varchar,
+--   type varchar,
+--   required boolean,
+--   edit boolean,
+--   system boolean
+-- );
+
+-- CREATE TABLE dictionary_group_name_data_krt_confirm (
 --   id int,
 --   name varchar
+-- );
+
+-- CREATE TABLE description_dictionary_group_data_krt_confirm (
+--   key varchar,
+--   name varchar,
+--   type varchar,
+--   required boolean,
+--   edit boolean,
+--   system boolean
+-- );
+
+-- CREATE TABLE dictionary_stage_data_krt_unconfirm (
+--   id int,
+--   name varchar,
+--   fullname varchar
+-- );
+
+-- CREATE TABLE description_dictionary_stage_data_krt_unconfirm (
+--   key varchar,
+--   name varchar,
+--   type varchar,
+--   required boolean,
+--   edit boolean,
+--   system boolean
+-- );
+
+-- CREATE TABLE dictionary_status_stage_data_krt_unconfirm (
+--   id int,
+--   name varchar
+-- );
+
+-- CREATE TABLE description_dictionary_status_stage_data_krt_unconfirm (
+--   key varchar,
+--   name varchar,
+--   type varchar,
+--   required boolean,
+--   edit boolean,
+--   system boolean
+-- );
+
+-- CREATE TABLE dictionary_group_name_data_krt_unconfirm (
+--   id int,
+--   name varchar
+-- );
+
+-- CREATE TABLE description_dictionary_group_name_data_krt_unconfirm (
+--   key varchar,
+--   name varchar,
+--   type varchar,
+--   required boolean,
+--   edit boolean,
+--   system boolean
 -- );
 

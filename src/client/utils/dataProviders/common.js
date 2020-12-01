@@ -24,7 +24,7 @@ export const post = async (path, params = {}, options = {}) => {
   };
 
   try {
-    const results = axios.post(`/api/${path}`, params, { headers });
+    const results = axios.post(`/api/${path}`, { data: params }, { headers });
     return results;
   } catch (err) {
     return err;

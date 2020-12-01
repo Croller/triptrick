@@ -61,6 +61,7 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 0,
     "no-eval": 0,
+    'camelcase': 0,
   },
   globals: {
     _HOST: 'readonly',

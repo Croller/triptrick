@@ -1,0 +1,13 @@
+key,name,type,required,edit,system
+id,id,number,false,false,true
+district,Округ,dictionary_district,true,true,false
+krt,КРТ,data_krt,true,true,false
+stage,Этап,dictionary_stage_data_krt_confirm,true,true,false
+status_stage,Статус этапа,dictionary_status_stage_data_krt_confirm,true,true,false
+date_start,Дата начала этапа,date,true,true,false
+date_end,Дата завершения этапа,date,true,true,false
+next_stage,Следующий этап,dictionary_stage_data_krt_confirm,true,true,false
+date_next,Ориентировочная дата следующего этапа,date,true,true,false
+descriptions,Примечание,string,false,true,false
+group_name,Группа,dictionary_group_name_data_krt_confirm,true,true,false
+change_at,Изменено,datetime,false,false,true
