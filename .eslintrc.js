@@ -60,6 +60,7 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 0,
+    "no-eval": 0,
   },
   globals: {
     _HOST: 'readonly',

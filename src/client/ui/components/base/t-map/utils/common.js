@@ -1,40 +1,85 @@
-export const getScale = (map, turf, units) => {
+export const getScale = (draw, turf, units) => {
   const inchesPerMeter = 39.37;
   const screenDPI = 96.0;
-  const bounds = map.getBounds();
-  const size = map.getCanvas();
+  const bounds = draw.getBounds();
+  const size = draw.getCanvas();
   // eslint-disable-next-line no-underscore-dangle
   const distance = turf.distance(turf.point([bounds._ne.lng, bounds._ne.lat]), turf.point([bounds._ne.lng, bounds._sw.lat]), { units });
   const scaleValue = Math.floor((Math.abs(distance * 1000) / size.width) * inchesPerMeter * screenDPI);
   return scaleValue;
 };
 
-export const setDrawMode = (mode, map) => {
+export const getJson = (feature, turf) => {
+  const { properties, geometry } = feature;
+  const prop = Object.keys(properties).reduce((obj, key) => {
+    let value = properties[key];
+    if (typeof value === 'string') {
+      if (value.indexOf('[') > -1) {
+        value = eval(value);
+      }
+      if (value === 'null') {
+        value = null;
+      }
+    }
+    return { ...obj, [key]: value };
+  }, {});
+  return turf.feature(geometry, prop);
+};
+
+export const getPaintLayer = (arr, paints) => arr.reduce((edited, layer) => {
+  const { properties, features } = layer;
+  const { id, options } = properties;
+  const typeLayer = properties.type || 'geojson';
+  if (features.length > 0) {
+    const { geometry } = features[0];
+    const typePaint = geometry.type;
+    const paint = paints[typeLayer][typePaint];
+    const paintArr = paint.map((p) => {
+      const layerObj = {
+        ...p,
+        ...options,
+        id: `${id}_${p.id}`,
+        source: {
+          type: typeLayer,
+          data: layer,
+        },
+      };
+      if (typeLayer === 'vector') {
+        layerObj['source-layer'] = `${id.split('_')[1]}`;
+      }
+      return layerObj;
+    });
+    return [...edited, ...paintArr];
+  }
+  return edited;
+}, []);
+
+export const setDrawMode = (draw, mode = 'drawEnd') => {
   switch (mode) {
     case 'drawPoint':
-      map.changeMode('draw_point_custom');
+      draw.changeMode('draw_point_custom');
       break;
     case 'drawLine':
-      map.changeMode('draw_line_string_custom');
+      draw.changeMode('draw_line_string_custom');
       break;
     case 'drawLinePencil':
-      map.changeMode('draw_line_string_pencil');
+      draw.changeMode('draw_line_string_pencil');
       break;
     case 'drawPolygon':
-      map.changeMode('draw_polygon_custom');
+      draw.changeMode('draw_polygon_custom');
       break;
     case 'drawPolygonPencil':
-      map.changeMode('draw_polygon_pencil');
+      draw.changeMode('draw_polygon_pencil');
       break;
     case 'drawRectangle':
-      map.changeMode('draw_rectangle');
+      draw.changeMode('draw_rectangle');
       break;
     case 'drawRectangleAssisted':
-      map.changeMode('draw_rectangle_assisted');
+      draw.changeMode('draw_rectangle_assisted');
       break;
     // case 'drawCircle':
     //   // надо ограничить масштаб, при зуме 18 карты, круг не круг
-    //   map.changeMode('draw_circle', { initialRadiusInKm: (getScaleStr() / 100000).toFixed(6) });
+    //   draw.changeMode('draw_circle', { initialRadiusInKm: (getScaleStr() / 100000).toFixed(6) });
     //   break;
     // case 'snapVertex':
     //   setSnapModes('vertex', snapValue);
@@ -44,26 +89,26 @@ export const setDrawMode = (mode, map) => {
     //   break;
     // case 'mesuareLine': {
     //   setIsMesuaring(true);
-    //   map.deleteAll();
-    //   this.popup = new mapBox.Popup({ closeOnClick: false });
+    //   draw.deleteAll();
+    //   this.popup = new drawBox.Popup({ closeOnClick: false });
     //   this.popup.on('close', () => {
-    //     map.deleteAll();
+    //     draw.deleteAll();
     //   });
-    //   map.changeMode('draw_line_string');
+    //   draw.changeMode('draw_line_string');
     //   break;
     // }
     // case 'mesuareArea': {
     //   setIsMesuaring(true);
-    //   map.deleteAll();
-    //   this.popup = new mapBox.Popup({ closeOnClick: false });
+    //   draw.deleteAll();
+    //   this.popup = new drawBox.Popup({ closeOnClick: false });
     //   this.popup.on('close', () => {
-    //     map.deleteAll();
+    //     draw.deleteAll();
     //   });
-    //   map.changeMode('draw_polygon');
+    //   draw.changeMode('draw_polygon');
     //   break;
     // }
     case 'copyObj': {
-      const { features } = map.getSelected();
+      const { features } = draw.getSelected();
       if (features.length > 0) {
         this.copyObjArr = [...features];
       }
@@ -71,12 +116,12 @@ export const setDrawMode = (mode, map) => {
     }
     case 'pasteObj': {
       if (this.copyObjArr.length > 0) {
-        const { features } = map.getAll();
-        map.set({
+        const { features } = draw.getAll();
+        draw.set({
           type: 'FeatureCollection',
           features: [
             ...features,
-            ...this.copyObjArr.map(cp => ({
+            ...this.copyObjArr.draw(cp => ({
               ...cp,
               id: `${cp.id}_copy`,
             })),
@@ -86,11 +131,11 @@ export const setDrawMode = (mode, map) => {
       break;
     }
     case 'cutObj': {
-      const { features } = map.getSelected();
-      const all = map.getAll().features;
+      const { features } = draw.getSelected();
+      const all = draw.getAll().features;
       if (features.length > 0) {
         this.copyObjArr = features;
-        map.set({
+        draw.set({
           type: 'FeatureCollection',
           features: all.filter(af => features.filter(ff => ff.id === af.id).length === 0),
         });
@@ -98,32 +143,31 @@ export const setDrawMode = (mode, map) => {
       break;
     }
     case 'deleteObj': {
-      const { features } = map.getSelected();
-      const all = map.getAll().features;
+      const { features } = draw.getSelected();
+      const all = draw.getAll().features;
       if (features.length > 0) {
-        map.set({
+        draw.set({
           type: 'FeatureCollection',
           features: all.filter(af => features.filter(ff => ff.id === af.id).length === 0),
         });
       }
       break;
     }
-    case 'drawStop': {
-      map.changeMode('simple_select');
-      map.deleteAll();
+    case 'drawEnd': {
+      draw.changeMode('simple_select');
       break;
     }
     case 'drawClear': {
-      map.changeMode('simple_select');
-      map.deleteAll();
+      draw.changeMode('simple_select');
+      draw.deleteAll();
       break;
     }
     case 'deleteLastPoint': {
-      if (map.getMode().indexOf('draw_') === 0 && map.getAll().features.length > 0) {
-        const { features } = map.getAll();
+      if (draw.getMode().indexOf('draw_') === 0 && draw.getAll().features.length > 0) {
+        const { features } = draw.getAll();
         const newFeature = this.delLastCoords(features[features.length - 1]);
         features[features.length - 1] = newFeature;
-        map.set({ type: 'FeatureCollection', features });
+        draw.set({ type: 'FeatureCollection', features });
       }
       break;
     }
@@ -131,4 +175,5 @@ export const setDrawMode = (mode, map) => {
       break;
     }
   }
+  return draw;
 };

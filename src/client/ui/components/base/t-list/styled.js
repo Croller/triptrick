@@ -11,10 +11,12 @@ export const Wrapper = styled.ul`
 
 export const Child = styled.li`
   display: flex;
-  padding: 7px 5px;
+  align-items: center;
+  padding: 5px 5px 5px 0;
 
   > svg {
     width: 10px;
+    height: 10px;
     color: ${PALETTE.grey2};
     margin-right: 10px;
   }

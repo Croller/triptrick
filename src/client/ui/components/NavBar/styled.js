@@ -20,9 +20,8 @@ export const Nav = styled.nav`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding: 0.5rem 1rem;
 
-  @media (min-width: 992px) {
+  @media (min-width: ${BREAKPOINTS.xl}) {
     flex-flow: row nowrap;
     justify-content: flex-start;
   }
@@ -31,7 +30,7 @@ export const Nav = styled.nav`
 export const Container = styled.div`
   display: flex;
   width: 100%;
-  max-width: 1200px;
+  max-width: ${BREAKPOINTS.xl};
   padding: 15px;
   margin-left: auto;
   margin-right: auto;
@@ -60,7 +59,7 @@ export const Menu = styled.ul`
   list-style: none;
   display: ${p => (p.show ? 'block' : 'none')};
 
-  @media screen and (min-width: ${BREAKPOINTS.medium}) {
+  @media screen and (min-width: ${BREAKPOINTS.sm}) {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -101,7 +100,7 @@ export const Item = styled.li`
   margin: 0 15px;
   cursor: pointer;
 
-  @media screen and (min-width: ${BREAKPOINTS.small}) {
+  @media screen and (min-width: ${BREAKPOINTS.xs}) {
     height: 40px;
   }
 `;

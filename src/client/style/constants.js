@@ -1,12 +1,20 @@
 export const BREAKPOINTS = {
-  small: '320px',
-  medium: '768px',
-  large: '1366px',
-  xlarge: '1920px',
+  xs: '320px',
+  sm: '480px',
+  md: '768px',
+  lg: '992px',
+  xl: '1200px',
+
+  // small: '320px',
+  // medium: '768px',
+  // large: '1366px',
+  // xlarge: '1920px',
 };
 
 export const Z_INDEX = {
+  local: 10,
   header: 100,
+  content: 90,
   loader: 99999,
 };
 
@@ -43,4 +51,6 @@ export const THEME = {
   controlMargin: '5px 0 15px',
   controlErrorFontSize: '10px',
   controlErrorMargin: '-15px',
+  containerBoxShadow: `0 1px 10px 0 ${PALETTE.grey4}`,
+  containerBorderRadius: '4px',
 };

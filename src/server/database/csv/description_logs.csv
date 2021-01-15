@@ -1,0 +1,11 @@
+key,name,type
+id,#,number
+login,Логин,string
+password,Пароль,string
+surname,Фамилия,string
+name,Имя,string
+middlename,Отчество,string
+birthdate,Дата рождения,date
+phone,Телефон,number
+email,Почта,string
+enter_at,Последняя активность,datetime

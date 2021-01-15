@@ -1,7 +1,7 @@
 import moment from 'moment';
 
-const db = require('../db');
-const auth = require('../auth');
+const db = require('../services/db');
+const auth = require('../services/auth');
 
 const UserController = () => {
   const signin = (req, res) => {

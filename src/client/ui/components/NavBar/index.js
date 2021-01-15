@@ -11,6 +11,7 @@ import {
 
 export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  console.log(window.innerWidth, BREAKPOINTS.xs, compareBreakpoint(window.innerWidth, BREAKPOINTS.xs));
   return (
     <Wrapper>
       <Nav>
@@ -18,7 +19,7 @@ export const NavBar = () => {
           <Brand>
             <Logo src={LogoPng} />
           </Brand>
-          {compareBreakpoint(window.innerWidth, BREAKPOINTS.small) && (
+          {compareBreakpoint(window.innerWidth, BREAKPOINTS.xs) && (
             <MenuIcon onClick={() => setIsOpen(!isOpen)} />
           )}
           <Menu show={isOpen}>
