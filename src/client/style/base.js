@@ -11,43 +11,44 @@ import { FONTS, PALETTE } from './constants';
 export const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'FuturaPT-Light';
-    src: url(${FuturaPTLight}) format('ttf');
+    src: local('FuturaPT-Light'), url(${FuturaPTLight}) format('truetype');
   }
 
   @font-face {
     font-family: 'FuturaPT-Book';
-    src: url(${FuturaPTBook}) format('ttf');
+    src: local('FuturaPT-Book'), url(${FuturaPTBook}) format('truetype');
   }
 
   @font-face {
     font-family: 'FuturaPT-Medium';
-    src: url(${FuturaPTMedium}) format('ttf');
+    src: local('FuturaPT-Medium'), url(${FuturaPTMedium}) format('truetype');
   }
 
   @font-face {
     font-family: 'FuturaPT-Bold';
-    src: url(${FuturaPTBold}) format('ttf');
+    src: local('FuturaPT-Bold'), url(${FuturaPTBold}) format('truetype');
   }
 
   @font-face {
     font-family: 'Comfortaa-Regular';
-    src: url(${ComfortaaRegular}) format('ttf');
+    src: local('Comfortaa-Regular'), url(${ComfortaaRegular}) format('truetype');
   }
 
   @font-face {
     font-family: 'Comfortaa-Bold';
-    src: url(${ComfortaaBold}) format('ttf');
+    src: local('Comfortaa-Bold'), url(${ComfortaaBold}) format('truetype');
   }
 
   @font-face {
     font-family: 'Comfortaa-Light';
-    src: url(${ComfortaaLight}) format('ttf');
+    src: local('Comfortaa-Light'), url(${ComfortaaLight}) format('truetype');
   }
-
+  
   body {
     height: 100%;
     margin: 0;
-    font-family: ${FONTS.comfortaaRegular};
+    font-family: ${FONTS.regular} !important;
+    overflow-x: hidden;
   }
 
   [ant-click-animating-without-extra-node]::after {
@@ -88,5 +89,16 @@ export const GlobalStyle = createGlobalStyle`
   ::-webkit-scrollbar-track:hover {
     background: ${PALETTE.grey3};
     cursor: pointer;
+  }
+
+  /* input number hide arraows */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
   }
 `;
